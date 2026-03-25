@@ -1,0 +1,905 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>第5章 框模型 (Box Model) - Web前端教学PPT</title>
+    <style>
+      /* 基础重置与全局样式 */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: 'Microsoft YaHei', '微软雅黑', sans-serif;
+        background-color: #f0f0f0; /* 屏幕上显示的灰色背景，方便区分幻灯片 */
+        color: #333333;
+      }
+
+      /* 幻灯片容器：模拟 A4 横向尺寸 (297mm x 210mm) */
+      .slide {
+        width: 297mm;
+        height: 210mm;
+        background-color: #ffffff;
+        margin: 20px auto;
+        padding: 40mm 30mm; /* 安全边距，防止溢出 */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden; /* 严禁内容溢出 */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      /* 字体大小规范：至少 24px */
+      p,
+      li,
+      div {
+        font-size: 28px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+
+      /* 标题样式 */
+      h1 {
+        font-size: 60px;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      h2 {
+        font-size: 46px;
+        color: #e74c3c;
+        margin-bottom: 30px;
+        border-bottom: 3px solid #e74c3c;
+        padding-bottom: 10px;
+        display: inline-block;
+      }
+      h3 {
+        font-size: 36px;
+        color: #2980b9;
+        margin-bottom: 20px;
+      }
+
+      /* 强调文字 */
+      .highlight {
+        color: #e74c3c;
+        font-weight: bold;
+      }
+
+      /* 代码字体规范：Consolas，加粗，深色 */
+      code,
+      pre {
+        font-family: 'Consolas', monospace;
+        font-weight: bold;
+        color: #1a1a1a;
+      }
+
+      /* 行内代码样式 */
+      code {
+        background-color: #f4f4f4;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 28px; /* 匹配正文 */
+      }
+
+      /* 代码块样式 */
+      pre {
+        background-color: #fcfcfc;
+        border: 2px solid #ddd;
+        border-left: 8px solid #3498db;
+        padding: 20px;
+        border-radius: 8px;
+        font-size: 26px; /* 确保不溢出 */
+        white-space: pre-wrap; /* 防止代码行过长溢出 */
+        word-wrap: break-word;
+        margin-bottom: 20px;
+        max-height: 350px;
+        overflow-y: auto;
+      }
+
+      /* 列表样式 */
+      ul,
+      ol {
+        margin-left: 40px;
+        margin-bottom: 20px;
+      }
+
+      /* 居中工具类 */
+      .text-center {
+        text-align: center;
+      }
+      .flex-center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      /* 页码 */
+      .page-number {
+        position: absolute;
+        bottom: 20mm;
+        right: 30mm;
+        font-size: 20px;
+        color: #999;
+      }
+
+      /* 章节过渡页专用样式 */
+      .chapter-slide {
+        background-color: #2c3e50;
+        color: white;
+      }
+      .chapter-slide h1 {
+        color: white;
+        border-bottom: 5px solid #e74c3c;
+        padding-bottom: 20px;
+      }
+      .chapter-slide p {
+        color: #ecf0f1;
+        font-size: 36px;
+      }
+
+      /* 打印样式：清除阴影和边距，完美适配 PDF */
+      @media print {
+        @page {
+          size: A4 landscape;
+          margin: 0;
+        }
+        body {
+          background-color: #ffffff;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        .slide {
+          margin: 0;
+          box-shadow: none;
+          page-break-after: always;
+          page-break-inside: avoid;
+        }
+        /* 隐藏滚动条 */
+        pre {
+          overflow-y: hidden;
+        }
+      }
+      .triangle {
+        width: 0;
+        height: 0;
+        border: 100px solid transparent;
+        border-bottom-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Slide 1: 封面 -->
+    <div class="slide flex-center">
+      <h1>第5章：网页排版的魔术 —— 框模型 (Box Model)</h1>
+      <p style="font-size: 36px; color: #555">让你的网页元素听话的终极奥义</p>
+      <div style="margin-top: 50px; text-align: center"></div>
+      <div class="page-number">1</div>
+    </div>
+
+    <!-- Slide 2: 课程大纲 -->
+    <div class="slide">
+      <h2>今天我们要征服的大纲</h2>
+      <ul>
+        <li><strong>5.1 盒子</strong> (万物皆可装)</li>
+        <li><strong>5.2 框模型的要素</strong> (解剖一个快递箱)</li>
+        <li><strong>5.3 盒子的宽度和高度</strong> (到底多大才算大？)</li>
+        <li><strong>5.4 框模型的应用</strong> (把盒子摆在正确的位置)</li>
+        <li><strong>5.5 display</strong> (盒子的变形计)</li>
+        <li><strong>5.6 小结</strong> (带走今天的魔法口诀)</li>
+      </ul>
+      <div class="page-number">2</div>
+    </div>
+
+    <!-- Slide 3: 5.1 盒子 封面 -->
+    <div class="slide chapter-slide flex-center">
+      <h1>5.1 盒子 (Box)</h1>
+      <p>欢迎来到“万物皆盒子”的世界</p>
+      <div class="page-number">3</div>
+    </div>
+
+    <!-- Slide 4: 5.1 盒子 - 理论 -->
+    <div class="slide">
+      <h2>5.1 万物皆“盒子”</h2>
+      <p>
+        在前端开发者的眼里，网页并不是平面的画纸，而是由无数个<span class="highlight"
+          >看不见的盒子</span
+        >堆砌而成的乐高玩具。
+      </p>
+      <p><strong>生活中的比喻：</strong></p>
+      <p>
+        就像你去逛超市，货架上的商品。不管里面的东西是圆的（苹果）、软的（毛巾）还是奇形怪状的，厂家都会给它套上一个<span
+          class="highlight"
+          >方方正正的包装盒</span
+        >，方便摆放。
+      </p>
+      <p>
+        网页里的标签（如 <code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>,
+        <code>&lt;img&gt;</code>），在浏览器眼里，统统都是一个矩形的“盒子”！
+      </p>
+      <div class="page-number">4</div>
+    </div>
+
+    <!-- Slide 5: 5.1 盒子 - 实操任务 -->
+    <div class="slide">
+      <h2>实操任务 1：让隐形的盒子现形！</h2>
+      <p>
+        <strong>任务目标：</strong>我们写一段文字，并通过 CSS 给它加上背景色，证明它真的是个方盒子。
+      </p>
+      <p>请在你的编辑器中输入以下代码：</p>
+      <pre><code>&lt;!-- HTML 代码 --&gt;
+&lt;h3 class="magic-box"&gt;大家好，我是一段普通的文字&lt;/h3&gt;
+
+&lt;!-- CSS 代码 --&gt;
+&lt;style&gt;
+  .magic-box {
+    background-color: yellow; /* 涂上黄色背景 */
+  }
+&lt;/style&gt;</code></pre>
+      <div class="page-number">5</div>
+    </div>
+
+    <!-- Slide 6: 5.1 盒子 - 预期效果 -->
+    <div class="slide">
+      <h2>任务 1：预期效果</h2>
+      <p><strong>你会看到：</strong></p>
+      <p>虽然文字本身只有一点点长，但你会发现黄色背景填满了一长条矩形区域！</p>
+      <div
+        style="
+          background-color: yellow;
+          padding: 10px;
+          border: 1px dashed #333;
+          display: inline-block;
+          width: 100%;
+        "
+      >
+        <h3 style="margin: 0; color: black">大家好，我是一段普通的文字</h3>
+      </div>
+      <p style="margin-top: 20px">
+        <strong>老师点拨：</strong
+        >看！哪怕是一行字，浏览器也是把它装在一个“矩形盒子”里处理的。记住这句口诀：<span
+          class="highlight"
+          >网页排版，就是摆放盒子。</span
+        >
+      </p>
+      <div class="page-number">6</div>
+    </div>
+
+    <!-- Slide 7: 5.2 要素 封面 -->
+    <div class="slide chapter-slide flex-center">
+      <h1>5.2 框模型的要素</h1>
+      <p>解剖一个标准的前端“快递箱”</p>
+      <div class="page-number">7</div>
+    </div>
+
+    <!-- Slide 8: 5.2 要素 - 理论比喻 -->
+    <div class="slide">
+      <h2>5.2 框模型的四大要素</h2>
+      <p>
+        每一个 HTML 盒子，都由四个部分组成。闭上眼睛，想象你寄了一个易碎品（比如玻璃杯）的快递：
+      </p>
+      <ul>
+        <li><code>Content</code> (内容)：<strong>玻璃杯本身</strong>（文字、图片）。</li>
+        <li><code>Padding</code> (内边距)：杯子和纸箱之间的<strong>防震泡沫纸</strong>。</li>
+        <li><code>Border</code> (边框)：<strong>快递纸箱的硬纸板</strong>。</li>
+        <li>
+          <code>Margin</code>
+          (外边距)：这个纸箱和旁边纸箱之间的<strong>安全距离</strong>（防碰撞）。
+        </li>
+      </ul>
+      <div class="page-number">8</div>
+    </div>
+    <!-- padding写法合集 -->
+    <div class="slide">
+      <h2>Padding写法合集</h2>
+      <p>
+        <strong style="color: red">padding:10px;</strong
+        >&nbsp;&nbsp;1个值：上下左右内边距padding都为10px
+      </p>
+      <p>
+        <strong style="color: red">padding:10px 20px;</strong>&nbsp;&nbsp;2个值：上下10px,左右20px
+      </p>
+      <p>
+        <strong style="color: red">padding:25px 50px 75px;</strong
+        >&nbsp;&nbsp;2个值：上25px,左右50px,下75px
+      </p>
+      <p>
+        <strong style="color: red">padding:25px 50px 75px 100px;</strong
+        >&nbsp;&nbsp;2个值：上25px,右50px,下75px,左100px
+      </p>
+      <div class="page-number">9</div>
+    </div>
+    <!-- padding写法合集 -->
+    <div class="slide">
+      <h2>Padding写法合集</h2>
+      <p>
+        <strong style="color: red">padding-top:10px;</strong>&nbsp;&nbsp;仅有上内边距padding为10px
+      </p>
+      <p>
+        <strong style="color: red">padding-right:20px;</strong>&nbsp;&nbsp;仅有右内边距padding为20px
+      </p>
+      <p>
+        <strong style="color: red">padding-bottom:15px;</strong
+        >&nbsp;&nbsp;仅有下内边距padding为15px
+      </p>
+      <p>
+        <strong style="color: red">padding-left:10px;</strong>&nbsp;&nbsp;仅有左内边距padding为10px
+      </p>
+
+      <div class="page-number">9</div>
+    </div>
+    <!-- Slide 9: 5.2 要素 - 任务 2.1 (Content & Padding) -->
+    <div class="slide">
+      <h2>实操任务 2.1：塞入防震泡沫 (Padding)</h2>
+      <p><strong>任务目标：</strong>让文字和盒子的边缘保持距离，不要紧贴着。</p>
+      <pre><code>&lt;div class="box-step1"&gt;我是玻璃杯（内容）&lt;/div&gt;
+
+&lt;style&gt;
+  .box-step1 {
+    background-color: lightblue;
+    /* padding: 上 右 下 左; */
+    padding: 30px; /* 塞入 30px 厚的泡沫纸 */
+  }
+&lt;/style&gt;</code></pre>
+      <div class="page-number">9</div>
+    </div>
+
+    <!-- Slide 10: 5.2 要素 - 预期效果 2.1 -->
+    <div class="slide">
+      <h2>任务 2.1：预期效果</h2>
+      <p><strong>对比一下：</strong></p>
+      <p>没有 <code>padding</code> 时，文字紧贴边缘：</p>
+      <div style="background-color: lightblue; margin-bottom: 20px">我是玻璃杯（内容）</div>
+      <p>加了 <code>padding: 30px;</code> 后，内容被保护起来了，盒子被“撑大”了：</p>
+      <div style="background-color: lightblue; padding: 30px">我是玻璃杯（内容）</div>
+      <div class="page-number">10</div>
+    </div>
+
+    <div class="slide">
+      <h2>border写法</h2>
+      <p>
+        <strong style="color: red">border:1px solid red;</strong
+        >&nbsp;&nbsp;边框宽度为1px，边框为实线，颜色为红色
+      </p>
+      <p>
+        <strong style="color: red">border-top:1px solid red;</strong
+        >&nbsp;&nbsp;只有上边框，宽度为1px，实线，红色
+      </p>
+      <p>
+        <strong style="color: red">border-right:1px solid red;</strong
+        >&nbsp;&nbsp;只有右边框，宽度为1px，实线，红色
+      </p>
+      <p>
+        <strong style="color: red">border-bottom:1px solid red;</strong
+        >&nbsp;&nbsp;只有下边框，宽度为1px，实线，红色
+      </p>
+      <p>
+        <strong style="color: red">border-left:1px solid red;</strong
+        >&nbsp;&nbsp;只有左边框，宽度为1px，实线，红色
+      </p>
+
+      <div class="page-number">9</div>
+    </div>
+    <!-- Slide 11: 5.2 要素 - 任务 2.2 (Border) -->
+    <div class="slide">
+      <h2>实操任务 2.2：加固纸箱 (Border)</h2>
+      <p><strong>任务目标：</strong>给盒子画上清晰的边框，让它看起来更像个实体箱子。</p>
+      <pre><code>&lt;div class="box-step2"&gt;带边框的盒子&lt;/div&gt;
+
+&lt;style&gt;
+  .box-step2 {
+    padding: 20px;
+    /* border: 粗细 样式 颜色; */
+    border: 5px solid red; /* 5像素实线红色的硬纸板 */
+  }
+&lt;/style&gt;</code></pre>
+      <div class="page-number">11</div>
+    </div>
+
+    <!-- Slide 12: 5.2 要素 - 预期效果 2.2 -->
+    <div class="slide">
+      <h2>任务 2.2：预期效果</h2>
+      <p><strong>你会看到：</strong></p>
+      <p>盒子外围出现了一圈红色的警戒线（边框）。</p>
+      <div style="padding: 20px; border: 5px solid red; display: inline-block">带边框的盒子</div>
+      <p style="margin-top: 30px">
+        <strong>老师提示：</strong>边框样式 <code>solid</code> 是实线，你也可以试试
+        <code>dashed</code> (虚线) 或 <code>dotted</code> (点线)，看看有啥变化！
+      </p>
+      <div class="page-number">12</div>
+    </div>
+
+    <div class="slide">
+      <h2>圆角属性border-radius</h2>
+      <p>
+        <strong style="color: red">border-radius:50%</strong
+        >&nbsp;&nbsp;4个角设成圆角为50%，盒子变成了圆形
+      </p>
+      <div style="border-radius: 50%; width: 100px; height: 100px; background-color: red"></div>
+      <p>
+        <strong style="color: red">border-radius:10px 20px 30px 40px</strong
+        >&nbsp;&nbsp;左上角10px、右上角20px、右下角30px、左下角40px
+      </p>
+      <div
+        style="
+          border-radius: 10px 20px 30px 40px;
+          width: 100px;
+          height: 100px;
+          background-color: red;
+        "
+      ></div>
+
+      <div class="page-number"></div>
+    </div>
+
+    <!-- margin写法合集 -->
+    <div class="slide">
+      <h2>margin写法合集</h2>
+      <p>
+        <strong style="color: red">margin:10px;</strong
+        >&nbsp;&nbsp;1个值：上下左右外边距margin都为10px
+      </p>
+      <p>
+        <strong style="color: red">margin:10px 20px;</strong>&nbsp;&nbsp;2个值：上下10px,左右20px
+      </p>
+      <p>
+        <strong style="color: red">margin:25px 50px 75px;</strong
+        >&nbsp;&nbsp;2个值：上25px,左右50px,下75px
+      </p>
+      <p>
+        <strong style="color: red">margin:25px 50px 75px 100px;</strong
+        >&nbsp;&nbsp;2个值：上25px,右50px,下75px,左100px
+      </p>
+      <div class="page-number">9</div>
+    </div>
+    <!--  margin写法合集 -->
+    <div class="slide">
+      <h2>margin写法合集</h2>
+      <p>
+        <strong style="color: red">margin-top:10px;</strong>&nbsp;&nbsp;仅有上外边距margin为10px
+      </p>
+      <p>
+        <strong style="color: red">margin-right:20px;</strong>&nbsp;&nbsp;仅有右外边距margin为20px
+      </p>
+      <p>
+        <strong style="color: red">margin-bottom:15px;</strong>&nbsp;&nbsp;仅有下外边距margin为15px
+      </p>
+
+      <p>
+        <strong style="color: red">margin-left:10px;</strong>&nbsp;&nbsp;仅有左外边距margin为10px
+      </p>
+
+      <div class="page-number"></div>
+    </div>
+    <!-- Slide 13: 5.2 要素 - 任务 2.3 (Margin) -->
+    <div class="slide">
+      <h2>实操任务 2.3：保持社交距离 (Margin)</h2>
+      <p><strong>任务目标：</strong>做两个盒子，让它们之间产生距离，不要挤在一起。</p>
+      <pre><code>&lt;div class="box-step3"&gt;我是哥哥&lt;/div&gt;
+&lt;div class="box-step3"&gt;我是弟弟&lt;/div&gt;
+
+&lt;style&gt;
+  .box-step3 {
+    border: 2px solid blue;
+    /* margin 决定了盒子与外部环境的距离 */
+    margin-bottom: 40px; /* 往下推开 40px 的距离 */
+  }
+&lt;/style&gt;</code></pre>
+      <div class="page-number">13</div>
+    </div>
+
+    <!-- Slide 14: 5.2 要素 - 预期效果 2.3 -->
+    <div class="slide">
+      <h2>任务 2.3：预期效果</h2>
+      <p>加了 <code>margin-bottom: 40px;</code> 之后，哥哥和弟弟之间不再紧紧挨着了：</p>
+      <div style="border: 2px solid blue; padding: 10px; margin-bottom: 40px">我是哥哥</div>
+      <div style="border: 2px solid blue; padding: 10px">我是弟弟</div>
+      <p><strong>总结要素：</strong> <code>Margin</code> 是透明的，它只负责“推开”别人！</p>
+      <div class="page-number">14</div>
+    </div>
+
+    <!-- Slide 15: 5.3 宽高 封面 -->
+    <div class="slide chapter-slide flex-center">
+      <h1>5.3 盒子的宽度和高度</h1>
+      <p>前端界的一大“骗局”：到底多大才算大？</p>
+      <div class="page-number">15</div>
+    </div>
+
+    <!-- Slide 16: 5.3 宽高 - 理论与数学 -->
+    <div class="slide">
+      <h2>5.3 灵魂拷问：100px 到底有多宽？</h2>
+      <p>
+        如果你在 CSS 中写了 <code>width: 100px;</code>，这个盒子在屏幕上占据的宽度真的是 100px 吗？
+      </p>
+      <p><strong>错！</strong>（这就是无数新手熬夜掉头发的原因 😂）</p>
+      <p>
+        在标准框模型中，你设置的 <code>width</code> 和 <code>height</code>，仅仅只是<span
+          class="highlight"
+          >玻璃杯（Content）</span
+        >的尺寸！
+      </p>
+      <p>
+        <strong>真实占地宽度 = </strong> <code>内容宽度width</code> + 左 <code>padding</code> + 右
+        <code>padding</code> + 左 <code>border</code> + 右 <code>border</code>
+      </p>
+      <div class="page-number">16</div>
+    </div>
+
+    <!-- Slide 17: 5.3 宽高 - 任务 3.1 -->
+    <div class="slide">
+      <h2>实操任务 3.1：算算真实体型</h2>
+      <p><strong>任务目标：</strong>写一个盒子，看看它到底被撑得有多大。</p>
+      <pre><code>&lt;div class="math-box"&gt;我胖吗？&lt;/div&gt;
+
+&lt;style&gt;
+  .math-box {
+    width: 200px;
+    padding: 20px;
+    border: 5px solid black;
+    background-color: lightgreen;
+  }
+&lt;/style&gt;</code></pre>
+      <div class="page-number">17</div>
+    </div>
+
+    <!-- Slide 18: 5.3 宽高 - 预期效果 3.1 -->
+    <div class="slide">
+      <h2>任务 3.1：预期效果与计算</h2>
+      <p>虽然你写了 <code>width: 200px</code>，但在浏览器里审查元素时，它的实际宽度是：</p>
+      <p class="highlight" style="font-size: 34px; text-align: center; margin: 30px 0">
+        200(内容) + 20(左内边距) + 20(右内边距) + 5(左边框) + 5(右边框) = 250px！
+      </p>
+      <p>
+        <strong>生活比喻：</strong>你买了一张 2米 宽的床垫（内容），但你加了
+        20厘米的床框（Padding/Border），结果你的卧室放不下了！
+      </p>
+      <div class="page-number">18</div>
+    </div>
+
+    <!-- Slide 19: 5.3 宽高 - 救星降临 -->
+    <div class="slide">
+      <h2>CSS 救星降临：border-box</h2>
+      <p>
+        每次都要做算术题太折磨人了！怎么才能让我设置 <code>width: 200px</code>，它最终的占地就是
+        200px 呢？
+      </p>
+      <p>我们要改变规则，使用：<code>box-sizing: border-box;</code></p>
+      <p><strong>买房比喻：</strong></p>
+      <ul>
+        <li><strong>默认模式 (content-box)：</strong>买房看“套内面积”，加上公摊后总价超出预算。</li>
+        <li>
+          <strong>神仙模式 (border-box)：</strong
+          >买房看“建筑面积”，设置多大就是多大，边框和内边距会向内挤压内容空间！
+        </li>
+      </ul>
+      <div class="page-number">19</div>
+    </div>
+
+    <!-- Slide 20: 5.3 宽高 - 任务 3.2 -->
+    <div class="slide">
+      <h2>实操任务 3.2：启用魔法盒子</h2>
+      <p><strong>任务目标：</strong>使用 <code>border-box</code> 锁定盒子的最终大小。</p>
+      <pre><code>&lt;style&gt;
+  .magic-sizing {
+    /* 划重点！现代前端必写的属性 */
+    box-sizing: border-box; 
+    
+    width: 200px;
+    padding: 20px;
+    border: 5px solid black;
+    background-color: pink;
+  }
+&lt;/style&gt;
+&lt;div class="magic-sizing"&gt;我被锁定了！&lt;/div&gt;</code></pre>
+      <div class="page-number">20</div>
+    </div>
+
+    <!-- Slide 21: 5.3 宽高 - 预期效果 3.2 -->
+    <div class="slide">
+      <h2>任务 3.2：预期效果</h2>
+      <p>加上 <code>box-sizing: border-box;</code> 后：</p>
+      <p>
+        不管你把 <code>padding</code> 和 <code>border</code> 设置多大，盒子的总宽度死死锁定在
+        <strong>200px</strong>！
+      </p>
+      <p>浏览器会自动帮你做减法，压缩里面文字（内容）的活动空间。</p>
+      <p class="highlight text-center" style="margin-top: 40px">
+        老司机的忠告：在实际开发中，我们通常会在最开头对所有元素加上全局设定 `* { box-sizing:
+        border-box; }`
+      </p>
+      <div class="page-number">21</div>
+    </div>
+
+    <!-- Slide 22: 5.4 应用 封面 -->
+    <div class="slide chapter-slide flex-center">
+      <h1>5.4 框模型的应用</h1>
+      <p>如何优雅地摆弄这些盒子</p>
+      <div class="page-number">22</div>
+    </div>
+
+    <!-- Slide 23: 5.4 应用 - 水平居中理论 -->
+    <div class="slide">
+      <h2>应用 1：让盒子“C位出道” (水平居中)</h2>
+      <p>我们在网页上经常看到居中对齐的内容块。怎么让一个盒子在父元素里水平居中呢？</p>
+      <p><strong>秘诀：自动分配外边距！</strong></p>
+      <p>
+        当我们把盒子的左右 <code>margin</code> 设置为
+        <code>auto</code> 时，浏览器就会平分两边的剩余空间，盒子就被推到了正中间！
+      </p>
+      <p><code style="color: red">margin: 0 auto;</code></p>
+      <div class="page-number">23</div>
+    </div>
+
+    <!-- Slide 24: 5.4 应用 - 任务 4.1 -->
+    <div class="slide">
+      <h2>实操任务 4.1：盒子居中术</h2>
+      <p><strong>任务目标：</strong>让一个 400px 宽的盒子在页面中水平居中。</p>
+      <pre><code>&lt;div class="center-box"&gt;我是C位盒子&lt;/div&gt;
+
+&lt;style&gt;
+  .center-box {
+    width: 400px;
+    background-color: orange;
+    /* 上下边距为0，左右为自动平分！ */
+    margin: 0 auto; 
+    text-align: center; /* 让文字也居中 */
+  }
+&lt;/style&gt;</code></pre>
+      <div class="page-number">24</div>
+    </div>
+
+    <!-- Slide 25: 5.4 应用 - 预期效果 4.1 -->
+    <div class="slide">
+      <h2>任务 4.1：预期效果</h2>
+      <p>盒子乖乖地跑到了页面的正中央：</p>
+      <div
+        style="
+          width: 400px;
+          margin: 0 auto;
+          background-color: orange;
+          text-align: center;
+          padding: 20px;
+        "
+      >
+        我是C位盒子
+      </div>
+      <p style="margin-top: 40px">
+        <strong>注意前提条件：</strong>盒子必须是有明确宽度的块级元素（设置了具体的
+        <code>width</code>），<code>margin: 0 auto;</code> 才会生效哦！
+      </p>
+      <div class="page-number">25</div>
+    </div>
+
+    <!-- Slide 26: 5.4 应用 - 边距塌陷理论 -->
+    <div class="slide">
+      <h2>经典陷阱：外边距塌陷 (Margin Collapse)</h2>
+      <p>这又是前端的一个“玄学”设定。想象一下：</p>
+      <p>上面盒子的 <code>margin-bottom</code> 是 30px。</p>
+      <p>下面盒子的 <code>margin-top</code> 是 20px。</p>
+      <p>你以为它们之间的距离是 30 + 20 = 50px 吗？</p>
+      <p class="highlight">错！它们会“打架”，距离不是相加，而是“谁大听谁的”，最终距离是 30px！</p>
+      <div class="page-number">26</div>
+    </div>
+
+    <!-- Slide 27: 5.4 应用 - 任务 4.2 -->
+    <div class="slide">
+      <h2>实操任务 4.2：避开塌陷陷阱</h2>
+      <p><strong>任务目标：</strong>体会并解决外边距塌陷。</p>
+      <pre style="overflow: visible"><code>&lt;style&gt;
+  .boxA { margin-bottom: 50px; background: #ddd;}
+  .boxB { margin-top: 50px; background: #eee;}
+&lt;/style&gt;
+&lt;div class="boxA"&gt;上面的盒子&lt;/div&gt;
+&lt;div class="boxB"&gt;下面的盒子&lt;/div&gt;</code></pre>
+      <p>
+        <strong>老师支招：</strong
+        >怎么避免脑子糊涂？最简单的实战技巧是：**统一只设置单方向的外边距**（比如大家统一只设置
+        `margin-bottom`），不让它们有发生重叠的机会！
+      </p>
+      <div class="page-number">27</div>
+    </div>
+
+    <div class="slide">
+      <h2>用边框画三角</h2>
+      <p>通过设置宽高为0，并利用边框的交界处，可以画出各种三角形。</p>
+      <pre><code>&lt;style&gt;
+  .triangle {
+    width: 0;
+    height: 0;
+    border: 100px solid transparent;
+    border-bottom-color: red;
+  }
+&lt;/style&gt;
+&lt;div class="triangle"&gt;&lt;/div&gt;</code></pre>
+      <div class="page-number"></div>
+    </div>
+    <div class="slide">
+      <p>效果：一个向上的红色三角形（底部边框为底边，其他三边透明）。</p>
+      <div class="triangle"></div>
+    </div>
+    <!-- Slide 28: 5.5 display 封面 -->
+    <div class="slide chapter-slide flex-center">
+      <h1>5.5 display 属性</h1>
+      <p>给盒子分配不同的“性格”</p>
+      <div class="page-number">28</div>
+    </div>
+
+    <!-- Slide 29: 5.5 display - 性格比喻 -->
+    <div class="slide">
+      <h2>5.5 盒子的三种基本性格</h2>
+      <p>在 HTML 中，盒子生来性格不同，主要由 <code>display</code> 属性决定：</p>
+      <ul>
+        <li>
+          <code>block</code> (块级)：<strong>霸道总裁。</strong>
+          必须独占一行，宽、高、内外边距随便设。（代表：<code>&lt;div&gt;</code>,
+          <code>&lt;p&gt;</code>, <code>&lt;h1&gt;</code>）
+        </li>
+        <li>
+          <code>inline</code> (行内)：<strong>随和群演。</strong>
+          大家挤在同一行，设置宽高无效！靠内容撑开。（代表：<code>&lt;span&gt;</code>,
+          <code>&lt;a&gt;</code>）
+        </li>
+        <li>
+          <code>inline-block</code> (行内块)：<strong>混血儿。</strong>
+          既能排在同一行，又能随意设置宽高！
+        </li>
+      </ul>
+      <div class="page-number">29</div>
+    </div>
+
+    <!-- Slide 30: 5.5 display - 任务 5.1 -->
+    <div class="slide">
+      <h2>实操任务 5.1：霸道总裁与群演</h2>
+      <p><strong>任务目标：</strong>测试不同标签天生的 display 属性。</p>
+      <pre><code>&lt;!-- div 是块级，占据整行 --&gt;
+&lt;div style="background: pink;"&gt;我是div，我独占一行&lt;/div&gt;
+&lt;div style="background: pink;"&gt;我是div2，我也独占一行&lt;/div&gt;
+
+&lt;!-- span 是行内，挤在一起 --&gt;
+&lt;span style="background: lightblue;"&gt;我是span&lt;/span&gt;
+&lt;span style="background: lightgreen;"&gt;我也是span&lt;/span&gt;</code></pre>
+      <div class="page-number">30</div>
+    </div>
+
+    <!-- Slide 31: 5.5 display - 预期效果 5.1 -->
+    <div class="slide">
+      <h2>任务 5.1：预期效果</h2>
+      <p>
+        <strong>霸道总裁 <code>&lt;div&gt;</code>：</strong>即使文字很少，也不允许别人站在旁边。
+      </p>
+      <div style="background: pink">我是div，我独占一行</div>
+      <div style="background: pink; margin-bottom: 20px">我是div2，我也独占一行</div>
+
+      <p>
+        <strong>随和群演 <code>&lt;span&gt;</code>：</strong>并排站立。
+      </p>
+      <div>
+        <span style="background: lightblue; display: inline">我是span</span>
+        <span style="background: lightgreen; display: inline">我也是span</span>
+      </div>
+      <div class="page-number">31</div>
+    </div>
+
+    <!-- Slide 32: 5.5 display - 任务 5.2 -->
+    <div class="slide">
+      <h2>实操任务 5.2：性格改造 (inline-block)</h2>
+      <p><strong>任务目标：</strong>我们想要多个方块并排显示，但又要能设置宽度和高度。怎么办？</p>
+      <pre><code>&lt;style&gt;
+  .nav-item {
+    display: inline-block; /* 划重点！转换性格 */
+    width: 100px;
+    height: 40px;
+    background-color: #3498db;
+    color: white;
+    text-align: center;
+  }
+&lt;/style&gt;
+&lt;div class="nav-item"&gt;首页&lt;/div&gt;
+&lt;div class="nav-item"&gt;新闻&lt;/div&gt;
+&lt;div class="nav-item"&gt;关于&lt;/div&gt;</code></pre>
+      <div class="page-number">32</div>
+    </div>
+
+    <!-- Slide 33: 5.5 display - 预期效果 5.2 -->
+    <div class="slide">
+      <h2>任务 5.2：预期效果</h2>
+      <p>
+        通过赋予 <code>display: inline-block;</code>，原本霸道的
+        <code>&lt;div&gt;</code> 变得可以并排站立了，而且宽高依然生效！
+      </p>
+      <div>
+        <div
+          style="
+            display: inline-block;
+            width: 100px;
+            line-height: 40px;
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            margin-right: 5px;
+          "
+        >
+          首页
+        </div>
+        <div
+          style="
+            display: inline-block;
+            width: 100px;
+            line-height: 40px;
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            margin-right: 5px;
+          "
+        >
+          新闻
+        </div>
+        <div
+          style="
+            display: inline-block;
+            width: 100px;
+            line-height: 40px;
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+          "
+        >
+          关于
+        </div>
+      </div>
+
+      <p style="margin-top: 30px">（这就是早些年网页导航栏最经典的制作方法！）</p>
+      <div class="page-number">33</div>
+    </div>
+
+    <!-- Slide 34: 5.5 display - 隐身衣 -->
+    <div class="slide">
+      <h2>5.5 终极魔法：隐身衣 display: none;</h2>
+      <p>有时候我们需要把某个盒子彻底从网页上抹去（比如关掉弹窗）。</p>
+      <p>此时，只需使用 <code>display: none;</code>。</p>
+      <p><strong>特点：</strong></p>
+      <ul>
+        <li>盒子完全消失，<strong>不占用任何网页空间</strong>。</li>
+        <li>后边的元素会直接顶上来。</li>
+        <li>这是配合 JavaScript 做交互特效（如显示/隐藏菜单）时最常用的 CSS 属性！</li>
+      </ul>
+      <div class="page-number">34</div>
+    </div>
+
+    <!-- Slide 35: 5.6 小结 封面 -->
+    <div class="slide chapter-slide flex-center">
+      <h1>5.6 小结</h1>
+      <p>收下这份前端武功秘籍</p>
+      <div class="page-number">35</div>
+    </div>
+
+    <!-- Slide 36: 5.6 小结 - 回顾 -->
+    <div class="slide">
+      <h2>框模型核心秘籍复盘</h2>
+      <ol>
+        <li>
+          <strong>记住解剖图：</strong>一个盒子 = 内容(Content) + 内边距(Padding) + 边框(Border) +
+          外边距(Margin)。
+        </li>
+        <li>
+          <strong>避开尺寸陷阱：</strong>养成好习惯，遇到尺寸算不清，直接祭出
+          <code>box-sizing: border-box;</code>。
+        </li>
+        <li>
+          <strong>居中法宝：</strong>固定宽度的块级盒子，用 <code>margin: 0 auto;</code> 稳稳 C位。
+        </li>
+        <li>
+          <strong>搞懂性格：</strong> <code>block</code> 独占一行，<code>inline</code>
+          挤在一起且不能设宽高，<code>inline-block</code> 完美结合体。
+        </li>
+      </ol>
+      <p class="highlight text-center" style="margin-top: 40px">
+        课后作业：尝试用今天学的盒子模型，自己拼凑出一个包含头部、内容、底部的网页骨架吧！
+      </p>
+      <div class="page-number">36</div>
+    </div>
+  </body>
+</html>

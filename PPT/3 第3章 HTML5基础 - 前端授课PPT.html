@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第3章 HTML5基础 - 前端授课PPT</title>
+  <style>
+    /* 全局及页面基础设置 */
+    body {
+      font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+      font-size: 26px;
+      margin: 0;
+      background-color: #e0e5ec;
+      color: #333333;
+      counter-reset: slide-counter;
+    }
+
+    /* 幻灯片容器设置 (适配网页预览与PDF横向导出) */
+    .slide {
+      background-color: #ffffff;
+      width: 297mm;
+      height: 210mm;
+      margin: 30px auto;
+      padding: 60px;
+      box-sizing: border-box;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      page-break-after: always;
+      page-break-inside: avoid;
+      overflow: hidden;
+      /* 严禁内容溢出 */
+    }
+
+    /* 打印模式优化 */
+    @media print {
+      @page {
+        size: A4 landscape;
+        margin: 0;
+      }
+
+      body {
+        background-color: #ffffff;
+        margin: 0;
+      }
+
+      .slide {
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        box-shadow: none;
+        border: none;
+        page-break-after: always;
+        page-break-inside: avoid;
+      }
+    }
+
+    /* 标题排版 */
+    h1 {
+      font-size: 48px;
+      color: #2c3e50;
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border-bottom: 3px solid #3498db;
+      padding-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 36px;
+      color: #2980b9;
+      margin-top: 0;
+      margin-bottom: 25px;
+    }
+
+    /* 内容区布局 */
+    .content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .content-top {
+      justify-content: flex-start;
+    }
+
+    /* 模块化卡片设计：理论、任务、结果 */
+    .box {
+      padding: 25px;
+      margin-bottom: 25px;
+      border-radius: 8px;
+      line-height: 1.6;
+    }
+
+    .theory-box {
+      border-left: 8px solid #3498db;
+      background-color: #f7fbfe;
+    }
+
+    .task-box {
+      border-left: 8px solid #e74c3c;
+      background-color: #fdf4f3;
+    }
+
+    .result-box {
+      border: 3px dashed #27ae60;
+      background-color: #f4fbf6;
+      text-align: center;
+    }
+
+    /* 强调文本 */
+    .highlight {
+      color: #e74c3c;
+      font-weight: bold;
+    }
+
+    /* 列表样式 */
+    ul {
+      line-height: 1.8;
+      margin-top: 10px;
+      padding-left: 40px;
+    }
+
+    li {
+      margin-bottom: 15px;
+    }
+
+    /* 代码块设置：严格白底深字，防止溢出 */
+    pre {
+      background-color: #ffffff;
+      border: 2px solid #bdc3c7;
+      padding: 20px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 24px;
+      color: #2c3e50;
+      overflow-x: hidden;
+      white-space: pre-wrap;
+      border-radius: 5px;
+      margin: 15px 0;
+      line-height: 1.4;
+    }
+
+    /* 页码注入 */
+    .slide::after {
+      counter-increment: slide-counter;
+      content: counter(slide-counter);
+      position: absolute;
+      bottom: 25px;
+      right: 40px;
+      font-size: 22px;
+      color: #7f8c8d;
+    }
+
+    /* 首页和尾页特殊居中布局 */
+    .center-slide {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .center-slide h1 {
+      border-bottom: none;
+      font-size: 60px;
+    }
+
+    .center-slide p {
+      font-size: 32px;
+      color: #7f8c8d;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Slide 1: 封面 -->
+  <div class="slide center-slide">
+    <h1>第3章 HTML5基础</h1>
+    <p>带你走进现代 Web 开发的魔法世界 🚀</p>
+
+  </div>
+
+  <!-- Slide 2: 课程大纲 -->
+  <div class="slide">
+    <h2>今天我们学什么？ (课程大纲)</h2>
+    <div class="content">
+      <div class="theory-box">
+        <p>各位同学好！接下来的 45 分钟，我们将一起掌握：</p>
+        <ul>
+          <li><strong>3.1 HTML的发展：</strong> 从“泥巴房”到“精装别墅”</li>
+          <li><strong>3.2 HTML5布局元素：</strong> 给网页划分出真正的“房间”</li>
+          <li><strong>3.3 常用HTML5元素：</strong> 网页中的那些小魔法道具</li>
+          <li><strong>3.4 HTML5属性：</strong> 标签的隐藏技能</li>
+          <li><strong>3.5 HTML5表单：</strong> 会自己思考的智能输入框</li>
+          <li><strong>3.6 音频和视频：</strong> 告别第三方插件的影音时代</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3: 3.1 理论引入 -->
+  <div class="slide">
+    <h2>3.1 HTML 的发展 (打个比方)</h2>
+    <div class="content">
+      <div class="theory-box">
+        <p>学习代码就像是学<span class="highlight">盖房子</span>。</p>
+        <ul>
+          <li><strong>早期 HTML：</strong> 就像用泥巴糊墙。大家各显神通，代码乱七八糟，浏览器只能“猜”你想显示什么，房子摇摇欲坠。</li>
+          <li><strong>XHTML 时代：</strong> 泥瓦匠被教导主任骂了，开始要求绝对的横平竖直。</li>
+          <li><strong>HTML5 时代：</strong> 终于有了现代化预制板！高效、酷炫、包容性强！</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 4: 3.1.1 XHTML -->
+  <div class="slide">
+    <h2>3.1.1 XHTML：严厉的教导主任</h2>
+    <div class="content">
+      <div class="theory-box">
+        <p>XHTML 曾经统治过一段时期，它的特点是<span class="highlight">极致的严格</span>：</p>
+        <ul>
+          <li>标签必须小写：写成 <code>&lt;HTML&gt;</code> 会被报错！</li>
+          <li>标签必须闭合：少写一个 <code>&lt;/p&gt;</code>，网页直接崩溃！</li>
+          <li>属性必须加引号：<code>id=box</code> 不行，必须是 <code>id="box"</code>。</li>
+        </ul>
+        <p><strong>现状：</strong> 虽然现在不常用，但它给我们留下了“写规范代码”的好习惯。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 5: 3.1.2 HTML5 -->
+  <div class="slide">
+    <h2>3.1.2 HTML5：宽容的现代建筑师</h2>
+    <div class="content">
+      <div class="theory-box">
+        <p>终于，HTML5 诞生了！它就像一位酷酷的现代建筑师：</p>
+        <ul>
+          <li><strong>包容：</strong> 标签大写？没闭合？它都能尽量帮你修复渲染。</li>
+          <li><strong>简洁：</strong> 文档声明从原来长长的一大串，变成了简单的 <code>&lt;!DOCTYPE html&gt;</code>。</li>
+          <li><strong>强大：</strong> 自带视频播放、画布绘图、本地存储等超强能力，不再依赖 Flash 这种插件！</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 6: 3.2 布局元素 理论 -->
+  <div class="slide">
+    <h2>3.2 HTML5 布局元素：为何需要语义化？</h2>
+    <div class="content">
+      <div class="theory-box">
+        <p>以前我们布局，满屏幕都是 <code>&lt;div&gt;</code>。这就好比你搬家，所有的箱子全长一样，完全不知道里面装的是衣服还是零食。</p>
+        <p>HTML5 引入了<span class="highlight">语义化标签</span>，就是给你的纸箱子贴上清晰的标签！</p>
+        <ul>
+          <li>搜索引擎（如百度、谷歌）看得懂。</li>
+          <li>盲人阅读器读得懂。</li>
+          <li>我们程序员自己接手代码时，也不会抓狂了。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 7: 3.2 布局元素 常用标签 -->
+  <div class="slide">
+    <h2>3.2 认识这些“带标签的箱子”</h2>
+    <div class="content">
+      <div class="theory-box">
+        <ul>
+          <li><code>&lt;header&gt;</code>：页头（网页的帽子/招牌）</li>
+          <li><code>&lt;nav&gt;</code>：导航（网站的路牌，存放菜单链接）</li>
+          <li><code>&lt;main&gt;</code>：主要内容（网页的身体，核心内容）</li>
+          <li><code>&lt;article&gt;</code>：独立文章（可以单独成篇的一篇博客或新闻）</li>
+          <li><code>&lt;section&gt;</code>：章节区块（将页面划分为不同功能区）</li>
+          <li><code>&lt;footer&gt;</code>：页脚（网页的鞋子/版权声明）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 8: 3.2 布局元素 任务 -->
+  <div class="slide">
+    <h2>【实操任务 1】搭建你的第一个 HTML5 别墅骨架</h2>
+    <div class="content">
+      <div class="task-box">
+        <p><strong>任务要求：</strong> 使用 HTML5 布局标签，搭建一个包含头部、导航、主体和页脚的简单博客页面骨架。</p>
+        <pre>
+&lt;body&gt;
+  &lt;header&gt;
+    &lt;h1&gt;我的个人博客&lt;/h1&gt;
+  &lt;/header&gt;
+
+  &lt;nav&gt;
+    &lt;a href="#"&gt;首页&lt;/a&gt; | &lt;a href="#"&gt;关于我&lt;/a&gt;
+  &lt;/nav&gt;
+
+  &lt;main&gt;
+    &lt;section&gt;这里是核心内容区&lt;/section&gt;
+  &lt;/main&gt;
+
+  &lt;footer&gt;版权所有 &copy; 2026&lt;/footer&gt;
+&lt;/body&gt;
+</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 9: 3.2 布局元素 结果预期 -->
+  <div class="slide">
+    <h2>【结果揭晓 1】别墅骨架展示</h2>
+    <div class="content">
+      <div class="result-box">
+        <h3>页面上会按顺序依次显示：</h3>
+        <p style="font-size: 32px; font-weight: bold; margin: 10px 0;">我的个人博客</p>
+        <p style="color: blue; text-decoration: underline;">首页 | 关于我</p>
+        <p style="margin: 20px 0;">这里是核心内容区</p>
+        <p style="font-size: 20px; color: #777;">版权所有 © 2026</p>
+      </div>
+      <p style="margin-top: 20px; text-align: center;">虽然现在还没有 CSS 来美化，但骨架非常健康，极具专业范儿！</p>
+    </div>
+  </div>
+
+  <!-- Slide 10: 3.3 常用元素 理论 -->
+  <div class="slide">
+    <h2>3.3 常用 HTML5 元素：做笔记的荧光笔</h2>
+    <div class="content">
+      <div class="theory-box">
+        <p>我们在读书时，总喜欢用笔画重点。HTML 也有这样的“画笔”：</p>
+        <ul>
+          <li><code>&lt;mark&gt;</code> 标签：高亮显示文本。（就像黄色的荧光笔）</li>
+          <li><code>&lt;strong&gt;</code> 标签：文字加粗，表示强调。</li>
+          <li><code>&lt;em&gt;</code> 标签：文字斜体，表示语气上的强调。</li>
+        </ul>
+        <p>比单纯使用 CSS 改变颜色更好，因为它们带有<span class="highlight">语义</span>！</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 11: 3.3 常用元素 任务 -->
+  <div class="slide">
+    <h2>【实操任务 2】给你的文章画重点</h2>
+    <div class="content">
+      <div class="task-box">
+        <p><strong>任务要求：</strong> 编写一段关于前端学习的文字，并使用 <code>mark</code> 标签高亮核心词汇。</p>
+        <pre>
+&lt;p&gt;
+  学习 Web 前端开发，最基础的三剑客是：
+  &lt;strong&gt;HTML&lt;/strong&gt;、
+  &lt;strong&gt;CSS&lt;/strong&gt; 和 
+  &lt;strong&gt;JavaScript&lt;/strong&gt;。
+  其中，&lt;mark&gt;多动手敲代码&lt;/mark&gt;是学好前端的唯一捷径！
+&lt;/p&gt;
+</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 12: 3.3 常用元素 结果预期 -->
+  <div class="slide">
+    <h2>【结果揭晓 2】自带高亮特效</h2>
+    <div class="content">
+      <div class="result-box">
+        <p style="text-align: left; padding: 20px; font-size: 28px;">
+          学习 Web 前端开发，最基础的三剑客是：
+          <strong>HTML</strong>、
+          <strong>CSS</strong> 和
+          <strong>JavaScript</strong>。
+          其中，<mark style="background-color: yellow;">多动手敲代码</mark>是学好前端的唯一捷径！
+        </p>
+      </div>
+      <p style="margin-top: 20px; text-align: center;">浏览器默认会为 <code>&lt;mark&gt;</code> 标签加上黄色的背景底色，非常醒目！</p>
+    </div>
+  </div>
+
+  <!-- Slide 13: 3.3 常用元素 进度条理论 -->
+  <div class="slide">
+    <h2>3.3 常用 HTML5 元素：加载条与仪表盘</h2>
+    <div class="content">
+      <div class="theory-box">
+        <p>以前要做个游戏血条或者加载进度，要写一堆复杂的 CSS 和 JavaScript。现在 HTML5 给了你现成的组件：</p>
+        <ul>
+          <li><code>&lt;progress&gt;</code> 标签：进度条。表示一个任务完成的程度，比如下载进度。</li>
+          <li><code>&lt;meter&gt;</code> 标签：度量衡 / 仪表盘。表示已知范围内的数值，比如手机电量、磁盘空间。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 14: 3.3 常用元素 进度条任务 -->
+  <div class="slide">
+    <h2>【实操任务 3】制作一个下载进度条和磁盘容量盘</h2>
+    <div class="content">
+      <div class="task-box">
+        <p><strong>任务要求：</strong> 直接使用 HTML 标签展示文件下载到了 70%，以及 C 盘空间使用了 90%。</p>
+        <pre>
+&lt;h3&gt;文件下载进度：&lt;/h3&gt;
+&lt;!-- value是当前值，max是最大值 --&gt;
+&lt;progress value="70" max="100"&gt;&lt;/progress&gt; 70%
+
+&lt;h3&gt;C盘空间使用情况：&lt;/h3&gt;
+&lt;!-- 可以设置高低风险值，当达到90时通常会变红 --&gt;
+&lt;meter value="90" min="0" max="100" low="30" high="80"&gt;
+&lt;/meter&gt; 90%
+</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 15: 3.3 常用元素 进度条结果 -->
+  <div class="slide">
+    <h2>【结果揭晓 3】不写一行 CSS 的进度组件</h2>
+    <div class="content">
+      <div class="result-box">
+        <p>文件下载进度：<br> <progress value="70" max="100" style="width: 200px; height: 20px;"></progress> 70%</p>
+        <hr style="border:1px dashed #ccc; margin: 20px 0;">
+        <p>C盘空间使用情况：<br> <meter value="90" min="0" max="100" low="30" high="80"
+            style="width: 200px; height: 20px;"></meter> 90% (极高，通常渲染为红色或黄色)</p>
+      </div>
+      <p style="margin-top: 20px; text-align: center;">不同的浏览器会自带不同的默认 UI 样式，但功能完全生效！</p>
+    </div>
+  </div>
+
+  <!-- Slide 16: 3.4 属性 理论 -->
+  <div class="slide">
+    <h2>3.4 HTML5 属性：给标签赋予超能力</h2>
+    <div class="content">
+      <div class="theory-box">
+        <p>HTML5 不仅带来了新标签，还带来了<span class="highlight">全局属性</span>，它们可以加在几乎任何标签上，就像魔法一样：</p>
+        <ul>
+          <li><code>hidden</code> 属性：隐身斗篷。加上它，元素就在页面上消失了。</li>
+          <li><code>contenteditable</code> 属性：点石成金的魔法棒。加上它，网页上的文字就能像 Word 文档一样被用户直接修改！</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 17: 3.4 属性 任务 -->
+  <div class="slide">
+    <h2>【实操任务 4】体验隐身斗篷与魔法棒</h2>
+    <div class="content">
+      <div class="task-box">
+        <p><strong>任务要求：</strong> 编写一段可以被用户直接编辑的签名，以及一个被隐藏的秘密彩蛋。</p>
+        <pre>
+&lt;!-- 添加 contenteditable="true" 让文字可编辑 --&gt;
+&lt;p contenteditable="true"&gt;
+  这是一段神奇的文字，你用鼠标点一下，就可以直接修改我啦！
+&lt;/p&gt;
+
+&lt;!-- 添加 hidden 属性隐藏元素 --&gt;
+&lt;div hidden&gt;
+  这是一个隐藏的宝藏，普通用户在页面上是看不见我的！
+&lt;/div&gt;
+</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 18: 3.4 属性 结果预期 -->
+  <div class="slide">
+    <h2>【结果揭晓 4】网页变身记事本</h2>
+    <div class="content">
+      <div class="result-box">
+        <p style="border: 1px dotted #999; padding: 10px; display: inline-block;">这是一段神奇的文字，你用鼠标点一下，就可以直接修改我啦！</p>
+        <p style="font-style: italic; color: #888;">(此时隐藏的宝藏 div 完全不可见，不占据任何空间)</p>
+      </div>
+      <p style="margin-top: 20px; text-align: center;"><code>contenteditable</code> 属性是开发“网页富文本编辑器”的核心基石！</p>
+    </div>
+  </div>
+
+  <!-- Slide 19: 3.4 data属性 理论 -->
+  <div class="slide">
+    <h2>3.4 HTML5 属性：data-* 自定义属性</h2>
+    <div class="content">
+      <div class="theory-box">
+        <p>有时候，我们需要在网页元素上偷偷塞一点数据，方便以后用 JavaScript 获取。</p>
+        <p>这就是 <span class="highlight">data-* 属性</span>，它就像是在你的衣服内侧缝了一个隐秘的口袋。</p>
+        <ul>
+          <li>规则：以 <code>data-</code> 开头，后面跟着你自定义的名字。</li>
+          <li>示例：<code>data-user-id="1001"</code></li>
+          <li>好处：规范化存储私有数据，且不会影响页面的任何显示。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 20: 3.4 data属性 任务 -->
+  <div class="slide">
+    <h2>【实操任务 5】给按钮缝上隐秘口袋</h2>
+    <div class="content">
+      <div class="task-box">
+        <p><strong>任务要求：</strong> 制作一个商品购买按钮，并将商品的 ID 和价格隐藏在标签的 data 属性中。</p>
+        <pre>
+&lt;!-- 给按钮添加 data-id 和 data-price 属性 --&gt;
+&lt;button 
+    data-id="apple_001" 
+    data-price="9.9"
+&gt;
+  购买苹果
+&lt;/button&gt;
+</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 21: 3.4 data属性 结果预期 -->
+  <div class="slide">
+    <h2>【结果揭晓 5】前端工程师的“暗号”</h2>
+    <div class="content">
+      <div class="result-box">
+        <button style="padding: 10px 20px; font-size: 24px;">购买苹果</button>
+      </div>
+      <p style="margin-top: 20px; text-align: center;">页面上只显示普通的按钮。但后续如果你学习了 JavaScript，只需一行代码就能读取到 <code>9.9</code>
+        这个价格去结算，非常巧妙！</p>
+    </div>
+  </div>
+
+  <!-- Slide 22: 3.5 表单 理论 -->
+  <div class="slide">
+    <h2>3.5 HTML5 表单：会思考的智能助手</h2>
+    <div class="content">
+      <div class="theory-box">
+        <p>以前网页里的表单（输入框）非常笨，只能让你敲字。</p>
+        <p>如果要验证你输入的是不是邮箱，或者让你选个颜色、选个日期，程序员要写几百行 JavaScript 代码才能实现。</p>
+        <p>HTML5 表单迎来了<span class="highlight">史诗级加强</span>！它们现在自带日历、调色板和智能提示了！</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 23: 3.5.1 datalist 理论 -->
+  <div class="slide">
+    <h2>3.5.1 datalist 元素：智能下拉提示</h2>
+    <div class="content">
+      <div class="theory-box">
+        <p>你在百度搜索时，打一个字，下面就会弹出一排建议对吧？</p>
+        <p>现在我们用 HTML5 的 <code>&lt;datalist&gt;</code> 标签，几行代码就能实现类似的效果！</p>
+        <ul>
+          <li>它是一组隐藏的备选项。</li>
+          <li>必须把它和 <code>&lt;input&gt;</code> 框通过 <code>id</code> 绑定起来才能召唤它！</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 24: 3.5.1 datalist 任务 -->
+  <div class="slide">
+    <h2>【实操任务 6】制作一个自带提示的浏览器输入框</h2>
+    <div class="content">
+      <div class="task-box">
+        <p><strong>任务要求：</strong> 创建一个文本输入框，当用户输入内容或双击时，提示 Chrome、Edge 等浏览器名称。</p>
+        <pre>
+&lt;!-- 1. input输入框，用 list 属性绑定 datalist 的 id --&gt;
+&lt;input type="text" list="browsers" placeholder="选择浏览器"&gt;
+
+&lt;!-- 2. datalist 提供数据选项，通过 id 关联 --&gt;
+&lt;datalist id="browsers"&gt;
+  &lt;option value="Chrome"&gt;
+  &lt;option value="Edge"&gt;
+  &lt;option value="Firefox"&gt;
+  &lt;option value="Safari"&gt;
+&lt;/datalist&gt;
+</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 25: 3.5.1 datalist 结果预期 -->
+  <div class="slide">
+    <h2>【结果揭晓 6】原生搜索提示框</h2>
+    <div class="content">
+      <div class="result-box">
+        <input type="text" list="mock-browsers" placeholder="选择浏览器"
+          style="padding: 5px; font-size: 24px; width: 200px;">
+        <datalist id="mock-browsers">
+          <option value="Chrome"></option>
+          <option value="Edge"></option>
+          <option value="Firefox"></option>
+        </datalist>
+        <p style="font-size: 20px; color: #666; margin-top: 10px;">(试着点击上面的输入框并输入 'c' 或双击)</p>
+      </div>
+      <p style="margin-top: 20px; text-align: center;">你会发现下拉框自动帮你匹配了包含该字母的选项，极其方便！</p>
+    </div>
+  </div>
+
+  <!-- Slide 26: 3.5.2 autocomplete 理论 -->
+  <div class="slide">
+    <h2>3.5.2 autocomplete 属性：浏览器的记忆力</h2>
+    <div class="content">
+      <div class="theory-box">
+        <p>你有没有发现，每次在购物网站填收货地址，浏览器经常会询问你：“要帮你自动填充以前写过的地址吗？”</p>
+        <p>这就是 <span class="highlight">autocomplete (自动完成)</span> 属性的功劳。</p>
+        <ul>
+          <li><code>autocomplete="on"</code>：开启历史记录记忆（默认）。</li>
+          <li><code>autocomplete="off"</code>：关闭记忆。比如涉及到银行密码、验证码时，我们必须把它关掉以保证安全！</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 27: 3.5.3 新的input类型 理论 -->
+  <div class="slide">
+    <h2>3.5.3 酷炫的新 input 类型</h2>
+    <div class="content">
+      <div class="theory-box">
+        <p>只要修改 <code>&lt;input&gt;</code> 的 <code>type</code> 属性，就能召唤各种神奇控件：</p>
+        <ul>
+          <li><code>type="color"</code>：弹出一个原生的系统调色板！</li>
+          <li><code>type="date"</code>：弹出一个原生的日历让你选日期！</li>
+          <li><code>type="range"</code>：变成一个可以左右拖动的滑块！</li>
+          <li><code>type="email"</code> / <code>type="url"</code>：在手机端会呼出带有 "@" 或 ".com" 专属键盘！</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 28: 3.5.3 新类型 任务 -->
+  <div class="slide">
+    <h2>【实操任务 7】极速搭建用户资料收集表</h2>
+    <div class="content">
+      <div class="task-box">
+        <p><strong>任务要求：</strong> 创建一个表单，包含密码框(关闭历史记录)、生日选择(日历)和幸运色选择(调色板)。</p>
+        <pre>
+&lt;form&gt;
+  &lt;p&gt;密码(禁用历史记录): 
+    &lt;input type="password" autocomplete="off"&gt;&lt;/p&gt;
+
+  &lt;p&gt;你的生日: 
+    &lt;input type="date"&gt;&lt;/p&gt;
+
+  &lt;p&gt;你的幸运色: 
+    &lt;input type="color"&gt;&lt;/p&gt;
+&lt;/form&gt;
+</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 29: 3.5.3 新类型 结果预期 -->
+  <div class="slide">
+    <h2>【结果揭晓 7】功能爆表的原生表单</h2>
+    <div class="content">
+      <div class="result-box">
+        <div style="text-align: left; display: inline-block; font-size: 24px;">
+          <p>密码: <input type="password" style="font-size: 24px;"></p>
+          <p>你的生日: <input type="date" style="font-size: 24px;"></p>
+          <p>你的幸运色: <input type="color" style="width: 50px; height: 50px; cursor: pointer;"></p>
+        </div>
+      </div>
+      <p style="margin-top: 20px; text-align: center;">不需要写任何一行复杂的 JS 代码，现代浏览器已经为你搞定了日历和颜色的交互！</p>
+    </div>
+  </div>
+
+  <!-- Slide 30: 3.6 音视频 理论引入 -->
+  <div class="slide">
+    <h2>3.6 音频和视频：告别 Flash 的黑暗时代</h2>
+    <div class="content">
+      <div class="theory-box">
+        <p>你们可能不知道，以前在网页上看个视频，电脑里必须得安装一个叫 <code>Flash Player</code> 的插件，它又卡又容易崩溃。</p>
+        <p>HTML5 出现后，霸气地说：“插件时代结束了，视频和音频，我自己原生支持！”</p>
+        <p>这就好比买手机自带了高清相机，再也不用外接个笨重的镜头了。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 31: 3.6 音视频 标签介绍 -->
+  <div class="slide">
+    <h2>3.6 认识 audio 和 video</h2>
+    <div class="content">
+      <div class="theory-box">
+        <ul>
+          <li><code>&lt;audio&gt;</code> 标签：用于播放音乐/音频。</li>
+          <li><code>&lt;video&gt;</code> 标签：用于播放电影/视频。</li>
+        </ul>
+        <p><strong>关键属性：</strong></p>
+        <ul>
+          <li><code>src</code>：文件路径（歌曲或视频在哪里）。</li>
+          <li><code>controls</code>：魔法开关！加上它，浏览器就会自动显示出播放、暂停、音量调节按钮！</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 32: 3.6 音视频 任务 -->
+  <div class="slide">
+    <h2>【实操任务 8】在网页里开一个微型影院</h2>
+    <div class="content">
+      <div class="task-box">
+        <p><strong>任务要求：</strong> 在页面中嵌入一段音乐（带控制条）和一段视频（设置宽高并带控制条）。</p>
+        <pre>
+&lt;!-- 插入音频，加上 controls 显示播放按钮 --&gt;
+&lt;h3&gt;背景音乐：&lt;/h3&gt;
+&lt;audio src="music.mp3" controls&gt;&lt;/audio&gt;
+
+&lt;!-- 插入视频，设置宽为400像素 --&gt;
+&lt;h3&gt;猫咪视频：&lt;/h3&gt;
+&lt;video src="cat.mp4" controls width="400"&gt;
+  你的浏览器太老啦，不支持视频播放。
+&lt;/video&gt;
+</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 33: 3.6 音视频 结果预期 -->
+  <div class="slide">
+    <h2>【结果揭晓 8】丝滑流畅的多媒体体验</h2>
+    <div class="content">
+      <div class="result-box">
+        <p>背景音乐：<br> <audio controls style="width: 300px;"></audio></p>
+        <p>猫咪视频：<br>
+          <video controls width="300" style="background: #000; height: 168px;"></video>
+        </p>
+      </div>
+      <p style="margin-top: 10px; text-align: center; font-size: 22px;">（提示：<code>&lt;video&gt;</code>
+        标签中间的文字，只有在极老的浏览器上才会显示作为备用提示。）</p>
+    </div>
+  </div>
+
+  <!-- Slide 34: 课程总结 -->
+  <div class="slide">
+    <h2>45分钟充实之旅：课程总结</h2>
+    <div class="content">
+      <div class="theory-box">
+        <p>今天我们一起在 HTML5 的魔法世界里畅游了一番，你学会了：</p>
+        <ul>
+          <li>用 <code>header</code>、<code>nav</code> 等语义化标签盖出了健康的别墅骨架。</li>
+          <li>掌握了 <code>mark</code>、<code>progress</code> 这些随用随走的组件。</li>
+          <li>体验了 <code>contenteditable</code> 和 <code>data-*</code> 的隐藏超能力。</li>
+          <li>用几行代码呼出了神奇的日历和颜色选择器。</li>
+          <li>成功在页面中原生嵌入了音视频播放器。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 35: 感谢页 -->
+  <div class="slide center-slide">
+    <h1>谢谢大家！🎉</h1>
+    <p style="margin-top: 30px;">代码的奥秘在于多敲、多练。</p>
+    <p style="margin-top: 20px;">下节课，我们将学习让别墅变得漂亮的魔法 —— <strong>CSS</strong>！</p>
+    <div style="margin-top: 60px; font-size: 24px; color: #7f8c8d;">
+      <span>Q & A 提问环节</span>
+    </div>
+  </div>
+
+</body>
+
+</html>

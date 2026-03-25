@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>第4章 CSS基础 - 网页美颜术</title>
+    <style>
+      /* 全局基础重置 */
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        background-color: #f0f2f5;
+        font-family: '微软雅黑', 'Microsoft YaHei', sans-serif;
+        scroll-behavior: smooth;
+      }
+
+      /* 滚动捕捉，让网页变身PPT */
+      html {
+        scroll-snap-type: y mandatory;
+      }
+
+      /* 单张幻灯片样式 */
+      .slide {
+        scroll-snap-align: start;
+        width: 100vw;
+        height: 100vh;
+        /* 撑满屏幕 */
+        background-color: #ffffff;
+        /* 纯白背景 */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-sizing: border-box;
+        padding: 60px 100px;
+        position: relative;
+        overflow: hidden;
+        /* 防止溢出 */
+        border-bottom: 1px solid #eee;
+      }
+
+      /* 标题和文字大小严格控制 */
+      .slide h1 {
+        font-size: 52px;
+        color: #2c3e50;
+        margin-bottom: 30px;
+        border-bottom: 4px solid #3498db;
+        padding-bottom: 10px;
+        display: inline-block;
+      }
+
+      .slide h2 {
+        font-size: 40px;
+        color: #e74c3c;
+        margin-bottom: 25px;
+      }
+
+      .slide p,
+      .slide li {
+        font-size: 32px;
+        /* 保证后排学生看得清 */
+        line-height: 1.8;
+        color: #333333;
+      }
+
+      .slide ul {
+        margin-left: 40px;
+      }
+
+      /* 突出显示的关键字 */
+      .highlight {
+        color: #e74c3c;
+        font-weight: bold;
+      }
+
+      .tip {
+        background-color: #e8f6f3;
+        padding: 15px 20px;
+        border-left: 6px solid #1abc9c;
+        font-size: 28px;
+        margin-top: 20px;
+      }
+
+      /* 代码块样式：Consolas 字体，深色文字，白色背景 */
+      pre {
+        font-family: 'Consolas', 'Courier New', monospace;
+        font-size: 26px;
+        /* 代码至少 24px */
+        background-color: #fafafa;
+        border: 2px solid #ddd;
+        color: #111111;
+        padding: 20px 30px;
+        border-radius: 8px;
+        white-space: pre-wrap;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.02);
+        margin-top: 20px;
+      }
+
+      /* 底部页码 */
+      .page-number {
+        position: absolute;
+        bottom: 30px;
+        right: 50px;
+        font-size: 24px;
+        color: #999;
+      }
+
+      /* 打印模式（Ctrl+P）完美导出 PDF 优化 */
+      @media print {
+        body {
+          background: #fff;
+        }
+
+        html {
+          scroll-snap-type: none;
+        }
+
+        .slide {
+          page-break-after: always;
+          /* 每页独立 */
+          width: 100%;
+          height: 100vh;
+          border: none;
+          padding: 40px 60px;
+        }
+
+        @page {
+          size: landscape;
+          /* 横向打印 */
+          margin: 0;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 第1页：封面 -->
+    <div class="slide">
+      <h1 style="border: none; font-size: 64px; text-align: center; color: #2980b9; width: 100%">
+        第 4 章：网页的“美颜滤镜”
+      </h1>
+      <h2 style="text-align: center; font-size: 48px; color: #333">—— 零基础搞懂 CSS 核心基础</h2>
+
+      <div class="page-number">1 / 35</div>
+    </div>
+
+    <!-- 第2页：课前导入 -->
+    <div class="slide">
+      <h1>课前闲聊：为什么需要 CSS？</h1>
+      <p>大家回想一下上一节课我们写的 HTML 页面：</p>
+      <ul>
+        <li>有文字、有图片、有段落。</li>
+        <li>但是... 它们是从上到下死板排列的。</li>
+        <li>字全是黑的，背景全是白的！太素了！</li>
+      </ul>
+      <div class="tip">今天，我们要给网页<strong>“化妆”</strong>，让它变成你喜欢的样子！</div>
+      <div class="page-number">2 / 35</div>
+    </div>
+
+    <!-- 第3页：4.1 CSS 简介（理论） -->
+    <div class="slide">
+      <h1>4.1 CSS 简介 (Theory)</h1>
+      <p>什么是 CSS？</p>
+      <ul>
+        <li>全称：Cascading Style Sheets（层叠样式表）</li>
+        <li>如果说 <span class="highlight">HTML 是网页的骨架</span>（负责结构）。</li>
+        <li>那么 <span class="highlight">CSS 就是网页的衣服和妆容</span>（负责好看）。</li>
+      </ul>
+      <div class="page-number">3 / 35</div>
+    </div>
+
+    <!-- 第4页：4.1 CSS 简介（生动比喻） -->
+    <div class="slide">
+      <h1>4.1 核心理念：结构与表现分离</h1>
+      <p>老外设计网页时，强调一个原则：</p>
+      <p><strong>买衣服不要和长骨头混在一起！</strong></p>
+      <ul>
+        <li>HTML 只负责告诉浏览器：“这是一个标题”。</li>
+        <li>CSS 负责告诉浏览器：“这个标题是红色的、30像素大”。</li>
+        <li>好处：换一套 CSS，整个网站就能瞬间换个“皮肤”。</li>
+      </ul>
+      <div class="page-number">4 / 35</div>
+    </div>
+
+    <!-- 第5页：4.2.1 选择器概念（理论） -->
+    <div class="slide">
+      <h1>4.2.1 选择器：精准制导的导弹</h1>
+      <p>想要给网页“化妆”，你面临的第一个问题是：</p>
+      <p><strong>你要给哪一个部位化？</strong></p>
+      <ul>
+        <li>是给所有的段落涂色？</li>
+        <li>还是只给那个特定的按钮加边框？</li>
+      </ul>
+      <div class="tip">CSS 选择器（Selector），就是帮你<strong>找到目标元素</strong>的工具！</div>
+      <div class="page-number">5 / 35</div>
+    </div>
+
+    <!-- 第6页：4.2.1 CSS 基本语法 -->
+    <div class="slide">
+      <h1>4.2.1 CSS 基本语法公式</h1>
+      <p>记住这个万能句型：<strong>谁 { 变成什么样 }</strong></p>
+      <pre>
+选择器 {
+    属性名: 属性值;
+    属性名: 属性值;
+}
+</pre
+      >
+      <ul>
+        <li><strong>选择器：</strong> 目标对象。</li>
+        <li><strong>大括号：</strong> 声明块，里面的内容就是魔法。</li>
+        <li><strong>分号：</strong> 每一句话说完，必须加分号（新手最容易忘！）</li>
+      </ul>
+      <div class="page-number">6 / 35</div>
+    </div>
+
+    <!-- 第7页：4.2.2 标签选择器（理论） -->
+    <div class="slide">
+      <h1>4.2.2 标签选择器 (Tag Selector)</h1>
+      <p><strong>概念：</strong>直接使用 HTML 的标签名作为选择器。</p>
+      <p>
+        <strong>生活比喻：</strong>“范围攻击”。校长在广播里喊：“所有<span class="highlight"
+          >穿校服的同学</span
+        >，到操场集合！”
+      </p>
+      <ul>
+        <li>作用：一次性选中页面上所有的该标签元素。</li>
+        <li>特点：威力巨大，但不够精准。</li>
+      </ul>
+      <div class="page-number">7 / 35</div>
+    </div>
+
+    <!-- 第8页：4.2.2 标签选择器（任务） -->
+    <div class="slide">
+      <h1>动手任务 1：标签选择器</h1>
+      <h2>任务目标：让页面上所有的段落（p标签）文字变成蓝色。</h2>
+      <p>请在编辑器中输入以下代码：</p>
+      <pre>
+/* CSS 代码 */
+p {
+    color: blue;
+}
+</pre
+      >
+      <div class="tip">动手试试：写完后看看你的 HTML 页面，是不是所有的文字都变蓝了？</div>
+      <div class="page-number">8 / 35</div>
+    </div>
+
+    <!-- 第9页：4.2.2 标签选择器（效果展示） -->
+    <div class="slide">
+      <h1>任务 1：预期效果</h1>
+      <p>你的 HTML 如果长这样：</p>
+      <pre>
+&lt;p&gt;我是段落一&lt;/p&gt;
+&lt;p&gt;我是段落二&lt;/p&gt;
+&lt;div&gt;我是一个div&lt;/div&gt;
+</pre
+      >
+      <ul>
+        <li>段落一：<strong style="color: blue">变成蓝色</strong></li>
+        <li>段落二：<strong style="color: blue">变成蓝色</strong></li>
+        <li>div：保持原来的黑色（因为校长没喊 div）。</li>
+      </ul>
+      <div class="page-number">9 / 35</div>
+    </div>
+
+    <!-- 第10页：4.2.3 ID选择器（理论） -->
+    <div class="slide">
+      <h1>4.2.3 ID 选择器 (ID Selector)</h1>
+      <p><strong>概念：</strong>为特定的元素设置一个唯一的标识，用 <strong>#</strong> 来选中它。</p>
+      <p>
+        <strong>生活比喻：</strong>“身份证号”。警察说：“身份证号是
+        <span class="highlight">110105...</span> 的人出列！”
+      </p>
+      <ul>
+        <li>前提：HTML 标签必须有 <code>id="xxx"</code> 属性。</li>
+        <li>规则：CSS 中必须用 <strong>#</strong> 开头。</li>
+        <li>禁忌：一个页面中，同一个 ID 名称<strong>只能出现一次</strong>！</li>
+      </ul>
+      <div class="page-number">10 / 35</div>
+    </div>
+
+    <!-- 第11页：4.2.3 ID选择器（任务） -->
+    <div class="slide">
+      <h1>动手任务 2：ID 选择器</h1>
+      <h2>任务目标：只让“特权VIP”变成红色。</h2>
+      <p>HTML 准备：<code>&lt;p id="vip"&gt;我是唯一的 VIP&lt;/p&gt;</code></p>
+      <pre>
+/* CSS 代码 */
+#vip {
+    color: red;
+    font-size: 40px;
+}
+</pre
+      >
+      <div class="tip">注意看：前面有一个井号 (#) 哦！</div>
+      <div class="page-number">11 / 35</div>
+    </div>
+
+    <!-- 第12页：4.2.3 ID选择器（效果展示） -->
+    <div class="slide">
+      <h1>任务 2：预期效果</h1>
+      <p>经过刚才的代码施法：</p>
+      <ul>
+        <li>页面上那个带有 <code>id="vip"</code> 的段落，瞬间变成了：</li>
+        <li style="font-size: 40px; color: red">我是唯一的 VIP</li>
+        <li>其他普通的段落依然不受影响。</li>
+      </ul>
+      <p>这就是“精准狙击”的威力！</p>
+      <div class="page-number">12 / 35</div>
+    </div>
+
+    <!-- 第13页：4.2.4 Class选择器（理论） -->
+    <div class="slide">
+      <h1>4.2.4 Class 选择器 (类选择器)</h1>
+      <p>
+        <strong>概念：</strong>给一类元素贴上相同的标签，用 <strong>.</strong> （点）来选中它们。
+      </p>
+      <p>
+        <strong>生活比喻：</strong>“工作服”。店长说：“所有穿<span class="highlight"
+          >红色服务员制服</span
+        >的，去端盘子！”
+      </p>
+      <ul>
+        <li>前提：HTML 标签有 <code>class="xxx"</code> 属性。</li>
+        <li>规则：CSS 中必须用 <strong>.</strong> （英文句号）开头。</li>
+        <li>优势：<strong>可无限次重复使用</strong>，最常用的选择器！</li>
+      </ul>
+      <div class="page-number">13 / 35</div>
+    </div>
+
+    <!-- 第14页：4.2.4 Class选择器（任务） -->
+    <div class="slide">
+      <h1>动手任务 3：Class 选择器</h1>
+      <h2>任务目标：把第一和第三个元素背景变成黄色。</h2>
+      <p>HTML: <code>&lt;div class="box"&gt;&lt;/div&gt;</code> (准备几个这样的div)</p>
+      <pre>
+/* CSS 代码 */
+.box {
+    background-color: yellow;
+}
+</pre
+      >
+      <div class="tip">
+        考考你：在 CSS 里，ID 用什么符号？Class 用什么符号？<br />（答：ID 用 #，Class 用 .
+        ）不要搞混啦！
+      </div>
+      <div class="page-number">14 / 35</div>
+    </div>
+
+    <!-- 第15页：4.2.4 Class选择器（效果展示） -->
+    <div class="slide">
+      <h1>任务 3：预期效果</h1>
+      <p>只要你的 HTML 标签里写了 <code>class="box"</code>：</p>
+      <ul>
+        <li>
+          不管是 <code>&lt;p&gt;</code> 还是 <code>&lt;h1&gt;</code> 还是 <code>&lt;div&gt;</code>。
+        </li>
+        <li>它们的背景都会齐刷刷地变成黄色！</li>
+        <li>这就是 Class 的魅力：<strong>高度复用</strong>。</li>
+      </ul>
+      <div class="page-number">15 / 35</div>
+    </div>
+
+    <!-- 第16页：4.2.5 群组选择器（理论与实践） -->
+    <div class="slide">
+      <h1>4.2.5 群组选择器（打包操作）</h1>
+      <p>如果 h1, h2, p 都需要变成灰色，难道要写三遍吗？太累了！</p>
+      <p><strong>语法：</strong>用<span class="highlight">逗号 ( , )</span> 隔开。</p>
+      <pre>
+/* 群组选择器：组队打怪 */
+h1, h2, p {
+    color: gray;
+}
+</pre
+      >
+      <p><strong>效果：</strong>这三个标签被一起选中，统一修改颜色。省时省力！</p>
+      <div class="page-number">16 / 35</div>
+    </div>
+
+    <!-- 第17页：4.2.5 后代选择器（理论与实践） -->
+    <div class="slide">
+      <h1>4.2.5 后代选择器（精确锁定）</h1>
+      <p>怎么选中“那个特殊盒子里面的段落”，而不影响外面的段落？</p>
+      <p><strong>语法：</strong>用<span class="highlight">空格 ( )</span> 隔开。</p>
+      <pre>
+/* 后代选择器：子子孙孙 */
+.box p {
+    color: green;
+}
+</pre
+      >
+      <p><strong>翻译：</strong>在 class 为 box 的元素<strong>内部</strong>，寻找所有的 p 标签。</p>
+      <div class="page-number">17 / 35</div>
+    </div>
+
+    <!-- 第18页：4.3 常用属性（字体与文本） -->
+    <div class="slide">
+      <h1>4.3 常用 CSS 属性 (Property)</h1>
+      <p>学会了“找目标”，接下来学习几招“魔法技能”：</p>
+      <ul>
+        <li><code>color: red;</code> - 设置文字颜色（字色）。</li>
+        <li><code>font-size: 20px;</code> - 设置字体大小。</li>
+        <li><code>font-weight: bold;</code> - 让文字加粗。</li>
+        <li><code>text-align: center;</code> - 让文本居中对齐。</li>
+      </ul>
+      <div class="page-number">18 / 35</div>
+    </div>
+
+    <!-- 第19页：4.3 常用属性（背景与尺寸） -->
+    <div class="slide">
+      <h1>4.3 常用 CSS 属性 (续)</h1>
+      <p>除了文字，我们还能改变盒子的外观：</p>
+      <ul>
+        <li><code>background-color: pink;</code> - 给背景涂上粉色。</li>
+        <li><code>width: 200px;</code> - 设置元素的宽度。</li>
+        <li><code>height: 100px;</code> - 设置元素的高度。</li>
+      </ul>
+      <div class="tip">注意：属性和值之间用冒号 (:) 连接，结尾必须有分号 (;)！</div>
+      <div class="page-number">19 / 35</div>
+    </div>
+
+    <!-- 第20页：4.3 常用属性（综合任务） -->
+    <div class="slide">
+      <h1>动手任务 4：画一个有字色的方块</h1>
+      <h2>任务目标：利用刚才学的属性，画一个居中的大红盒子。</h2>
+      <pre>
+.my-card {
+    width: 300px;
+    height: 150px;
+    background-color: #34495e;
+    color: white;
+    font-size: 30px;
+    text-align: center;
+}
+</pre
+      >
+      <p>挑战一下：把这段代码敲到你的编辑器里！</p>
+      <div class="page-number">20 / 35</div>
+    </div>
+
+    <!-- 第21页：4.4 CSS 伪类（理论） -->
+    <div class="slide">
+      <h1>4.4 CSS 伪类 (Pseudo-classes)</h1>
+      <p>网页不应该是死板的，它应该能感知到用户的操作！</p>
+      <p><strong>核心伪类：</strong><code>:hover</code> (悬停状态)</p>
+      <p>
+        <strong>生活比喻：</strong
+        >“含羞草”。平时是个普通的草，你鼠标“摸”它一下，它就闭合了（变色了）。
+      </p>
+      <ul>
+        <li>作用：当鼠标指针停留在元素上时，触发新的样式。</li>
+      </ul>
+      <div class="page-number">21 / 35</div>
+    </div>
+
+    <!-- 第22页：4.4 CSS 伪类（任务） -->
+    <div class="slide">
+      <h1>动手任务 5：制作一个会变色的按钮</h1>
+      <h2>任务目标：鼠标放上去，按钮背景变黑，文字变白。</h2>
+      <pre>
+/* 1. 按钮的正常状态 */
+.btn {
+    background-color: lightgray;
+    color: black;
+}
+
+/* 2. 鼠标放上去的“激动状态” */
+.btn:hover {
+    background-color: black;
+    color: white;
+}
+</pre
+      >
+      <div class="page-number">22 / 35</div>
+    </div>
+
+    <!-- 第23页：4.4 CSS 伪类（效果展示） -->
+    <div class="slide">
+      <h1>任务 5：预期效果</h1>
+      <p>这可能是你写出的第一个具有“交互感”的网页效果！</p>
+      <ul>
+        <li>没碰它时：它是一个灰色不起眼的按钮。</li>
+        <li>鼠标滑过：瞬间变成酷炫的黑底白字。</li>
+        <li>鼠标移开：它又乖乖变回了灰色。</li>
+      </ul>
+      <div class="tip">
+        思考：很多网站的链接鼠标放上去会下划线消失，就是用 <code>a:hover</code> 做的！
+      </div>
+      <div class="page-number">23 / 35</div>
+    </div>
+
+    <!-- 第24页：4.5 CSS的位置（引入） -->
+    <div class="slide">
+      <h1>4.5 CSS 代码写在哪里？</h1>
+      <p>目前为止，我们只讲了 CSS 代码长什么样。</p>
+      <p>但是，这串魔法代码，到底应该写在 HTML 文件的哪个位置呢？</p>
+      <p>在前端开发中，我们有 <strong>三种</strong> 穿衣服的方式：</p>
+      <ol>
+        <li>内嵌样式（Inline）</li>
+        <li>内部样式（Internal）</li>
+        <li>外部样式（External）</li>
+      </ol>
+      <div class="page-number">24 / 35</div>
+    </div>
+
+    <!-- 第25页：4.5.1 内嵌样式 -->
+    <div class="slide">
+      <h1>4.5.1 内嵌样式（直接纹身）</h1>
+      <p><strong>做法：</strong>直接在 HTML 标签的 <code>style</code> 属性里写 CSS。</p>
+      <pre>
+&lt;h1 style="color: red; font-size: 20px;"&gt;
+    我是红色的标题
+&lt;/h1&gt;
+</pre
+      >
+      <ul>
+        <li>优点：最直接，优先级极高。</li>
+        <li>
+          缺点：就像在皮肤上纹身，HTML和CSS完全混在一起，后期极难维护！<strong
+            >老师强烈不推荐！</strong
+          >
+        </li>
+      </ul>
+      <div class="page-number">25 / 35</div>
+    </div>
+
+    <!-- 第26页：4.5.2 内部样式 -->
+    <div class="slide">
+      <h1>4.5.2 内部样式（储物间）</h1>
+      <p>
+        <strong>做法：</strong>写在 HTML 文件的 <code>&lt;head&gt;</code> 标签里的
+        <code>&lt;style&gt;</code> 中。
+      </p>
+      <pre>
+&lt;head&gt;
+    &lt;style&gt;
+        h1 { color: red; }
+    &lt;/style&gt;
+&lt;/head&gt;
+</pre
+      >
+      <ul>
+        <li>优点：单个页面内做到了结构和表现分离。</li>
+        <li>缺点：如果你的网站有 100 个页面，你得复制 100 遍这段代码。</li>
+      </ul>
+      <div class="page-number">26 / 35</div>
+    </div>
+
+    <!-- 第27页：4.5.3 外部样式 -->
+    <div class="slide">
+      <h1>4.5.3 外部样式（独立衣柜）</h1>
+      <p><strong>做法：</strong>创建一个独立的 <code>.css</code> 文件，然后在 HTML 中“引入”它。</p>
+      <pre>
+&lt;!-- 在 HTML 的 head 中引入 --&gt;
+&lt;link rel="stylesheet" href="style.css"&gt;
+</pre
+      >
+      <ul>
+        <li><strong>这是业界最标准、最专业的做法！</strong></li>
+        <li>所有的样式都保存在外部的 <code>style.css</code> 中。</li>
+        <li>一次修改，100个页面同时生效！</li>
+      </ul>
+      <div class="page-number">27 / 35</div>
+    </div>
+
+    <!-- 第28页：4.5 位置总结 -->
+    <div class="slide">
+      <h1>4.5 样式位置终极总结</h1>
+      <table
+        border="1"
+        style="
+          width: 100%;
+          text-align: center;
+          border-collapse: collapse;
+          font-size: 28px;
+          line-height: 2;
+        "
+      >
+        <tr style="background: #34495e; color: white">
+          <th>方式</th>
+          <th>代码位置</th>
+          <th>适用场景</th>
+          <th>老师推荐度</th>
+        </tr>
+        <tr>
+          <td>内嵌 (Inline)</td>
+          <td>HTML 标签内</td>
+          <td>临时测试、极个别特殊样式</td>
+          <td>⭐ (尽量别用)</td>
+        </tr>
+        <tr>
+          <td>内部 (Internal)</td>
+          <td>head的style里</td>
+          <td>单页面宣传页、初学练习</td>
+          <td>⭐⭐⭐</td>
+        </tr>
+        <tr>
+          <td>外部 (External)</td>
+          <td>独立的 .css 文件</td>
+          <td>企业级正规大型项目</td>
+          <td>⭐⭐⭐⭐⭐</td>
+        </tr>
+      </table>
+      <div class="page-number">28 / 35</div>
+    </div>
+
+    <!-- 第29页：4.6 层叠与继承 引入 -->
+    <div class="slide">
+      <h1>4.6 层叠、继承与优先级</h1>
+      <p>如果有两段 CSS 代码，都试图改变同一个元素的颜色，浏览器该听谁的？</p>
+      <p>这就好比：妈妈让你穿红衣服，爸爸让你穿蓝衣服，你穿啥？</p>
+      <div class="tip">
+        这就引出了 CSS 的三大底层逻辑：<br /><strong
+          >层叠 (Cascading)、继承 (Inheritance)、优先级 (Specificity)。</strong
+        >
+      </div>
+      <div class="page-number">29 / 35</div>
+    </div>
+
+    <!-- 第30页：4.6.1 层叠 -->
+    <div class="slide">
+      <h1>4.6.1 层叠 (Cascading)</h1>
+      <p><strong>原则：</strong>“后来居上”。</p>
+      <p>
+        当多个相同优先级的规则应用在同一个元素时，<span class="highlight"
+          >写在后面的代码会覆盖前面的代码</span
+        >。
+      </p>
+      <pre>
+p { color: red; }
+
+/* 因为这行在后面，所以最终段落是蓝色！ */
+p { color: blue; } 
+</pre
+      >
+      <p>这就是 Cascading Style Sheets 中 Cascading 的字面含义！</p>
+      <div class="page-number">30 / 35</div>
+    </div>
+
+    <!-- 第31页：4.6.2 继承 -->
+    <div class="slide">
+      <h1>4.6.2 继承 (Inheritance)</h1>
+      <p><strong>原则：</strong>“父传子”。某些属性，祖先元素设置了，后代元素会自动享有。</p>
+      <pre>
+body {
+    font-size: 20px;
+    color: #333;
+}
+</pre
+      >
+      <ul>
+        <li>你在 body 上设置了字体颜色，里面的 p, div 都会自动变成这个颜色。</li>
+        <li>
+          <strong>注意：</strong
+          >并不是所有属性都会继承！像边框(border)、背景(background)就不会继承（你爸的房子不一定直接变成你的房子）。
+        </li>
+      </ul>
+      <div class="page-number">31 / 35</div>
+    </div>
+
+    <!-- 第32页：4.6.3 优先级 概念 -->
+    <div class="slide">
+      <h1>4.6.3 优先级 (Specificity) - 权重之战</h1>
+      <p>如果选择器不同，浏览器会计算它们的“权重”。谁的官大，听谁的。</p>
+      <p><strong>权重排行榜：</strong></p>
+      <ol>
+        <li><strong>内嵌样式表</strong> (style="...") 👉 犹如圣旨 (权重 1000)</li>
+        <li><strong>ID 选择器</strong> (#xxx) 👉 犹如省长 (权重 100)</li>
+        <li><strong>Class 选择器</strong> (.xxx) 👉 犹如市长 (权重 10)</li>
+        <li><strong>标签选择器</strong> (p, div) 👉 犹如村长 (权重 1)</li>
+      </ol>
+      <div class="page-number">32 / 35</div>
+    </div>
+
+    <!-- 第33页：4.6.3 优先级 算数题 -->
+    <div class="slide">
+      <h1>动手任务 6：权重算数题</h1>
+      <h2>任务目标：判断文字最终是什么颜色？</h2>
+      <pre>
+/* CSS */
+#box { color: red; }   /* 权重 100 */
+.text { color: blue; } /* 权重 10 */
+p { color: green; }    /* 权重 1 */
+
+&lt;!-- HTML --&gt;
+&lt;p id="box" class="text"&gt;我是什么颜色？&lt;/p&gt;
+</pre
+      >
+      <div class="tip">
+        答案揭晓：是<strong>红色</strong>！因为 ID 的权重 (100) 碾压了 Class 和标签。
+      </div>
+      <div class="page-number">33 / 35</div>
+    </div>
+
+    <!-- 第34页：本章小结 -->
+    <div class="slide">
+      <h1>总结：你今天学到了什么？</h1>
+      <ul>
+        <li>🎨 <strong>CSS 的作用：</strong> HTML的化妆师，分离结构与表现。</li>
+        <li>🎯 <strong>寻找目标：</strong> 标签(村长)、Class(市长, 最常用)、ID(省长, 唯一)。</li>
+        <li>💅 <strong>魔法属性：</strong> color, background, font-size...</li>
+        <li>💡 <strong>交互伪类：</strong> :hover 鼠标悬停特效。</li>
+        <li>📁 <strong>引入位置：</strong> 强烈推荐使用外部引入（<code>&lt;link&gt;</code>）。</li>
+        <li>
+          ⚖️ <strong>底层规则：</strong> 层叠（后来居上）、继承（父传子）、优先级（权重计算）。
+        </li>
+      </ul>
+      <div class="page-number">34 / 35</div>
+    </div>
+
+    <!-- 第35页：结束页 -->
+    <div class="slide">
+      <h1 style="border: none; font-size: 60px; text-align: center; color: #27ae60; width: 100%">
+        下课时间到！🎉
+      </h1>
+      <h2 style="text-align: center; font-size: 40px; color: #333">
+        实践出真知，大家记得完成今天的课后作业哦！
+      </h2>
+      <p style="text-align: center; margin-top: 50px">
+        Q & A 提问环节<br />
+        <span style="font-size: 24px; color: #7f8c8d"
+          >（大家回去后试着给自己上节课的简历页面加上 CSS 吧）</span
+        >
+      </p>
+      <div class="page-number">35 / 35</div>
+    </div>
+  </body>
+</html>
