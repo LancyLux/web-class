@@ -1,0 +1,20 @@
+.card {
+  width: 300px;
+  height: 300px;
+  /* bgc */
+  background-color: blue;
+  color: white;
+  /* 文字水平方向上居中对齐 */
+  text-align: center;
+  font-size: 30px;
+}
+/* 伪类 */
+.card:hover {
+  background-color: black;
+}
+#text {
+  color: pink;
+}
+span {
+  color: green !important;
+}

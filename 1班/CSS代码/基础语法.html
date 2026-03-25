@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS基础语法</title>
+  </head>
+  <body>
+    <p id="one">这是一个段落1</p>
+    <p>这是一个段落2</p>
+    <!-- 下面这些p标签都要设成黄色字体 -->
+    <p class="yellow1">这是一个段落3</p>
+    <p class="yellow1">这是一个段落4</p>
+    <p class="yellow1">这是一个段落5</p>
+    <div>
+      这是div元素
+      <p>这是div元素中的p标签</p>
+    </div>
+  </body>
+</html>
+
+<!-- CSS代码写到style标签中 -->
+<style>
+  /* 标签名选择器 */
+  p {
+    color: blue;
+  }
+  div {
+    color: red;
+  }
+  /* id选择器 */
+  /* id为one的元素，也就是第一个p标签 */
+  #one {
+    color: green;
+  }
+  /* 类选择器 */
+  /* 类名为yellow1的元素，也就是下面3个p标签 */
+  .yellow1 {
+    color: yellow;
+  }
+  /* 后代选择器 */
+  div p {
+    color: pink;
+  }
+</style>

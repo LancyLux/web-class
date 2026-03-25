@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>手机促销浮动布局</title>
+  </head>
+  <body>
+    <div class="promo-container">
+      <div class="phone-card">
+        <div class="phone-image"></div>
+        <h3>Redmi Note 12 Pro+</h3>
+        <div class="price-tag">￥1999</div>
+        <div class="specs">2亿像素主摄 | 天玑1080</div>
+        <div class="installment">6期免息 ¥333/期</div>
+      </div>
+
+      <div class="phone-card">
+        <div class="phone-image"></div>
+        <h3>Xiaomi 13 Lite</h3>
+        <div class="price-tag">￥2999</div>
+        <div class="specs">骁龙7 Gen1 | 120Hz AMOLED</div>
+        <div class="installment">12期免息 ¥250/期</div>
+      </div>
+
+      <div class="phone-card">
+        <div class="phone-image"></div>
+        <h3>Redmi K60 Pro</h3>
+        <div class="price-tag">￥3299</div>
+        <div class="specs">骁龙8 Gen2 | 2K 高光屏</div>
+        <div class="installment">24期免息 ¥137/期</div>
+      </div>
+    </div>
+  </body>
+</html>
+<style>
+  /* 容器样式 */
+  .promo-container {
+    width: 1200px;
+    margin: 20px auto;
+    background: rgb(222, 215, 215);
+    padding: 20px;
+    overflow: hidden; /* 清除浮动 */
+  }
+
+  /* 商品卡片 */
+  .phone-card {
+    float: left;
+    width: 28%;
+    margin: 1%;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+  }
+
+  /* 图片区域 */
+  .phone-image {
+    width: 100%;
+    height: 180px;
+    background: #f0f0f0;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+  h3 {
+    float: left;
+  }
+  /* 价格标签 */
+  .price-tag {
+    float: right;
+    background: #ff4a07;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+
+  /* 商品信息 */
+  .specs {
+    clear: both; /* 清除价格标签浮动 */
+    color: #666;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  /* 分期信息 */
+  .installment {
+    color: #ff4a07;
+    background: #fff0eb;
+    padding: 5px;
+    border-radius: 3px;
+    margin-top: 10px;
+  }
+</style>

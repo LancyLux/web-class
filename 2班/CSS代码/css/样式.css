@@ -1,0 +1,9 @@
+div {
+  width: 300px;
+  height: 200px;
+  /* bgc */
+  background-color: black;
+  color: white;
+  text-align: center;
+  font-size: 37px;
+}

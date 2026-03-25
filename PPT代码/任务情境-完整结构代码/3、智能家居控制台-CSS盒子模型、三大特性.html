@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>智能家居控制台</title>
+  </head>
+
+  <body>
+    <div class="dashboard">
+      <div class="card alarm">
+        <h2>燃气报警器</h2>
+        <div class="status"></div>
+        <button>紧急关闭</button>
+      </div>
+
+      <div class="card">
+        <h2>客厅灯光</h2>
+        <div class="status active"></div>
+        <button>开关</button>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  /* 解决方案示例 */
+  .dashboard {
+    padding: 20px;
+    /* 容器内边距 */
+    background: #f0f0f0;
+    /* 层级背景 */
+  }
+
+  .card {
+    width: 300px;
+    margin: 15px;
+    /* 外边距实现间距 */
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    /* 圆角属性 */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    /* 盒子阴影 */
+    box-sizing: border-box;
+    /* 切换盒模型 */
+  }
+
+  .alarm {
+    background: pink !important;
+    /* 优先级强制 */
+    border: 2px solid #ff6b81;
+  }
+
+  button {
+    min-width: 48px;
+    /* 可访问性要求 */
+    min-height: 48px;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+  }
+
+  .status {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #2ecc71;
+    margin-bottom: 15px;
+    /* 间距控制 */
+  }
+
+  /* 激活状态层叠样式 */
+  .status.active {
+    border-color: #2ecc71;
+    /* 覆盖基础边框色 */
+    background: #2ecc71;
+    /* 新增背景色 */
+    box-shadow: 0 0 8px rgba(46, 204, 113, 0.5);
+    /* 发光效果 */
+  }
+
+  /* 紧急状态的优先级示范 */
+  .alarm .status.active {
+    border-color: #ff4757;
+    /* 更高优先级选择器覆盖 */
+    background: #ff4757;
+    box-shadow: 0 0 10px rgba(255, 71, 87, 0.6);
+  }
+
+  body {
+    color: #333;
+    /* 继承性应用 */
+    font-family: system-ui;
+  }
+</style>

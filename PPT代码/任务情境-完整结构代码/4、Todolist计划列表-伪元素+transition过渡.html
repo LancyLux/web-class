@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Todolist计划列表</title>
+  </head>
+  <body>
+    <ul class="message-list">
+      <li class="message unread">
+        <div class="avatar"></div>
+        <p class="content">明天下午3点有前端学习小组会议</p>
+        <span class="time">10:30</span>
+      </li>
+      <li class="message">
+        <div class="avatar"></div>
+        <p class="content">你的CSS学习进度已超过85%同学</p>
+        <span class="time">09:15</span>
+      </li>
+      <li class="message">
+        <div class="avatar"></div>
+        <p class="content">【重要】本周学习报告已生成</p>
+        <span class="time">昨天</span>
+      </li>
+    </ul>
+  </body>
+</html>
+<style>
+  /* 未做计划标记（使用左边框替代绝对定位） */
+  .message.unread {
+    border-left: 5px solid #ff4757;
+    margin-left: 0; /* 抵消边框占位 */
+    padding-left: 15px; /* 保持内容对齐 */
+  }
+
+  /* 鼠标悬停效果 */
+  .message:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    /* 扩展内容，基础好的同学可提前学习 */
+    transform: translateY(-2px);
+  }
+
+  /* 分隔线（通过伪元素实现） */
+  /* :not(:last-child) 是一个伪类选择器，用于排除最后一个子元素。 */
+  .message:not(:last-child)::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background: #eee;
+    margin: 15px 0;
+  }
+
+  /* 时间图标（行内伪元素） */
+  .time::before {
+    content: '🕒 ';
+    display: inline-block;
+    margin-right: 5px;
+  }
+
+  /* 第一条计划提示（通过伪元素+浮动实现） */
+  .message:first-child .content::after {
+    content: 'NEW';
+    background: #2ecc71;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    margin-left: 10px;
+  }
+
+  /* 基础样式 */
+  .message {
+    background: white;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 8px;
+    /* 扩展内容，基础好的同学可提前学习 */
+    transition: 0.3s; /* 定义过渡效果的持续时间为0.3秒 */
+    overflow: hidden; /* 清除浮动 */
+  }
+  .avatar {
+    width: 40px;
+    height: 40px;
+    background: #f0f0f0;
+    border-radius: 50%;
+    display: inline-block;
+    /* 行内元素垂直居中，具体参考：https://developer.mozilla.org/zh-CN/docs/Web/CSS/vertical-align */
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+</style>

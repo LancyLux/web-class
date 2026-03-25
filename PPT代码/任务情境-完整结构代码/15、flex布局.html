@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flex布局案例 - 导航+卡片</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar">
+        <div class="logo">LOGO</div>
+        <ul class="menu">
+          <li><a href="#">首页</a></li>
+          <li><a href="#">产品</a></li>
+          <li><a href="#">关于</a></li>
+        </ul>
+      </nav>
+      <div class="card">
+        <h2>卡片标题1</h2>
+        <p>这是卡片1的内容描述。</p>
+      </div>
+      <div class="card">
+        <h2>卡片标题2</h2>
+        <p>这是卡片2的内容描述。</p>
+      </div>
+      <div class="card">
+        <h2>卡片标题3</h2>
+        <p>这是卡片3的内容描述。</p>
+      </div>
+    </div>
+  </body>
+</html>
+<style>
+  /* Flex容器基础设置 */
+  .container {
+    display: flex;
+    /* 设置flex容器内的子元素在需要时换行显示 */
+    flex-wrap: wrap;
+    /* 设置 flex 容器中项目的间距为 20 像素 */
+    gap: 20px;
+    padding: 20px;
+    background: #f0f0f0;
+    justify-content: center; /* 使内容居中 */
+  }
+
+  /* 导航栏Flex应用 */
+  .navbar {
+    display: flex;
+    justify-content: space-around; /* 使子元素在主轴上均匀分布 */
+    align-items: center;
+    width: 100%;
+    padding: 15px;
+    background: #4a90e2; /* 更改背景颜色 */
+    color: white;
+    border-radius: 8px; /* 添加圆角 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+  }
+
+  .navbar .logo {
+    font-size: 24px; /* 增大LOGO字体 */
+    font-weight: bold; /* 加粗LOGO字体 */
+  }
+
+  .navbar .menu {
+    list-style: none; /* 去掉默认列表样式 */
+    padding: 0;
+    margin: 0;
+  }
+
+  .navbar .menu li {
+    display: inline; /* 使菜单项在一行显示 */
+    margin: 0 10px; /* 调整菜单项间距 */
+  }
+  .navbar .menu li a {
+    color: white;
+  }
+
+  /* 卡片区Flex应用 */
+  .card {
+    flex: 1 1 300px; /* 弹性基准300px，可伸缩 */
+    min-height: 200px;
+    background: white;
+    border-radius: 8px; /* 添加圆角 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 改变阴影效果 */
+    padding: 20px; /* 添加内边距 */
+    text-align: center; /* 文本居中 */
+    transition: transform 0.2s; /* 添加过渡效果 */
+  }
+
+  .card:hover {
+    transform: translateY(-10px); /* 鼠标悬停时上移 */
+  }
+
+  /* 增加一些全局样式 */
+  body {
+    font-family: Arial, sans-serif; /* 更改字体 */
+    margin: 0;
+    padding: 0;
+  }
+
+  h1,
+  h2,
+  p {
+    margin: 10px 0;
+  }
+
+  a {
+    color: #4a90e2; /* 更改链接颜色 */
+    text-decoration: none; /* 去掉下划线 */
+  }
+
+  a:hover {
+    text-decoration: underline; /* 悬停时显示下划线 */
+  }
+</style>

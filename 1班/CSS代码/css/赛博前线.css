@@ -1,0 +1,28 @@
+.box {
+  width: 731px;
+  height: 419px;
+  background-color: black;
+  color: #00ffff;
+}
+h1 {
+  text-align: center;
+}
+.notice {
+  text-indent: 2em;
+  font-style: italic;
+}
+ul {
+  list-style: none;
+}
+.test {
+  color: gray;
+  text-decoration: line-through;
+}
+.go {
+  color: white;
+  text-decoration: none;
+}
+.go:hover {
+  background-color: #fff;
+  color: black;
+}

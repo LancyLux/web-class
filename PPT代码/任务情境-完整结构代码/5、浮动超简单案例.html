@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>商品展示</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="product">
+        <img src="./../images/粉色卫衣.jpg" alt="商品1" />
+        <h3>粉色卫衣</h3>
+        <p class="price">￥199.00</p>
+        <p class="desc">时尚、舒适、百搭</p>
+      </div>
+      <div class="product">
+        <img src="./../images/衬衫.jpg" alt="商品2" />
+        <h3>衬衫</h3>
+        <p class="price">￥159.00</p>
+        <p class="desc">时尚、舒适、百搭、简约</p>
+      </div>
+    </div>
+  </body>
+</html>
+<style>
+  /* 效果变化：
+商品卡片从左到右水平排列 
+自动换行特性：当容器宽度不足时自动换行  */
+  .product {
+    width: 300px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 10px;
+    float: left; /* 关键代码 */
+  }
+  /* 效果变化：
+图片与描述文字形成报纸式混排 
+价格标签自动出现在图片右侧 */
+  img {
+    width: 200px;
+    margin-right: 15px;
+  }
+</style>

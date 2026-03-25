@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>纯百分比流式布局案例</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: #f0f0f0;
+      }
+
+      /* 100%宽度容器 */
+      .container {
+        width: 100%;
+        padding: 1%;
+      }
+
+      /* 自适应卡片 */
+      .card {
+        width: 23%; /* 4列布局，留2%间隙 */
+        margin: 1%;
+        padding-bottom: 23%; /* 保持正方形比例 */
+        float: left;
+        background: pink;
+        border-radius: 5%;
+        box-shadow: 0 0 5% rgba(0, 0, 0, 0.1);
+      }
+
+      /* 清除浮动 */
+      .container:after {
+        content: '';
+        display: table;
+        clear: both;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">1</div>
+      <div class="card">2</div>
+      <div class="card">3</div>
+      <div class="card">4</div>
+      <!-- <div class="card">5</div>
+      <div class="card">6</div>
+      <div class="card">7</div>
+      <div class="card">8</div> -->
+    </div>
+  </body>
+</html>

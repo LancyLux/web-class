@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+  <head>
+    <title>皮卡丘训练师卡</title>
+    <style>
+      /* 被破坏的初始样式 */
+      .card {
+        width: 600px;
+        border: black;
+      }
+
+      .badge {
+        background: yellow;
+      }
+
+      img {
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="card">
+      <div class="header">
+        <h2>⚡ 雷电训练师</h2>
+        <span class="badge">初级徽章</span>
+      </div>
+
+      <img src="./../素材/pikachu.jpg" alt="皮卡丘" />
+
+      <div class="stats">
+        <p>等级：Lv.15</p>
+        <p>技能：电光一闪</p>
+      </div>
+    </div>
+  </body>
+</html>
+<style>
+  .card {
+    width: 324px;
+    min-height: 577px;
+    background: linear-gradient(white 70%, orange);
+    border: 7px solid orange;
+    border-radius: 26px;
+    /* 盒子阴影 */
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.5);
+    margin: 30px auto;
+    padding: 0 23px;
+  }
+  .badge {
+    display: inline-block;
+    width: 131px;
+    height: 49px;
+    background-color: yellow;
+    border: 4px solid orange;
+    border-radius: 12px;
+    /* 文字水平居中 */
+    text-align: center;
+    /* 文字垂直居中，line-height=height */
+    line-height: 49px;
+  }
+  .header h2 {
+    margin-bottom: 0;
+  }
+  img {
+    width: 100%;
+    height: 272px;
+    border: 4px solid gray;
+    border-radius: 26px;
+    /* 保持图片的宽高比 */
+    object-fit: cover;
+    margin: 20px 0;
+  }
+  .stats p {
+    padding: 10px 5px;
+    background-color: rgb(236, 234, 234);
+    border-radius: 10px;
+  }
+</style>

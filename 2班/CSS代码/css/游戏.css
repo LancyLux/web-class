@@ -1,0 +1,28 @@
+div {
+  background-color: black;
+  width: 586px;
+  height: 407px;
+  color: #00ffff;
+}
+h1 {
+  text-align: center;
+}
+.notice {
+  text-indent: 2em;
+  font-style: italic;
+}
+ul {
+  list-style: none;
+}
+.test {
+  color: gray;
+  text-decoration: line-through;
+}
+a {
+  color: white;
+  text-decoration: none;
+}
+a:hover {
+  background-color: white;
+  color: black;
+}

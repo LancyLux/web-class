@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>定位</title>
+  </head>
+  <body>
+    <div class="card">
+      <p>用户资料卡</p>
+      <div class="circle">99+</div>
+    </div>
+    <button>返回顶部</button>
+  </body>
+</html>
+<style>
+  .card {
+    position: relative;
+    width: 174px;
+    height: 116px;
+    background-color: pink;
+    border: 2px solid gray;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 50px;
+  }
+  .circle {
+    position: absolute;
+    top: -8px;
+    left: 135px;
+    width: 53px;
+    height: 50px;
+    background-color: red;
+    border-radius: 50%;
+  }
+  button {
+    /* 固定定位 */
+    position: fixed;
+    bottom: 15px;
+    right: 14px;
+  }
+</style>
