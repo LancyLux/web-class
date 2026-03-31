@@ -1,288 +1,284 @@
 <!doctype html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>第7章 前端开发规范和网页元素设计 - 10年老司机的Web前端通关秘籍</title>
-    <style>
-      /* ================= 全局样式与打印重置 ================= */
-      * {
-        box-sizing: border-box;
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第7章 前端开发规范和网页元素设计 - 10年老司机的Web前端通关秘籍</title>
+  <style>
+    /* ================= 全局样式与打印重置 ================= */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Microsoft YaHei', '微软雅黑', sans-serif;
+      background-color: #e0e5ec;
+      color: #333;
+      counter-reset: slideNumber;
+      /* 页面计数器 */
+    }
+
+    /* 中英文混排代码字体统一 */
+    code,
+    pre {
+      font-family: 'Consolas', monospace !important;
+      font-weight: bold;
+    }
+
+    /* ================= 幻灯片单页布局 ================= */
+    .slide {
+      width: 100vw;
+      /* 【核心修改】：使用 min-height 和 auto 替代写死的 100vh，防放大溢出 */
+      min-height: 100vh;
+      background-color: #ffffff;
+      padding: 40px 60px;
+      /* 稍微减小 padding，留出更多可用空间 */
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      position: relative;
+      /* 【核心修改】：允许内容过多或被放大时出现纵向滚动条 */
+      overflow-y: auto;
+      overflow-x: hidden;
+      page-break-after: always;
+      /* 打印时分页 */
+    }
+
+    /* ================= 标题与正文 ================= */
+    h1 {
+      font-size: 50px;
+      color: #2c3e50;
+      margin-bottom: 25px;
+      border-bottom: 4px solid #3498db;
+      padding-bottom: 10px;
+      display: inline-block;
+    }
+
+    h2 {
+      font-size: 38px;
+      color: #2980b9;
+      margin-bottom: 20px;
+    }
+
+    p,
+    li {
+      font-size: 28px;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    ul,
+    ol {
+      margin-left: 40px;
+      margin-bottom: 15px;
+    }
+
+    .highlight {
+      color: #e74c3c;
+      font-weight: bold;
+    }
+
+    /* ================= 代码块样式 ================= */
+    pre {
+      background-color: #f8f9fa;
+      border: 2px solid #bdc3c7;
+      border-left: 8px solid #2980b9;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 22px;
+      /* 适合双栏排版的大小 */
+      overflow-x: auto;
+      white-space: pre-wrap;
+      /* 代码自动换行，防溢出 */
+      word-wrap: break-word;
+      color: #2c3e50;
+      flex: 1;
+      /* 填充可用高度 */
+    }
+
+    code {
+      background-color: #f1c40f33;
+      padding: 2px 8px;
+      border-radius: 4px;
+      color: #c0392b;
+      font-size: 105%;
+    }
+
+    /* ================= 任务提示框 ================= */
+    .task-box {
+      background-color: #e8f8f5;
+      border: 3px dashed #1abc9c;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+
+    .task-box h3 {
+      color: #16a085;
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    /* ================= 【新增】左右双栏布局 (代码+效果) ================= */
+    .split-layout {
+      display: flex;
+      flex-direction: row;
+      gap: 30px;
+      margin-top: 15px;
+      flex: 1;
+      align-items: stretch;
+    }
+
+    .split-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+      /* 限制宽度 */
+    }
+
+    /* ================= 实时预览外框 ================= */
+    .preview-box {
+      border: 2px dashed #95a5a6;
+      background-color: #ecf0f1;
+      background-image:
+        linear-gradient(45deg,
+          #e0e0e0 25%,
+          transparent 25%,
+          transparent 75%,
+          #e0e0e0 75%,
+          #e0e0e0),
+        linear-gradient(45deg,
+          #e0e0e0 25%,
+          transparent 25%,
+          transparent 75%,
+          #e0e0e0 75%,
+          #e0e0e0);
+      background-size: 20px 20px;
+      background-position:
+        0 0,
+        10px 10px;
+      /* 经典的透明底纹背景 */
+      padding: 30px 20px;
+      border-radius: 8px;
+      position: relative;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .preview-box::before {
+      content: '👉 实时效果预览';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #34495e;
+      color: white;
+      padding: 5px 15px;
+      font-size: 16px;
+      font-weight: bold;
+      z-index: 10;
+    }
+
+    /* 居中排版工具类 */
+    .center-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .center-content h1 {
+      border-bottom: none;
+    }
+
+    /* 幻灯片页码 */
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      right: 40px;
+      font-size: 20px;
+      color: #95a5a6;
+    }
+
+    .footer::after {
+      counter-increment: slideNumber;
+      content: '第 ' counter(slideNumber) ' 页';
+    }
+
+    /* 打印专用样式 */
+    @media print {
+      @page {
+        size: landscape;
         margin: 0;
-        padding: 0;
       }
 
       body {
-        font-family: 'Microsoft YaHei', '微软雅黑', sans-serif;
-        background-color: #e0e5ec;
-        color: #333;
-        counter-reset: slideNumber; /* 页面计数器 */
+        background-color: #fff;
       }
 
-      /* 中英文混排代码字体统一 */
-      code,
-      pre {
-        font-family: 'Consolas', monospace !important;
-        font-weight: bold;
-      }
-
-      /* ================= 幻灯片单页布局 ================= */
       .slide {
-        width: 100vw;
-        /* 【核心修改】：使用 min-height 和 auto 替代写死的 100vh，防放大溢出 */
         min-height: 100vh;
-        background-color: #ffffff;
-        padding: 40px 60px; /* 稍微减小 padding，留出更多可用空间 */
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        position: relative;
-        /* 【核心修改】：允许内容过多或被放大时出现纵向滚动条 */
-        overflow-y: auto;
-        overflow-x: hidden;
-        page-break-after: always; /* 打印时分页 */
+        margin: 0;
+        box-shadow: none;
+        page-break-inside: avoid;
       }
+    }
+  </style>
+</head>
 
-      /* ================= 标题与正文 ================= */
-      h1 {
-        font-size: 50px;
-        color: #2c3e50;
-        margin-bottom: 25px;
-        border-bottom: 4px solid #3498db;
-        padding-bottom: 10px;
-        display: inline-block;
-      }
+<body>
+  <!-- Slide 1 -->
+  <div class="slide center-content">
+    <h1>第7章 前端开发规范与网页元素设计</h1>
+    <p style="font-size: 36px; color: #7f8c8d; margin-top: 20px">
+      从“能跑就行”到“优雅完美”的进阶之旅
+    </p>
+    <p style="font-size: 22px; color: #bdc3c7">记得多喝水，前方高能</p>
+    <div class="footer"></div>
+  </div>
 
-      h2 {
-        font-size: 38px;
-        color: #2980b9;
-        margin-bottom: 20px;
-      }
+  <!-- Slide 2 -->
 
-      p,
-      li {
-        font-size: 28px;
-        line-height: 1.6;
-        margin-bottom: 12px;
-      }
 
-      ul,
-      ol {
-        margin-left: 40px;
-        margin-bottom: 15px;
-      }
+  <!-- Slide 3 -->
+  <div class="slide">
+    <h2>🗺️ 今天的寻宝地图 (课程大纲)</h2>
+    <ol style="margin-top: 20px; line-height: 2">
+      <li><strong>7.1 基于HTML5的前端开发</strong> (我们的新地基)</li>
+      <li><strong>7.2 前端开发规范</strong> (教你如何不被同事打)</li>
+      <li><strong class="highlight">7.3 CSS常用属性 [核心重点!]</strong> (网页的超级美颜相机)</li>
+      <li><strong>7.4 网页元素设计</strong> (用代码搭建乐高积木)</li>
+    </ol>
+    <div class="footer"></div>
+  </div>
 
-      .highlight {
-        color: #e74c3c;
-        font-weight: bold;
-      }
-
-      /* ================= 代码块样式 ================= */
-      pre {
-        background-color: #f8f9fa;
-        border: 2px solid #bdc3c7;
-        border-left: 8px solid #2980b9;
-        padding: 15px;
-        border-radius: 8px;
-        font-size: 22px; /* 适合双栏排版的大小 */
-        overflow-x: auto;
-        white-space: pre-wrap; /* 代码自动换行，防溢出 */
-        word-wrap: break-word;
-        color: #2c3e50;
-        flex: 1; /* 填充可用高度 */
-      }
-
-      code {
-        background-color: #f1c40f33;
-        padding: 2px 8px;
-        border-radius: 4px;
-        color: #c0392b;
-        font-size: 105%;
-      }
-
-      /* ================= 任务提示框 ================= */
-      .task-box {
-        background-color: #e8f8f5;
-        border: 3px dashed #1abc9c;
-        padding: 20px;
-        border-radius: 10px;
-        margin-top: 15px;
-      }
-
-      .task-box h3 {
-        color: #16a085;
-        font-size: 30px;
-        margin-bottom: 10px;
-      }
-
-      /* ================= 【新增】左右双栏布局 (代码+效果) ================= */
-      .split-layout {
-        display: flex;
-        flex-direction: row;
-        gap: 30px;
-        margin-top: 15px;
-        flex: 1;
-        align-items: stretch;
-      }
-
-      .split-col {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        width: 50%; /* 限制宽度 */
-      }
-
-      /* ================= 实时预览外框 ================= */
-      .preview-box {
-        border: 2px dashed #95a5a6;
-        background-color: #ecf0f1;
-        background-image:
-          linear-gradient(
-            45deg,
-            #e0e0e0 25%,
-            transparent 25%,
-            transparent 75%,
-            #e0e0e0 75%,
-            #e0e0e0
-          ),
-          linear-gradient(
-            45deg,
-            #e0e0e0 25%,
-            transparent 25%,
-            transparent 75%,
-            #e0e0e0 75%,
-            #e0e0e0
-          );
-        background-size: 20px 20px;
-        background-position:
-          0 0,
-          10px 10px; /* 经典的透明底纹背景 */
-        padding: 30px 20px;
-        border-radius: 8px;
-        position: relative;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-      }
-
-      .preview-box::before {
-        content: '👉 实时效果预览';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        background: #34495e;
-        color: white;
-        padding: 5px 15px;
-        font-size: 16px;
-        font-weight: bold;
-        z-index: 10;
-      }
-
-      /* 居中排版工具类 */
-      .center-content {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-      }
-      .center-content h1 {
-        border-bottom: none;
-      }
-
-      /* 幻灯片页码 */
-      .footer {
-        position: absolute;
-        bottom: 20px;
-        right: 40px;
-        font-size: 20px;
-        color: #95a5a6;
-      }
-      .footer::after {
-        counter-increment: slideNumber;
-        content: '第 ' counter(slideNumber) ' 页';
-      }
-
-      /* 打印专用样式 */
-      @media print {
-        @page {
-          size: landscape;
-          margin: 0;
-        }
-        body {
-          background-color: #fff;
-        }
-        .slide {
-          min-height: 100vh;
-          margin: 0;
-          box-shadow: none;
-          page-break-inside: avoid;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <!-- Slide 1 -->
-    <div class="slide center-content">
-      <h1>第7章 前端开发规范与网页元素设计</h1>
-      <p style="font-size: 36px; color: #7f8c8d; margin-top: 20px">
-        从“能跑就行”到“优雅完美”的进阶之旅
-      </p>
-      <p style="font-size: 22px; color: #bdc3c7">记得多喝水，前方高能</p>
-      <div class="footer"></div>
-    </div>
-
-    <!-- Slide 2 -->
-    <div class="slide">
-      <h2>👋 欢迎来到前端的高级会所！</h2>
-      <p>
-        大家好！写了10年代码，我最大的感悟是：<span class="highlight"
-          >代码不仅仅是写给机器看的，更是写给未来的自己和同事看的！</span
-        >
-      </p>
-      <ul>
-        <li>初级程序员：页面跑起来了！万岁！(一个月后看不懂自己的代码)</li>
-        <li>高级程序员：我不光要跑起来，我还要代码整洁如诗，元素设计如画！</li>
-      </ul>
-      <p>今天，我们要脱离“初级搬砖工”的趣味，学习如何优雅地构建 Web 页面。</p>
-      <div class="footer"></div>
-    </div>
-
-    <!-- Slide 3 -->
-    <div class="slide">
-      <h2>🗺️ 今天的寻宝地图 (课程大纲)</h2>
-      <ol style="margin-top: 20px; line-height: 2">
-        <li><strong>7.1 基于HTML5的前端开发</strong> (我们的新地基)</li>
-        <li><strong>7.2 前端开发规范</strong> (教你如何不被同事打)</li>
-        <li><strong class="highlight">7.3 CSS常用属性 [核心重点!]</strong> (网页的超级美颜相机)</li>
-        <li><strong>7.4 网页元素设计</strong> (用代码搭建乐高积木)</li>
-      </ol>
-      <div class="footer"></div>
-    </div>
-
-    <!-- Slide 4 -->
-    <div class="slide">
-      <h2>7.1 基于HTML5的前端开发</h2>
-      <p><strong>生活化比喻：</strong></p>
-      <p>
-        以前盖房子（HTML4），大家都用通用的砖头
-        <code>&lt;div&gt;</code>。虽然能盖起来，但没人知道哪块是门，哪块是窗。
-      </p>
-      <p>
-        HTML5 就像是提供了<span class="highlight">定制化的建材</span>：有了专门做导航的
-        <code>&lt;nav&gt;</code>，专门做文章的 <code>&lt;article&gt;</code>，专门做底部的
-        <code>&lt;footer&gt;</code>。
-      </p>
-      <div class="split-layout">
-        <div class="split-col task-box" style="margin-top: 0">
-          <h3>💻 观察现代 HTML5 骨架：</h3>
-          <pre>
+  <!-- Slide 4 -->
+  <div class="slide">
+    <h2>7.1 基于HTML5的前端开发</h2>
+    <p><strong>生活化比喻：</strong></p>
+    <p>
+      以前盖房子（HTML4），大家都用通用的砖头
+      <code>&lt;div&gt;</code>。虽然能盖起来，但没人知道哪块是门，哪块是窗。
+    </p>
+    <p>
+      HTML5 就像是提供了<span class="highlight">定制化的建材</span>：有了专门做导航的
+      <code>&lt;nav&gt;</code>，专门做文章的 <code>&lt;article&gt;</code>，专门做底部的
+      <code>&lt;footer&gt;</code>。
+    </p>
+    <div class="split-layout">
+      <div class="split-col task-box" style="margin-top: 0">
+        <h3>💻 观察现代 HTML5 骨架：</h3>
+        <pre>
 &lt;body&gt;
   &lt;header&gt;这是网页头部&lt;/header&gt;
   &lt;nav&gt;菜单1 | 菜单2&lt;/nav&gt;
@@ -290,49 +286,48 @@
     &lt;article&gt;核心文章内容&lt;/article&gt;
   &lt;/main&gt;
   &lt;footer&gt;底部版权信息&lt;/footer&gt;
-&lt;/body&gt;</pre
-          >
-        </div>
-        <div class="split-col" style="justify-content: center; padding: 0 20px">
-          <p><strong>优势：</strong></p>
-          <ul>
-            <li>
-              <strong>语义化：</strong> 结构清晰，不仅人看得懂，搜索引擎（百度、谷歌）也看得懂，利于
-              SEO 排名。
-            </li>
-            <li>
-              <strong>自带魔法：</strong> 不需要复杂的插件就能播放视频
-              <code>&lt;video&gt;</code>、音频 <code>&lt;audio&gt;</code>。
-            </li>
-          </ul>
-        </div>
+&lt;/body&gt;</pre>
       </div>
-      <div class="footer"></div>
+      <div class="split-col" style="justify-content: center; padding: 0 20px">
+        <p><strong>优势：</strong></p>
+        <ul>
+          <li>
+            <strong>语义化：</strong> 结构清晰，不仅人看得懂，搜索引擎（百度、谷歌）也看得懂，利于
+            SEO 排名。
+          </li>
+          <li>
+            <strong>自带魔法：</strong> 不需要复杂的插件就能播放视频
+            <code>&lt;video&gt;</code>、音频 <code>&lt;audio&gt;</code>。
+          </li>
+        </ul>
+      </div>
     </div>
+    <div class="footer"></div>
+  </div>
 
-    <!-- Slide 5 -->
-    <div class="slide">
-      <h2>7.2 前端开发规范：为什么需要规范？</h2>
-      <p>想象一下，如果没有交通规则，马路会变成什么样？碰碰车现场！</p>
-      <p>同理，如果没有代码规范：</p>
-      <ul>
-        <li>你找不到图片放在了哪里...</li>
-        <li>别人的 CSS 把你的页面样式覆盖了...</li>
-        <li>交接代码时，同事拿着刀站在你背后...</li>
-      </ul>
-      <p class="highlight" style="margin-top: 30px; font-size: 34px">
-        规范，就是开发者的“护身符”！
-      </p>
-      <div class="footer"></div>
-    </div>
+  <!-- Slide 5 -->
+  <div class="slide">
+    <h2>7.2 前端开发规范：为什么需要规范？</h2>
+    <p>想象一下，如果没有交通规则，马路会变成什么样？碰碰车现场！</p>
+    <p>同理，如果没有代码规范：</p>
+    <ul>
+      <li>你找不到图片放在了哪里...</li>
+      <li>别人的 CSS 把你的页面样式覆盖了...</li>
+      <li>交接代码时，同事拿着刀站在你背后...</li>
+    </ul>
+    <p class="highlight" style="margin-top: 30px; font-size: 34px">
+      规范，就是开发者的“护身符”！
+    </p>
+    <div class="footer"></div>
+  </div>
 
-    <!-- Slide 6 -->
-    <div class="slide">
-      <h2>7.2.1 目录结构 & HTML 规范</h2>
-      <div class="split-layout">
-        <div class="split-col">
-          <p><strong>📂 目录结构（像整理衣柜）</strong></p>
-          <pre>
+  <!-- Slide 6 -->
+  <div class="slide">
+    <h2>7.2.1 目录结构 & HTML 规范</h2>
+    <div class="split-layout">
+      <div class="split-col">
+        <p><strong>📂 目录结构（像整理衣柜）</strong></p>
+        <pre>
 my-project/
 ├── index.html   (入口页面)
 ├── css/         (专放样式)
@@ -340,69 +335,68 @@ my-project/
 ├── js/          (专放脚本)
 │   └── main.js
 └── images/      (专放图片)
-    └── logo.png</pre
-          >
-        </div>
-        <div class="split-col">
-          <p><strong>✍️ HTML 规范（像写作文）</strong></p>
-          <ul>
-            <li>
-              <strong>小写原则：</strong> 标签和属性名必须小写。<code>&lt;DIV&gt;</code> 是违法的！
-            </li>
-            <li>
-              <strong>闭合原则：</strong> 有始有终 <code>&lt;p&gt;段落&lt;/p&gt;</code> 或
-              <code>&lt;img /&gt;</code>。
-            </li>
-            <li><strong>属性引号：</strong> 属性值必加双引号 <code>class="title"</code>。</li>
-            <li><strong>层级缩进：</strong> 父子关系必须用 Tab 键缩进对齐。</li>
-          </ul>
-        </div>
+    └── logo.png</pre>
       </div>
-      <div class="footer"></div>
+      <div class="split-col">
+        <p><strong>✍️ HTML 规范（像写作文）</strong></p>
+        <ul>
+          <li>
+            <strong>小写原则：</strong> 标签和属性名必须小写。<code>&lt;DIV&gt;</code> 是违法的！
+          </li>
+          <li>
+            <strong>闭合原则：</strong> 有始有终 <code>&lt;p&gt;段落&lt;/p&gt;</code> 或
+            <code>&lt;img /&gt;</code>。
+          </li>
+          <li><strong>属性引号：</strong> 属性值必加双引号 <code>class="title"</code>。</li>
+          <li><strong>层级缩进：</strong> 父子关系必须用 Tab 键缩进对齐。</li>
+        </ul>
+      </div>
     </div>
+    <div class="footer"></div>
+  </div>
 
-    <!-- Slide 7 -->
-    <div class="slide center-content">
-      <h1>7.3 CSS 常用属性 (核心重点)</h1>
-      <p style="font-size: 36px; color: #e74c3c">🌟 准备好你的“网页美颜相机” 🌟</p>
-      <p>接下来的内容非常酷炫，全程【左边代码，右边效果】，请不要眨眼！</p>
-      <div class="footer"></div>
-    </div>
+  <!-- Slide 7 -->
+  <div class="slide center-content">
+    <h1>7.3 CSS 常用属性 (核心重点)</h1>
+    <p style="font-size: 36px; color: #e74c3c">🌟 准备好你的“网页美颜相机” 🌟</p>
+    <p>接下来的内容非常酷炫，全程【左边代码，右边效果】，请不要眨眼！</p>
+    <div class="footer"></div>
+  </div>
 
-    <!-- Slide 8 -->
-    <div class="slide">
-      <h2>7.3.1 背景 (Background) 理论详解</h2>
-      <p><strong>生活化比喻：</strong> 给你的空房子刷漆、贴壁纸。</p>
-      <ul>
-        <li><code>background-color</code>: 背景颜色（刷漆）。</li>
-        <li><code>background-image</code>: 背景图（贴壁纸）。</li>
-        <li><code>background-repeat</code>: 图片是否平铺重复 (常用 <code>no-repeat</code>)。</li>
-        <li>
-          <strong class="highlight">background-position (重点)：图片贴在墙上的坐标！</strong>
-          <ul>
-            <li>
-              <strong>文字方向：</strong> <code>center center</code>(正中间),
-              <code>left top</code>(左上角)。
-            </li>
-            <li>
-              <strong>具体像素(X轴 Y轴)：</strong> <code>50px 100px</code> 意思是“图片距离左边
-              50像素，距离顶部 100像素”。
-            </li>
-            <li><strong>百分比：</strong> <code>50% 50%</code> 相当于绝对居中。</li>
-          </ul>
-        </li>
-      </ul>
-      <div class="footer"></div>
-    </div>
+  <!-- Slide 8 -->
+  <div class="slide">
+    <h2>7.3.1 背景 (Background) 理论详解</h2>
+    <p><strong>生活化比喻：</strong> 给你的空房子刷漆、贴壁纸。</p>
+    <ul>
+      <li><code>background-color</code>: 背景颜色（刷漆）。</li>
+      <li><code>background-image</code>: 背景图（贴壁纸）。</li>
+      <li><code>background-repeat</code>: 图片是否平铺重复 (常用 <code>no-repeat</code>)。</li>
+      <li>
+        <strong class="highlight">background-position (重点)：图片贴在墙上的坐标！</strong>
+        <ul>
+          <li>
+            <strong>文字方向：</strong> <code>center center</code>(正中间),
+            <code>left top</code>(左上角)。
+          </li>
+          <li>
+            <strong>具体像素(X轴 Y轴)：</strong> <code>50px 100px</code> 意思是“图片距离左边
+            50像素，距离顶部 100像素”。
+          </li>
+          <li><strong>百分比：</strong> <code>50% 50%</code> 相当于绝对居中。</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="footer"></div>
+  </div>
 
-    <!-- Slide 9 -->
-    <div class="slide">
-      <h2>7.3.1 任务：刷漆与精确贴壁纸</h2>
-      <div class="split-layout">
-        <div class="split-col task-box" style="margin-top: 0">
-          <h3>💻 简写魔法 (推荐)：</h3>
-          <p style="font-size: 20px">语法：颜色 图片 平铺 位置</p>
-          <pre>
+  <!-- Slide 9 -->
+  <div class="slide">
+    <h2>7.3.1 任务：刷漆与精确贴壁纸</h2>
+    <div class="split-layout">
+      <div class="split-col task-box" style="margin-top: 0">
+        <h3>💻 简写魔法 (推荐)：</h3>
+        <p style="font-size: 20px">语法：颜色 图片 平铺 位置</p>
+        <pre>
 .box {
   width: 100%; height: 200px;
   
@@ -411,50 +405,45 @@ my-project/
       url('star.png') 
       no-repeat 
       30px 50px; /* X偏30, Y偏50 */
-}</pre
-          >
-        </div>
-        <div class="split-col preview-box">
-          <!-- 用 CSS 原生模拟壁纸贴在具体坐标的效果 -->
-          <div
-            style="
+}</pre>
+      </div>
+      <div class="split-col preview-box">
+        <!-- 用 CSS 原生模拟壁纸贴在具体坐标的效果 -->
+        <div style="
               width: 100%;
               max-width: 300px;
               height: 200px;
               background-color: lightblue;
               position: relative;
               border: 2px solid #34495e;
-            "
-          >
-            <!-- 这里用一个星星模拟背景图片 -->
-            <div style="position: absolute; left: 30px; top: 50px; font-size: 40px; line-height: 1">
-              ⭐
-            </div>
-            <p
-              style="
+            ">
+          <!-- 这里用一个星星模拟背景图片 -->
+          <div style="position: absolute; left: 30px; top: 50px; font-size: 40px; line-height: 1">
+            ⭐
+          </div>
+          <p style="
                 position: absolute;
                 bottom: 10px;
                 width: 100%;
                 text-align: center;
                 font-size: 16px;
-              "
-            >
-              X偏移30px，Y偏移50px
-            </p>
-          </div>
+              ">
+            X偏移30px，Y偏移50px
+          </p>
         </div>
       </div>
-      <div class="footer"></div>
     </div>
+    <div class="footer"></div>
+  </div>
 
-    <!-- Slide 10 -->
-    <div class="slide">
-      <h2>7.3.2 无序列表前缀定制</h2>
-      <p>干掉列表默认的“丑黑点”，换成我们自己的图片或小图标。</p>
-      <div class="split-layout">
-        <div class="split-col task-box" style="margin-top: 0">
-          <h3>💻 定制新闻列表：</h3>
-          <pre>
+  <!-- Slide 10 -->
+  <div class="slide">
+    <h2>7.3.2 无序列表前缀定制</h2>
+    <p>干掉列表默认的“丑黑点”，换成我们自己的图片或小图标。</p>
+    <div class="split-layout">
+      <div class="split-col task-box" style="margin-top: 0">
+        <h3>💻 定制新闻列表：</h3>
+        <pre>
 &lt;ul class="news-list"&gt;
   &lt;li&gt;重磅！前端老师太帅被围观&lt;/li&gt;
   &lt;li&gt;震惊！网页美翻了&lt;/li&gt;
@@ -469,62 +458,51 @@ my-project/
   background: url('hot.png') no-repeat left center;
   padding-left: 30px; /* 留出空隙 */
 }
-&lt;/style&gt;</pre
-          >
-        </div>
-        <div class="split-col preview-box" style="align-items: flex-start">
-          <div
-            style="
+&lt;/style&gt;</pre>
+      </div>
+      <div class="split-col preview-box" style="align-items: flex-start">
+        <div style="
               background: white;
               padding: 20px;
               border-radius: 8px;
               width: 100%;
               box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            "
-          >
-            <ul style="list-style-type: none; margin-left: 0">
-              <!-- 模拟效果 -->
-              <li
-                style="font-size: 22px; padding-left: 30px; margin-bottom: 15px; position: relative"
-              >
-                <span
-                  style="
+            ">
+          <ul style="list-style-type: none; margin-left: 0">
+            <!-- 模拟效果 -->
+            <li style="font-size: 22px; padding-left: 30px; margin-bottom: 15px; position: relative">
+              <span style="
                     position: absolute;
                     left: 0;
                     top: 50%;
                     transform: translateY(-50%);
                     font-size: 20px;
-                  "
-                  >🔥</span
-                >重磅！前端老师太帅被围观
-              </li>
-              <li style="font-size: 22px; padding-left: 30px; position: relative">
-                <span
-                  style="
+                  ">🔥</span>重磅！前端老师太帅被围观
+            </li>
+            <li style="font-size: 22px; padding-left: 30px; position: relative">
+              <span style="
                     position: absolute;
                     left: 0;
                     top: 50%;
                     transform: translateY(-50%);
                     font-size: 20px;
-                  "
-                  >🔥</span
-                >震惊！用了这个属性网页美翻了
-              </li>
-            </ul>
-          </div>
+                  ">🔥</span>震惊！用了这个属性网页美翻了
+            </li>
+          </ul>
         </div>
       </div>
-      <div class="footer"></div>
     </div>
+    <div class="footer"></div>
+  </div>
 
-    <!-- Slide 11 -->
-    <div class="slide">
-      <h2>7.3.3 CSS3 背景缩放 (background-size)</h2>
-      <p>图片太大，盒子太小？CSS3 救世主属性解决比例问题！</p>
-      <div class="split-layout">
-        <div class="split-col task-box" style="margin-top: 0">
-          <h3>💻 常见缩放模式：</h3>
-          <pre>
+  <!-- Slide 11 -->
+  <div class="slide">
+    <h2>7.3.3 CSS3 背景缩放 (background-size)</h2>
+    <p>图片太大，盒子太小？CSS3 救世主属性解决比例问题！</p>
+    <div class="split-layout">
+      <div class="split-col task-box" style="margin-top: 0">
+        <h3>💻 常见缩放模式：</h3>
+        <pre>
 .bg-cover {
   /* cover: 保证覆盖铺满盒子，可能被裁切 */
   background-size: cover; 
@@ -533,23 +511,19 @@ my-project/
 .bg-contain {
   /* contain: 保证图片完整显示，盒子可能留白 */
   background-size: contain;
-}</pre
-          >
-        </div>
-        <div class="split-col preview-box" style="gap: 15px">
-          <!-- 模拟 cover -->
-          <div
-            style="
+}</pre>
+      </div>
+      <div class="split-col preview-box" style="gap: 15px">
+        <!-- 模拟 cover -->
+        <div style="
               width: 250px;
               height: 120px;
               border: 2px solid #333;
               position: relative;
               overflow: hidden;
               background: #fff;
-            "
-          >
-            <div
-              style="
+            ">
+          <div style="
                 width: 100%;
                 height: 100%;
                 background: linear-gradient(135deg, #1abc9c, #3498db);
@@ -559,14 +533,12 @@ my-project/
                 color: white;
                 font-weight: bold;
                 transform: scale(1.2);
-              "
-            >
-              cover 撑满全盒
-            </div>
+              ">
+            cover 撑满全盒
           </div>
-          <!-- 模拟 contain -->
-          <div
-            style="
+        </div>
+        <!-- 模拟 contain -->
+        <div style="
               width: 250px;
               height: 120px;
               border: 2px solid #333;
@@ -575,10 +547,8 @@ my-project/
               display: flex;
               align-items: center;
               justify-content: center;
-            "
-          >
-            <div
-              style="
+            ">
+          <div style="
                 width: 150px;
                 height: 100px;
                 background: linear-gradient(135deg, #9b59b6, #e74c3c);
@@ -589,24 +559,23 @@ my-project/
                 font-weight: bold;
                 text-align: center;
                 padding: 5px;
-              "
-            >
-              contain<br />显示完整
-            </div>
+              ">
+            contain<br />显示完整
           </div>
         </div>
       </div>
-      <div class="footer"></div>
     </div>
+    <div class="footer"></div>
+  </div>
 
-    <!-- Slide 12 -->
-    <div class="slide">
-      <h2>7.3.4 渐变背景 (Gradient)</h2>
-      <p>不需要求设计师切图了，用代码直接画出顺滑的颜色过渡层！</p>
-      <div class="split-layout">
-        <div class="split-col task-box" style="margin-top: 0">
-          <h3>💻 线性渐变：</h3>
-          <pre>
+  <!-- Slide 12 -->
+  <div class="slide">
+    <h2>7.3.4 渐变背景 (Gradient)</h2>
+    <p>不需要求设计师切图了，用代码直接画出顺滑的颜色过渡层！</p>
+    <div class="split-layout">
+      <div class="split-col task-box" style="margin-top: 0">
+        <h3>💻 线性渐变：</h3>
+        <pre>
 .gradient-box {
   width: 100%;
   height: 200px;
@@ -619,12 +588,10 @@ my-project/
   );
   
   border-radius: 10px;
-}</pre
-          >
-        </div>
-        <div class="split-col preview-box">
-          <div
-            style="
+}</pre>
+      </div>
+      <div class="split-col preview-box">
+        <div style="
               width: 100%;
               height: 200px;
               background: linear-gradient(to bottom right, #ff7eb3, #ff758c);
@@ -636,23 +603,22 @@ my-project/
               font-size: 32px;
               font-weight: bold;
               box-shadow: 0 10px 20px rgba(255, 117, 140, 0.4);
-            "
-          >
-            绝美朝霞渐变
-          </div>
+            ">
+          绝美朝霞渐变
         </div>
       </div>
-      <div class="footer"></div>
     </div>
+    <div class="footer"></div>
+  </div>
 
-    <!-- Slide 13 -->
-    <div class="slide">
-      <h2>7.3.5 核心文字属性 (Typography)</h2>
-      <p>排版好坏直接决定网页气质。拯救密密麻麻的阅读体验！</p>
-      <div class="split-layout">
-        <div class="split-col task-box" style="margin-top: 0">
-          <h3>💻 舒适阅读排版：</h3>
-          <pre>
+  <!-- Slide 13 -->
+  <div class="slide">
+    <h2>7.3.5 核心文字属性 (Typography)</h2>
+    <p>排版好坏直接决定网页气质。拯救密密麻麻的阅读体验！</p>
+    <div class="split-layout">
+      <div class="split-col task-box" style="margin-top: 0">
+        <h3>💻 舒适阅读排版：</h3>
+        <pre>
 .article {
   /* 别用纯黑，深灰更护眼 */
   color: #333333; 
@@ -663,21 +629,17 @@ my-project/
   line-height: 1.6; 
   text-align: justify; /* 两端对齐 */
   text-decoration: underline; /* 下划线 */
-}</pre
-          >
-        </div>
-        <div class="split-col preview-box">
-          <div
-            style="
+}</pre>
+      </div>
+      <div class="split-col preview-box">
+        <div style="
               background: white;
               padding: 20px;
               border-radius: 8px;
               width: 100%;
               box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            "
-          >
-            <p
-              style="
+            ">
+          <p style="
                 color: #333;
                 font-size: 18px;
                 line-height: 1.6;
@@ -685,25 +647,24 @@ my-project/
                 text-align: justify;
                 text-decoration: underline;
                 margin: 0;
-              "
-            >
-              代码不仅仅是写给机器看的，更是写给未来的自己和同事看的。优雅的文字排版，行高设定为 1.6
-              倍后，文字有了呼吸的空间，阅读起来犹如清风拂面，极其舒适。
-            </p>
-          </div>
+              ">
+            代码不仅仅是写给机器看的，更是写给未来的自己和同事看的。优雅的文字排版，行高设定为 1.6
+            倍后，文字有了呼吸的空间，阅读起来犹如清风拂面，极其舒适。
+          </p>
         </div>
       </div>
-      <div class="footer"></div>
     </div>
+    <div class="footer"></div>
+  </div>
 
-    <!-- Slide 14 -->
-    <div class="slide">
-      <h2>7.3.6 圆角 (Border-Radius)</h2>
-      <p>直角太锐利，圆角更亲和。一键让方块变圆润。</p>
-      <div class="split-layout">
-        <div class="split-col task-box" style="margin-top: 0">
-          <h3>💻 制作圆角与头像：</h3>
-          <pre>
+  <!-- Slide 14 -->
+  <div class="slide">
+    <h2>7.3.6 圆角 (Border-Radius)</h2>
+    <p>直角太锐利，圆角更亲和。一键让方块变圆润。</p>
+    <div class="split-layout">
+      <div class="split-col task-box" style="margin-top: 0">
+        <h3>💻 制作圆角与头像：</h3>
+        <pre>
 /* 1. 轻微圆角 (常用于卡片/按钮) */
 .btn {
   border-radius: 10px; 
@@ -715,25 +676,21 @@ my-project/
   width: 120px; height: 120px;
   border-radius: 50%; /* 核心魔法 */
   border: 4px solid white;
-}</pre
-          >
-        </div>
-        <div class="split-col preview-box" style="flex-direction: row; gap: 30px">
-          <button
-            style="
+}</pre>
+      </div>
+      <div class="split-col preview-box" style="flex-direction: row; gap: 30px">
+        <button style="
               padding: 15px 30px;
               background: #3498db;
               color: white;
               border: none;
               border-radius: 10px;
               font-size: 20px;
-            "
-          >
-            10px 按钮
-          </button>
+            ">
+          10px 按钮
+        </button>
 
-          <div
-            style="
+        <div style="
               width: 120px;
               height: 120px;
               background: #e67e22;
@@ -745,24 +702,23 @@ my-project/
               justify-content: center;
               font-size: 40px;
               color: white;
-            "
-          >
-            👨‍💻
-          </div>
+            ">
+          👨‍💻
         </div>
       </div>
-      <div class="footer"></div>
     </div>
+    <div class="footer"></div>
+  </div>
 
-    <!-- Slide 15 -->
-    <div class="slide">
-      <h2>7.3.7 阴影 (Box-Shadow) 🌟</h2>
-      <p>想让元素有“悬浮”在页面的三维立体感？这就是 3D 魔法棒！</p>
-      <div class="split-layout">
-        <div class="split-col task-box" style="margin-top: 0">
-          <h3>💻 语法与悬浮效果：</h3>
-          <p style="font-size: 18px">语法: X偏移 Y偏移 模糊 颜色</p>
-          <pre>
+  <!-- Slide 15 -->
+  <div class="slide">
+    <h2>7.3.7 阴影 (Box-Shadow) 🌟</h2>
+    <p>想让元素有“悬浮”在页面的三维立体感？这就是 3D 魔法棒！</p>
+    <div class="split-layout">
+      <div class="split-col task-box" style="margin-top: 0">
+        <h3>💻 语法与悬浮效果：</h3>
+        <p style="font-size: 18px">语法: X偏移 Y偏移 模糊 颜色</p>
+        <pre>
 .card {
   /* 0偏移, 下沉10px, 模糊20px, 15%黑 */
   box-shadow: 0 10px 20px rgba(0,0,0,0.15);
@@ -773,45 +729,45 @@ my-project/
 .card:hover {
   transform: translateY(-10px);
   box-shadow: 0 15px 30px rgba(0,0,0,0.25);
-}</pre
-          >
-        </div>
-        <div class="split-col preview-box">
-          <style>
-            .demo-card {
-              width: 200px;
-              height: 150px;
-              background: white;
-              border-radius: 12px;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              font-size: 24px;
-              font-weight: bold;
-              color: #2c3e50;
-              box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-              transition: all 0.3s ease;
-              cursor: pointer;
-            }
-            .demo-card:hover {
-              transform: translateY(-10px);
-              box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
-            }
-          </style>
-          <div class="demo-card">鼠标悬浮试试</div>
-        </div>
+}</pre>
       </div>
-      <div class="footer"></div>
-    </div>
+      <div class="split-col preview-box">
+        <style>
+          .demo-card {
+            width: 200px;
+            height: 150px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+          }
 
-    <!-- Slide 16 -->
-    <div class="slide">
-      <h2>7.3.8 边框背景 (Border-Image)</h2>
-      <p>产品经理想要相框一样复杂的花纹边框？把一张图“切割”后铺满边框！</p>
-      <div class="split-layout">
-        <div class="split-col task-box" style="margin-top: 0">
-          <h3>💻 边框图片/渐变：</h3>
-          <pre>
+          .demo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+          }
+        </style>
+        <div class="demo-card">鼠标悬浮试试</div>
+      </div>
+    </div>
+    <div class="footer"></div>
+  </div>
+
+  <!-- Slide 16 -->
+  <div class="slide">
+    <h2>7.3.8 边框背景 (Border-Image)</h2>
+    <p>产品经理想要相框一样复杂的花纹边框？把一张图“切割”后铺满边框！</p>
+    <div class="split-layout">
+      <div class="split-col task-box" style="margin-top: 0">
+        <h3>💻 边框图片/渐变：</h3>
+        <pre>
 .fancy-border {
   /* 必须先给边框占位宽度！ */
   border: 10px solid transparent; 
@@ -824,12 +780,10 @@ my-project/
   border-image: linear-gradient(
     to right, red, yellow
   ) 1 stretch;
-}</pre
-          >
-        </div>
-        <div class="split-col preview-box">
-          <div
-            style="
+}</pre>
+      </div>
+      <div class="split-col preview-box">
+        <div style="
               width: 200px;
               height: 100px;
               border: 15px solid transparent;
@@ -839,23 +793,22 @@ my-project/
               align-items: center;
               font-weight: bold;
               font-size: 24px;
-            "
-          >
-            炫酷渐变边框
-          </div>
+            ">
+          炫酷渐变边框
         </div>
       </div>
-      <div class="footer"></div>
     </div>
+    <div class="footer"></div>
+  </div>
 
-    <!-- Slide 17 -->
-    <div class="slide">
-      <h2>7.3.9 CSS3多列排版 (Multi-column)</h2>
-      <p>还记得看报纸的排版吗？以前需要算宽度、用 JS，现在只需两行代码！</p>
-      <div class="split-layout">
-        <div class="split-col task-box" style="margin-top: 0">
-          <h3>💻 报纸风格：</h3>
-          <pre>
+  <!-- Slide 17 -->
+  <div class="slide">
+    <h2>7.3.9 CSS3多列排版 (Multi-column)</h2>
+    <p>还记得看报纸的排版吗？以前需要算宽度、用 JS，现在只需两行代码！</p>
+    <div class="split-layout">
+      <div class="split-col task-box" style="margin-top: 0">
+        <h3>💻 报纸风格：</h3>
+        <pre>
 .newspaper {
   /* 强制分成 3 列 */
   column-count: 3;
@@ -865,12 +818,10 @@ my-project/
   
   /* 列与列之间加一条虚线分割 */
   column-rule: 2px dashed #95a5a6; 
-}</pre
-          >
-        </div>
-        <div class="split-col preview-box">
-          <div
-            style="
+}</pre>
+      </div>
+      <div class="split-col preview-box">
+        <div style="
               column-count: 3;
               column-gap: 20px;
               column-rule: 2px dashed #95a5a6;
@@ -880,23 +831,22 @@ my-project/
               background: white;
               padding: 15px;
               border-radius: 5px;
-            "
-          >
-            网页不是一块铁板，它是由小零件拼装起来的乐高。好的设计必须遵循一致性、易读性和反馈性。文字会自动流向下一列，完全不需要我们手动去切断文章。是不是极其智能？
-          </div>
+            ">
+          网页不是一块铁板，它是由小零件拼装起来的乐高。好的设计必须遵循一致性、易读性和反馈性。文字会自动流向下一列，完全不需要我们手动去切断文章。是不是极其智能？
         </div>
       </div>
-      <div class="footer"></div>
     </div>
+    <div class="footer"></div>
+  </div>
 
-    <!-- Slide 18 -->
-    <div class="slide">
-      <h2>7.3.10 HTML元素隐藏 (面试必考)</h2>
-      <p>怎么让元素看不见？有两种截然不同的魔法：</p>
-      <div class="split-layout">
-        <div class="split-col task-box" style="margin-top: 0">
-          <h3>💻 物理消灭 vs 光学隐身：</h3>
-          <pre>
+  <!-- Slide 18 -->
+  <div class="slide">
+    <h2>7.3.10 HTML元素隐藏 (面试必考)</h2>
+    <p>怎么让元素看不见？有两种截然不同的魔法：</p>
+    <div class="split-layout">
+      <div class="split-col task-box" style="margin-top: 0">
+        <h3>💻 物理消灭 vs 光学隐身：</h3>
+        <pre>
 .vanish {
   /* 灭霸打响指：连带位置一起抹除 */
   display: none; 
@@ -905,45 +855,40 @@ my-project/
 .invisible {
   /* 隐形斗篷：看不见了，但坑还占着 */
   visibility: hidden; 
-}</pre
-          >
+}</pre>
+      </div>
+      <div class="split-col preview-box" style="gap: 15px">
+        <div style="background: white; width: 100%; border: 1px solid #ccc; padding: 10px">
+          <span style="background: lightblue; padding: 5px">盒子A</span>
+          <span style="background: lightcoral; padding: 5px; display: none">盒子B (display: none)</span>
+          <span style="background: lightgreen; padding: 5px">盒子C (B的位置没了)</span>
         </div>
-        <div class="split-col preview-box" style="gap: 15px">
-          <div style="background: white; width: 100%; border: 1px solid #ccc; padding: 10px">
-            <span style="background: lightblue; padding: 5px">盒子A</span>
-            <span style="background: lightcoral; padding: 5px; display: none"
-              >盒子B (display: none)</span
-            >
-            <span style="background: lightgreen; padding: 5px">盒子C (B的位置没了)</span>
-          </div>
 
-          <div style="background: white; width: 100%; border: 1px solid #ccc; padding: 10px">
-            <span style="background: lightblue; padding: 5px">盒子A</span>
-            <span style="background: lightcoral; padding: 5px; visibility: hidden"
-              >盒子B (visibility)</span
-            >
-            <span style="background: lightgreen; padding: 5px">盒子C (B坑还在)</span>
-          </div>
+        <div style="background: white; width: 100%; border: 1px solid #ccc; padding: 10px">
+          <span style="background: lightblue; padding: 5px">盒子A</span>
+          <span style="background: lightcoral; padding: 5px; visibility: hidden">盒子B (visibility)</span>
+          <span style="background: lightgreen; padding: 5px">盒子C (B坑还在)</span>
         </div>
       </div>
-      <div class="footer"></div>
     </div>
+    <div class="footer"></div>
+  </div>
 
-    <!-- Slide 19 -->
-    <div class="slide center-content">
-      <h1>7.4 网页元素设计综合运用</h1>
-      <p style="font-size: 36px; color: #8e44ad">🎨 设计不是玄学，是逻辑与美的结合</p>
-      <p>三大原则：一致性 (长得一样) 、 易读性 (对比度高) 、 反馈性 (悬浮有动画)。</p>
-      <div class="footer"></div>
-    </div>
+  <!-- Slide 19 -->
+  <div class="slide center-content">
+    <h1>7.4 网页元素设计综合运用</h1>
+    <p style="font-size: 36px; color: #8e44ad">🎨 设计不是玄学，是逻辑与美的结合</p>
+    <p>三大原则：一致性 (长得一样) 、 易读性 (对比度高) 、 反馈性 (悬浮有动画)。</p>
+    <div class="footer"></div>
+  </div>
 
-    <!-- Slide 20 -->
-    <div class="slide">
-      <h2>🔥 终极任务：设计一个具有灵魂的按钮</h2>
-      <p>结合今天学过的背景渐变、圆角、阴影、文字样式，打造现代“行动召唤按钮”。</p>
-      <div class="split-layout">
-        <div class="split-col task-box" style="margin-top: 0">
-          <pre>
+  <!-- Slide 20 -->
+  <div class="slide">
+    <h2>🔥 终极任务：设计一个具有灵魂的按钮</h2>
+    <p>结合今天学过的背景渐变、圆角、阴影、文字样式，打造现代“行动召唤按钮”。</p>
+    <div class="split-layout">
+      <div class="split-col task-box" style="margin-top: 0">
+        <pre>
 .perfect-btn {
   padding: 12px 30px; /* 撑起空间 */
   background: linear-gradient(
@@ -959,59 +904,60 @@ my-project/
 .perfect-btn:hover {
   transform: translateY(-3px); /* 悬浮跳动 */
   box-shadow: 0 8px 25px rgba(33, 147, 176, 0.6);
-}</pre
-          >
-        </div>
-        <div class="split-col preview-box">
-          <style>
-            .perfect-btn {
-              padding: 15px 40px;
-              background: linear-gradient(to right, #6dd5ed, #2193b0);
-              color: white;
-              border: none;
-              border-radius: 30px;
-              box-shadow: 0 4px 15px rgba(33, 147, 176, 0.4);
-              transition: all 0.3s ease;
-              cursor: pointer;
-              font-size: 24px;
-              font-weight: bold;
-              text-decoration: none;
-            }
-            .perfect-btn:hover {
-              transform: translateY(-5px);
-              box-shadow: 0 10px 25px rgba(33, 147, 176, 0.6);
-            }
-          </style>
-          <button class="perfect-btn">点我感受魔法</button>
-        </div>
+}</pre>
       </div>
-      <div class="footer"></div>
-    </div>
+      <div class="split-col preview-box">
+        <style>
+          .perfect-btn {
+            padding: 15px 40px;
+            background: linear-gradient(to right, #6dd5ed, #2193b0);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(33, 147, 176, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+          }
 
-    <!-- Slide 21 -->
-    <div class="slide">
-      <h2>🎓 课程总结</h2>
-      <p>今天，我们完成了从青铜到王者的蜕变：</p>
-      <ol style="margin-top: 30px; line-height: 2">
-        <li>搭建了 <strong>HTML5 的现代化语义骨架</strong>。</li>
-        <li>掌握了不被打的 <strong>目录、HTML、CSS 命名规范</strong>。</li>
-        <li>学习了像魔法一样的 <strong>CSS 常用核心属性</strong> (背景排版、圆角、阴影...)。</li>
-        <li>理解了网页设计原则，并完成了 <strong>所见即所得的同屏联调</strong>。</li>
-      </ol>
-      <p class="highlight" style="margin-top: 40px; text-align: center; font-size: 40px">
-        记住：优秀的网页，代码和外观一样美丽！
-      </p>
-      <div class="footer"></div>
+          .perfect-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(33, 147, 176, 0.6);
+          }
+        </style>
+        <button class="perfect-btn">点我感受魔法</button>
+      </div>
     </div>
+    <div class="footer"></div>
+  </div>
 
-    <!-- Slide 22 -->
-    <div class="slide center-content">
-      <h1 style="border: none; font-size: 80px; margin-bottom: 20px">🎉 THANK YOU!</h1>
-      <p style="font-size: 36px">Q & A 答疑时间</p>
-      <p style="color: #95a5a6; margin-top: 50px; font-size: 24px">
-        现在，打开你的编辑器，去创造属于你的完美网页吧！
-      </p>
-      <div class="footer"></div>
-    </div>
-  </body>
+  <!-- Slide 21 -->
+  <div class="slide">
+    <h2>🎓 课程总结</h2>
+    <p>今天，我们完成了从青铜到王者的蜕变：</p>
+    <ol style="margin-top: 30px; line-height: 2">
+      <li>搭建了 <strong>HTML5 的现代化语义骨架</strong>。</li>
+      <li>掌握了不被打的 <strong>目录、HTML、CSS 命名规范</strong>。</li>
+      <li>学习了像魔法一样的 <strong>CSS 常用核心属性</strong> (背景排版、圆角、阴影...)。</li>
+      <li>理解了网页设计原则，并完成了 <strong>所见即所得的同屏联调</strong>。</li>
+    </ol>
+    <p class="highlight" style="margin-top: 40px; text-align: center; font-size: 40px">
+      记住：优秀的网页，代码和外观一样美丽！
+    </p>
+    <div class="footer"></div>
+  </div>
+
+  <!-- Slide 22 -->
+  <div class="slide center-content">
+    <h1 style="border: none; font-size: 80px; margin-bottom: 20px">🎉 THANK YOU!</h1>
+    <p style="font-size: 36px">Q & A 答疑时间</p>
+    <p style="color: #95a5a6; margin-top: 50px; font-size: 24px">
+      现在，打开你的编辑器，去创造属于你的完美网页吧！
+    </p>
+    <div class="footer"></div>
+  </div>
+</body>
+
 </html>
