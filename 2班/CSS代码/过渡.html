@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <span>鼠标放上来后，文字消失</span>
+    </div>
+  </body>
+</html>
+<style>
+  div {
+    width: 250px;
+    height: 100px;
+    background: linear-gradient(to right bottom, pink, red);
+    border-radius: 50px;
+    text-align: center;
+    line-height: 100px;
+    margin: 30px auto;
+  }
+  div:hover {
+    box-shadow: 0 10px 50px red;
+    transform: translateY(-10px);
+    transition: all 0.5s ease;
+  }
+</style>
