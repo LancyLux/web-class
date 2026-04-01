@@ -10,7 +10,36 @@
   <body>
     <div class="tudou">
       <div class="mask"></div>
-      <img src="./../素材/tudou.jpg" alt="" />
+      <img src="./../images/tudou.jpg" alt="" />
     </div>
   </body>
 </html>
+<style>
+  .tudou {
+    /* 子绝父相 */
+    position: relative;
+    width: 444px;
+    height: 320px;
+    margin: 30px auto;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+  }
+  .mask {
+    /* 默认情况下，隐藏 */
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    background-image: url('./../images/arr.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+  .tudou:hover .mask {
+    display: block;
+  }
+</style>
