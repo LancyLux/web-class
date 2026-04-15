@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <ul id="myList">
+    <li>土豆</li>
+    <li>黄瓜</li>
+    <li>萝卜</li>
+  </ul>
+  <ul id="op"></ul>
+  <button>复制节点</button>
+  <script>
+    var btn = document.querySelector('button');
+    btn.onclick = function () {
+      var item = document.getElementById('myList').firstElementChild;
+      var cloneItem = item.cloneNode(true);
+      document.getElementById('op').appendChild(cloneItem);
+    };
+  </script>
+</body>
+</html>

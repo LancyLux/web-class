@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <ul>
+    <li>第1个li元素</li>
+    <li>第2个li元素</li>
+  </ul>
+  <button>appendChild()方法</button>
+  <button>insertBefore()方法</button>
+  <script>
+    var ul = document.querySelector('ul');
+    var btn = document.querySelectorAll('button');
+    btn[0].onclick = function () {
+      var add_li = document.createElement('li');
+      add_li.innerHTML = '通过appendChild()方法添加的节点';
+      ul.appendChild(add_li);
+    };
+    btn[1].onclick = function () {
+      var add_li = document.createElement('li');
+      add_li.innerHTML = '通过insertBefore()方法添加的节点';
+      ul.insertBefore(add_li, ul.children[1]);
+    };
+  </script>
+</body>
+</html>

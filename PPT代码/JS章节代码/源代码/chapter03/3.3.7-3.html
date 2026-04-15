@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var arr = ['pink', 'red', 'blue'];
+    var a = arr[0];
+    var b = arr[1];
+    var c = arr[2];
+
+    var [a, b, c] = ['pink', 'red', 'blue'];
+
+    // 当等号左侧变量的数量小于等号右侧元素的数量时
+    var arr = ['pink', 'red', 'blue'];
+    [a, b] = arr;
+    console.log(a + ' - ' + b);                 // 输出结果为：pink - red
+
+    // 当等号左侧变量的数量多于等号右侧元素的数量时
+    var arr1 = ['pink', 'red'];
+    [d, e, f] = arr1;
+    console.log(d + ' - ' + e + ' - ' + f);    // 输出结果为：pink - red - undefined
+    
+    // 两个变量值的交换
+    var name1 = '小智', name2 = '小红';
+    [name1, name2] = [name2, name1];
+    console.log(name1 + ' - ' + name2);        // 输出结果为：小红 – 小智
+  </script>
+</body>
+</html>

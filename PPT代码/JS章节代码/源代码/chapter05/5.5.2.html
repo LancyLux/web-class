@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 方式1：通过日期对象的valueof()方法或getTime()方法获取
+      var date1 = new Date();
+      console.log(date1.valueOf());	          // 输出结果示例：1678440875203
+      console.log(date1.getTime());	          // 输出结果示例：1678440875203
+      // 方式2：使用“+”运算符将日期转换为数字
+      var date2 = +new Date();
+      console.log(date2);			    	          // 输出结果示例：1678440875203
+      // 方式3：使用HTML5新增的Date.now()方法获取
+      console.log(Date.now());	  	          // 输出结果示例：1678440875203
+      </script>
+  </body>
+</html>

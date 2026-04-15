@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div>单击</div>
+  <script>
+    var div = document.getElementsByTagName('div')[0];
+    // 获取事件对象和触发事件的对象，并完成兼容处理
+    div.onclick = function (e) {
+      var e = e || window.event;    
+      var target = e.target || e.srcElement;      
+      console.log(target);      // 输出结果为：<div>单击</div>
+      console.log(this);        // 输出结果为：<div>单击</div>
+    };
+  </script>
+</body>
+</html>

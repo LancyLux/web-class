@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function divide(x, y) {
+      if (y === 0) {
+        throw new Error('除数不能为0');
+      }
+      return x / y;
+    }
+    function calculate() {
+      var result;
+      try {
+        result = divide(3, 0);
+      } catch (error) {
+        console.log(error.message); // 输出结果：除数不能为0
+      }
+      console.log(result);          // 输出结果：undefined
+    }
+    calculate();
+  </script>
+</body>
+</html>

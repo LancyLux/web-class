@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">单击</button>
+    <script>
+      // 获取事件源
+      var button = document.getElementById('btn');
+      // 为获取的元素注册单击事件
+      button.onclick = function () {
+        alert('事件注册');
+      };
+      button.addEventListener('click', function () {
+        alert('事件注册');
+      });
+    </script>
+  </body>
+</html>

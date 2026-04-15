@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 获取数组长度
+    var arr1 = [0, 30, 60, 90];
+    var arr2 = ['a', , , , 'b', 'c'];
+    console.log(arr1.length);				    // 输出结果为：4
+    console.log(arr2.length);				    // 输出结果为：6
+
+    // 修改数组长度
+    var arr3 = [0, 1];
+    arr3.length = 4;						        // 修改数组长度为4
+    console.log(arr3);						      // 输出结果为: (4) [0, 1, empty × 2]
+    var arr4 = [0, 1];
+    arr4.length = 2;						        // 修改数组长度为2
+    console.log(arr4);						      // 输出结果为: (2) [0, 1]
+    var arr5 = [0, 1, 2, 3];
+    arr5.length = 3;						        // 修改数组长度为3
+    console.log(arr5);						      // 输出结果为: (3) [0, 1, 2]
+  </script>
+</body>
+</html>

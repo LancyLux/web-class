@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="jquery-3.6.4.min.js"></script>
+</head>
+<body>
+  <div index="1" data-index="2">div元素</div>
+  <script>
+    console.log($('div').attr('index'));             // 输出结果为：1
+    console.log($('div').attr('data-index'));        // 输出结果为：2
+    $('div').attr('index', 3);                       // 设置index的属性值为3
+    $('div').attr('data-index', 4);                  // 设置data-index的属性值为4
+  </script>
+</body>
+</html>

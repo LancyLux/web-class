@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <p>请选择你最喜欢的水果（多选）</p>
+  <input type="checkbox" name="fruit" value="草莓">草莓
+  <input type="checkbox" name="fruit" value="雪梨">雪梨
+  <input type="checkbox" name="fruit" value="芒果">芒果
+  <script>
+    var favoriteFruit = document.getElementsByName('fruit');
+    console.log(favoriteFruit); 
+    console.log(favoriteFruit[2]); 
+  </script>
+</body>
+</html>

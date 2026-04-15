@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Student() { }
+    var student = new Student();
+    console.log(student.__proto__);                       // 输出结果：{constructor: ƒ}
+    console.log(student.__proto__ === Student.prototype); // 输出结果：true
+  </script>
+</body>
+</html>

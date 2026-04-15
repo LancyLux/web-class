@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1.重复运行相同代码
+    for (var num = 1; num <= 10; num++) {
+      console.log('重要的事情说10遍');
+    }
+
+    var num = prompt('请输入次数');
+    for (var i = 1; i <= num; i++) {
+      console.log(`重要的事情说${num}遍`);
+    }
+
+    // 2.重复运行不同的代码
+    for (var i = 1; i <= 100; i++) {
+      if (i == 1) {
+        console.log('当前是第1次');
+      } else if (i == 100) {
+        console.log('当前是第100次');
+      }
+    }
+
+    // 3.计算1~100所有整数的和与平均值
+    var sum = 0;
+    for (var i = 1; i <= 100; i++) {
+      sum += i;
+    }
+    console.log('1~100所有整数的和为：' + sum);              // 输出结果为：5050
+    console.log('1~100所有整数的平均值为：' + (sum / 100));  // 输出结果为50.5
+
+    // 4.计算1~100所有整数中偶数的和与奇数的和
+    var even = 0;
+    var odd = 0;
+    for (var i = 1; i <= 100; i++) {
+      if (i % 2 == 0) {								                    // 判断i是奇数还是偶数
+        even += i;
+      } else {
+        odd += i;
+      }
+    }
+    console.log('1~100所有整数中偶数的和为' + even); 	      // 输出结果为：2550
+    console.log('1~100所有整数中奇数的和为' + odd);         // 输出结果为：2500
+
+    // 第2种方式
+    var even = 0;
+    for (var i = 2; i <= 100; i += 2) {     			        // i从2开始每次加2
+      even += i;
+    }
+    var odd = 0;
+    for (var i = 1; i <= 100; i += 2) {     			        // i 从1开始每次加2
+      odd += i;
+    }
+    console.log('1~100所有整数中偶数的和为' + even);  	    // 输出结果为：2550
+    console.log('1~100所有整数中奇数的和为' + odd);   	    // 输出结果为：2500
+
+    // 5.计算1~100所有整数中能被5整除的整数之和
+    var result = 0;
+    for (var i = 1; i <= 100; i++) {
+      if (i % 5 == 0) {
+        result += i;
+      }
+    }
+    console.log(result);  					                      // 输出结果为：1050
+
+    // 6.自动生成字符串
+    var num = prompt('请输入星星的个数');
+    var str = '';
+    for (var i = 1; i <= num; i++) {
+      str = str + '☆';
+    }
+    console.log(str);
+
+    // 多学一招：记录for语句的运行流程
+    var str = '';
+    var i = 4;        							                      // 控制循环的次数
+    for (str += '1'; i-- && (str += '2'); str += '4-') {
+      str += '3';
+    }
+    console.log(str); 							                      // 输出结果为：1234-234-234-234-
+  </script>
+</body>
+</html>

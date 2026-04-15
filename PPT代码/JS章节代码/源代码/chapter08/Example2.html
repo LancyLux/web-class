@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" placeholder="验证码">
+  <button>发送验证码</button>
+  <script>
+    var btn = document.querySelector('button');
+    btn.addEventListener('click', function () {
+      var time = 60; 
+      btn.disabled = true;
+      var timer = setInterval(function () {
+        if (time == 0) {
+          clearInterval(timer);
+          btn.disabled = false;
+          btn.innerHTML = '发送验证码';
+        } else {
+          btn.innerHTML = time + '秒后重新发送';
+          time--;
+        }
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

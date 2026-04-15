@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+      .ad {
+        position: relative;
+        width: 306px;
+        height: 306px;
+        margin: 100px auto;
+      }
+      .ad p {
+        position: absolute;
+        top: 306px;
+        right: 80px;
+        font-size: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ad">
+      <img src="ad.png" class="ad_img">
+      <p></p>
+    </div>
+    <script>
+      var ad = document.querySelector('.ad');
+      var tip = document.querySelector('p');
+      var time = 3;
+      fn();
+      var timer = window.setInterval(fn, 1000);
+      function fn(){
+        if (time == 0) {
+            ad.style.display = 'none';
+            clearInterval(timer);
+        }
+        tip.innerHTML = time + '秒后自动关闭广告';
+        time--;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="jquery-3.6.4.min.js"></script>
+  <style>
+    div { width: 100px; height: 100px; background-color: blue; }
+  </style>
+</head>
+<body>
+  <div></div>
+  <script>
+    // 获取div元素的宽度
+    console.log($('div').css('width'));
+    // 设置div元素的宽度为200px
+    $('div').css('width', '200px');
+    // 设置div元素的高度为200px，背景颜色为pink
+    $('div').css({ height: '200px', backgroundColor: 'pink' });
+  </script>
+</body>
+</html>

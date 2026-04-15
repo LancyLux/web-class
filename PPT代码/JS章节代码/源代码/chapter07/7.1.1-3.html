@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+  <body>
+    <div>星期一</div>
+    <div class="second">星期二</div>
+    <div>星期三</div>
+    <script>
+      var second = document.querySelector('.second');
+      // 获取当前节点的上一个兄弟节点，结果为文本节点
+      console.log(second.previousSibling);
+      // 获取当前节点的下一个兄弟节点，结果为文本节点
+      console.log(second.nextSibling);
+      // 获取当前元素节点的上一个兄弟元素节点，结果为第1个div元素
+      console.log(second.previousElementSibling);
+      // 获取当前元素节点的下一个兄弟元素节点，结果为第3个div元素
+      console.log(second.nextElementSibling);
+    </script>
+  </body>   
+</html>

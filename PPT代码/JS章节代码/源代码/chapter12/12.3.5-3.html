@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var reg = /Su(nny)/;
+    console.log('Sunnyday'.match(reg));
+    // (2) ['Sunny', 'nny', index: 0, input: 'Sunnyday', groups: undefined]
+
+    var reg = /Su(?:nny)/;
+    console.log('Sunnyday'.match(reg));
+    // ['Sunny', index: 0, input: 'Sunnyday', groups: undefined]
+  </script>
+</body>
+</html>

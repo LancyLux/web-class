@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      list-style-type: none;
+    }
+
+    a {
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .nav {
+      margin: 100px;
+      background-color: #ADDBF7;
+      padding-left: 100px;
+    }
+
+    .nav::after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+
+    .nav>li {
+      position: relative;
+      float: left;
+      width: 80px;
+      height: 41px;
+      text-align: center;
+    }
+
+    .nav li a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      line-height: 41px;
+      color: #333;
+    }
+
+    .nav>li:hover>a {
+      background-color: #2597DF;
+    }
+
+    .nav ul {
+      display: none;
+      position: absolute;
+      top: 41px;
+      left: 0;
+      width: 100%;
+      border-left: 1px solid #369FE2;
+      border-right: 1px solid #369FE2;
+    }
+
+    .nav ul li:last-child {
+      border-bottom: 1px solid #369FE2;
+    }
+
+    .nav ul li a:hover {
+      background-color: #ADDBF7;
+    }
+  </style>
+</head>
+<body>
+  <ul class="nav">
+    <li>
+      <a href="#">家用电器</a>
+      <ul>
+        <li>
+          <a href="">电视</a>
+        </li>
+        <li>
+          <a href="">空调</a>
+        </li>
+        <li>
+          <a href="">冰箱</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">童装童鞋</a>
+      <ul>
+        <li>
+          <a href="">运动鞋</a>
+        </li>
+        <li>
+          <a href="">卫衣</a>
+        </li>
+        <li>
+          <a href="">裤子</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">冷饮冻食</a>
+      <ul>
+        <li>
+          <a href="">冰淇淋</a>
+        </li>
+        <li>
+          <a href="">冷藏饮料</a>
+        </li>
+        <li>
+          <a href="">汤圆</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">体育用品</a>
+      <ul>
+        <li>
+          <a href="">篮球</a>
+        </li>
+        <li>
+          <a href="">排球</a>
+        </li>
+        <li>
+          <a href="">网球</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <script>
+    // 获取元素
+    var nav = document.querySelector('.nav');
+    var lis = nav.children;
+    // 注册鼠标指针经过事件和鼠标指针离开事件
+    for (var i = 0; i < lis.length; i++) {
+      lis[i].onmouseover = function () {
+        this.children[1].style.display = 'block';
+      };
+      lis[i].onmouseout = function () {
+        this.children[1].style.display = 'none';
+      };
+    }
+  </script>
+</body>
+</html>

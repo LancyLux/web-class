@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>   
+    function Student() { }
+    console.log(Student.constructor);    // 输出结果为：ƒ Function() { [native code] }
+    console.log(Function.constructor);   // 输出结果为：ƒ Function() { [native code] }
+
+    var fn = new Function('a', 'b', 'console.log(a + b)');
+    fn(30, 60);												   // 输出结果为：90
+
+    console.log(Function.prototype === Object.__proto__); // 输出结果为：true
+  </script>      
+</body>
+</html>

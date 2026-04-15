@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var arr = [98, 31, 5, 27, 2, 78];
+    console.log(`待排序数组${arr}`);
+    for (var i = 1; i < arr.length; i++) {        	// 控制需要比较的轮数
+      for (var j = 0; j < arr.length - i; j++) {    // 控制参与比较的元素
+        if (arr[j] > arr[j + 1]) {                	// 比较相邻的两个元素
+          var temp = arr[j];
+          arr[j] = arr[j + 1];
+          arr[j + 1] = temp;
+        }
+      }
+    }
+    console.log(`排序后数组${arr}`);
+  </script>
+</body>
+</html>

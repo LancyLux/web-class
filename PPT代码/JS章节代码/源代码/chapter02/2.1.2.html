@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    // 1.布尔型
+
+    var result_01 = true;
+    var result_02 = false;
+
+    // 2.数字型
+
+    // 整数
+    var bin = 0b11010;		// 二进制表示的26
+    var oct = 0o32;			  // 八进制表示的26
+    var dec = 26;			    // 十进制数26
+    var hex = 0x1a;		  	// 十六进制表示的26
+
+    // 浮点数
+    // 使用标准格式表示浮点数
+    var fNum01 = -3.12;
+    var fNum02 = 3.12;
+    // 使用科学记数法格式表示浮点数
+    var fNum03 = 3.14E5;
+    var fNum04 = 7.35E-5;
+
+    // 数字型中的特殊值
+    console.log(Number.MAX_VALUE);		    // 输出结果为：1.7976931348623157e+308
+    console.log(Number.MIN_VALUE);		    // 输出结果为：5e-324
+
+    console.log(Number.MAX_VALUE * 2); 		// 输出结果为：Infinity
+    console.log(-Number.MAX_VALUE * 2);		// 输出结果为：-Infinity
+    console.log('abc' - 2); 					    // 输出结果为：NaN
+
+
+    // 3.字符串型
+
+    // 使用单引号标注字符串
+    var a = '';      					              // 表示空字符串
+    var str1 = '书籍';      					      // 表示字符串'书籍'
+    // 使用双引号标注字符串
+    var b = "";          					          // 表示空字符串
+    var str2 = "书籍是人类进步的阶梯";        // 表示字符串"书籍是人类进步的阶梯"
+    // 使用反引号标注字符串
+    var c = ``;          					          // 表示空字符串
+    var str3 = `读万卷书，行万里路`;          // 表示字符串`读万卷书，行万里路`
+
+    // 单引号中嵌套双引号
+    var fruit01 = '"apple"banana'; 				  // 字符串内容为"apple"banana
+    // 双引号中嵌套单引号
+    var fruit02 = "'pear'blueberry";		    // 字符串内容为'pear'blueberry
+    // 单引号中嵌套反引号
+    var food01 = '`noodles`rice';	      		// 字符串内容为`noodles`rice
+    // 双引号中嵌套反引号
+    var food02 = "`fish`meat";      				// 字符串内容为`fish`meat
+    // 反引号中嵌套单引号
+    var color01 = `'pink'red`;	      			// 字符串内容为'pink'red
+    // 反引号中嵌套双引号
+    var color02 = `"black"white`;	      		// 字符串内容为"black"white
+
+    // 单引号中嵌套单引号
+    var speak = 'I\'m 小明';					     // 字符串内容为I'm 小明
+    // 双引号中嵌套双引号
+    var boyName = "\"小智\"";		      		 // 字符串内容为"小智"
+    // 反引号中嵌套反引号
+    var girlName = `\`小丽\``;	    			 // 字符串内容为`小丽`
+
+    var str = 'I like running';
+    console.log(str.length);					    // 输出结果为：14
+
+    // 4.空型
+    var age = null;
+    console.log(age);		 				          // 输出结果为：null
+
+    // 5.未定义型
+    var age;
+    console.log(age);		 				          // 输出结果为：undefined
+  </script>
+</body>
+</html>

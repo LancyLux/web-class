@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <table border="1" cellspacing="0" align="center">
+    <caption>商品信息详情</caption>
+    <tr>
+      <th>商品种类</th>
+      <td>过季旧款</td>
+      <td>当前热销</td>
+      <td>春季新品</td>
+    </tr>
+    <tr>
+      <th>商品状态</th>
+      <td id="down"><span>已下架</span></td>
+      <td class="up">热卖中</td>
+      <td class="up" id="wait">待上架</td>
+    </tr>
+  </table>
+  <script>
+    // 通过id属性获取元素
+    var downGoods = document.getElementById('down');
+    // 通过innerHTML属性获取元素内容
+    console.log(downGoods.innerHTML);
+    // 通过赋值语句设置元素内容
+    downGoods.innerHTML = '已上架';
+    // 通过类名获取元素
+    var upGoodsFirst = document.getElementsByClassName('up');
+    // 通过innerText属性获取元素内容
+    console.log(upGoodsFirst[0].innerText);
+    // 通过id属性获取元素
+    var upGoodsSecond = document.getElementById('wait');
+    // 通过textContent属性获取元素内容
+    console.log(upGoodsSecond.textContent);
+  </script>
+</body>
+</html>

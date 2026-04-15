@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="vegetable">蔬菜</button>
+    <button id="fruit">水果</button> <br>
+    <img src="images/fruit.png" alt="" title="水果">
+    <script>
+      // 通过id属性获取元素
+      var vegetable = document.getElementById('vegetable');
+      var fruit = document.getElementById('fruit');
+      // 通过CSS选择器获取元素
+      var img = document.querySelector('img');
+      // 注册事件驱动程序
+      vegetable.onclick = function () {
+        img.src = 'images/vegetable.png';
+        img.title = '蔬菜';
+      };
+      fruit.onclick = function () {
+        img.src = 'images/fruit.png';
+        img.title = '水果';
+      };
+    </script>
+  </body>
+</html>

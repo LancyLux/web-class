@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+      background-color: pink;
+      position: relative;
+    }
+  </style>
+  <script src="jquery-3.6.4.min.js"></script>
+</head>
+<body>
+  <div></div>
+  <script>
+    $('div').mouseover(function () {
+      // 创建自定义动画
+      $('div').animate({ left: '+=100'}, 500);
+    });
+  </script>
+</body>
+</html>

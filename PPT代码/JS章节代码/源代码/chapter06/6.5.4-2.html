@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      .target {
+        width: 200px;
+        height: 200px;
+        border: 1px solid black;
+        font-size: 10px;
+        text-align: center;
+        line-height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">使用className更改元素的样式</div>
+    <script>
+      // 获取div元素
+      var box = document.querySelector('.box');
+      // 为获取到的div元素设置className
+      box.className = 'target';
+      //div元素：class='box target'
+      box.classList.add('target');
+      box.classList.remove('target');
+      box.classList.toggle('target');
+    </script>
+  </body>
+  <html></html>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 定义类
+    class Student {
+      constructor(name) {     // 构造方法
+        this.name = name;     // 为新创建的对象添加name属性
+      }
+      say() {
+        console.log('你好，我叫' + this.name);
+      }
+    }
+    // 使用类创建对象
+    var stu1 = new Student('小明');
+    var stu2 = new Student('小智');
+    stu1.say();
+    stu2.say();
+  </script>
+</body>
+</html>

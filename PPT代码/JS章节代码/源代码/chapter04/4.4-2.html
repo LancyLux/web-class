@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function greeting() {
+        var name = '小智';
+        return [function () {
+          return name;
+        }, function (newName) {
+          name = newName;
+        }];
+      }
+      var [getName, setName] = greeting();
+      console.log('你好' + getName());
+      setName('小明');
+      console.log('你好' + getName());
+    </script>  
+  </body>
+</html>

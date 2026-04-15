@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var arr = [92, 83, 69, 78, 95, 88, 75, 64, 90, 81];
+    var newArr = [];
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] >= 80) {
+        newArr[newArr.length] = arr[i];    	// 新数组的索引从0开始依次递增
+      }
+    }
+    console.log(newArr);        	// 输出结果为：(6) [92, 83, 95, 88, 90, 81]
+  </script>
+</body>
+</html>

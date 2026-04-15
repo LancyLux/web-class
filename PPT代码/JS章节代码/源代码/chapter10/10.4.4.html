@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    div { width: 100px; height: 100px; float: left; margin-left: 5px; }
+    .box { width: 425px; height: 100px; padding: 5px; border: 1px solid gray; }
+    .red { background-color: red; }
+    .green { background-color: green; }
+    .yello { background-color: yellow; }
+    .orange { background-color: orange; }
+  </style>
+  <script src="jquery-3.6.4.min.js"></script>
+</head>
+<body>
+  <div class="box">
+    <div class="red"></div>
+    <div class="green"></div>
+    <div class="yello"></div>
+    <div class="orange"></div>
+  </div>
+  <script>
+    $('.box div').fadeTo(2000, 0.2);
+    // 鼠标指针移入时的效果
+    $('.box div').mouseover(function () {
+      $(this).fadeTo('fast', 1);
+    });
+    // 鼠标指针移出时的效果
+    $('.box div').mouseout(function () {
+      $(this).fadeTo('fast', 0.2);
+    });
+  </script>
+</body>
+</html>

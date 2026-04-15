@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // （1）在全局作用域或者普通函数中，this指向全局对象window
+    console.log(this);		 // this指向全局对象window
+    function fn() {	
+    console.log(this);	
+    }	
+    window.fn();	
+
+    // （2）在方法中，this指向调用它所在方法的对象
+    var user = {
+    sayHi: function () {
+    console.log(this);
+    }
+    };
+    user.sayHi(); 			// sayHi中的this指向user对象
+
+    //（3）在构造函数中，this指向新创建的实例，
+    function Fun() {
+    console.log(this);
+    }
+    var fun = new Fun();    // Fun中的this指向新创建的实例fun
+  </script>
+</body>
+</html>

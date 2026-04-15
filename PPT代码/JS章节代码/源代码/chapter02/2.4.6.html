@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // continue语句
+    for (var i = 1; i <= 6; i++) {
+      if (i == 2) {
+        continue;                           // 跳出本次循环，直接跳到i++
+      }
+      console.log(`小智吃完了第${i}个桃子`);
+    }
+
+    // break语句
+    for (var i = 1; i <= 6; i++) {
+      if (i == 4) {
+        break;                              // 跳出整个循环
+      }
+      console.log(`小智吃完了第${i}个桃子`);
+    }
+    
+    // 标签语句
+    outerloop:
+    for (var i = 0; i < 10; i++) {
+      for (var j = 0; j < 1; j++) {
+        if (i == 5) {
+          break outerloop;
+        }
+        console.log('i = ' + i + ', j = ' + j);
+      }
+    }
+  </script>
+</body>
+</html>

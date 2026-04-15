@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function fruit(arg) {
+        console.log(arg);
+      }
+      fruit ('apple');                  // 输出结果为：apple
+
+      function getProduct(num01, num02) {
+        console.log(num01 * num02);
+      }
+      getProduct(3, 4);                 // 输出结果为：12
+      getProduct(6, 7);                 // 输出结果为：42
+
+
+      function getProduct(num01, num02) {
+        console.log(num01, num02);
+      }
+      getProduct(7, 8, 9);	            // 输出结果为：7 8
+      getProduct(5);		  	            // 输出结果为：5 undefined
+
+      function fn() {
+        console.log(arguments);			     // 输出结果为：Arguments(3) [1, 2, 3, …]
+        console.log(arguments.length);	 // 输出结果为：3
+        console.log(arguments[1]);		   // 输出结果为：2
+      }
+      fn(1, 2, 3);
+
+      function getMax() {
+        var max = arguments[0];
+        for (var i = 1; i < arguments.length; i++) {
+          if (arguments[i] > max) {
+            max = arguments[i];
+          }
+        }
+        console.log(max);
+      }
+      getMax(11, 22, 33);					       // 输出结果为：33
+      getMax(10, 20, 30, 40, 50);			   // 输出结果为：50
+      getMax(43, 19, 67, 89, 30, 29);	   // 输出结果为：89
+    </script>
+  </body>
+</html>

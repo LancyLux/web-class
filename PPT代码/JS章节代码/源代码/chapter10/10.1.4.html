@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="jquery-3.6.4.min.js"></script>
+</head>
+<body>
+  <ul>
+    <li>勤能补拙</li>
+    <li>孜孜不倦</li>
+  </ul>
+  <script>
+    // 将li元素追加到ul元素中
+    $('ul').append('<li>自强不息</li>');
+    // 追加ul元素的兄弟元素ul
+    $('ul').after('<ul><li>兢兢业业</li><li>勇往直前</li><li>坚定不移</li></ul>');
+  </script>
+</body>
+</html>

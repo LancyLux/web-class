@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" value="请输入内容" style="color:#999">
+    <script>
+      var text = document.querySelector('input');  
+      text.onfocus = function () {        // 注册获得焦点事件onfocus
+        if (this.value === '请输入内容') {
+          this.value = '';
+        }
+        this.style.color = '#333';
+      };
+      text.onblur = function () {         // 注册失去焦点事件onblur
+        if (this.value === '') {
+          this.value = '请输入内容';
+        }
+        // 失去焦点需要把文本框里面的文字颜色变浅色
+        this.style.color = '#999';
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 父类
+    class Father {
+      num() {
+        return 1;
+      }
+    }
+    // 子类
+    class Son extends Father {
+      num() {
+        var num1 = super.num();     // 调用父类的num()方法
+        console.log(num1);         
+      }
+    }
+    var son = new Son();
+    son.num();
+  </script>
+</body>
+</html>

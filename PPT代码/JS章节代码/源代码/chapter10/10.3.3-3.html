@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="jquery-3.6.4.min.js"></script>
+</head>
+<body>
+  <input type="text">
+  <script>
+    // 注册获取焦点事件
+    $('input').focus(function () {
+      $(this).val('123456')
+    });
+    // 触发获取焦点事件
+    $('input').triggerHandler('focus');
+  </script>
+</body>
+</html>

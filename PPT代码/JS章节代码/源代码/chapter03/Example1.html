@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var arr = [75, 95, 63, 86, 89, 92];
+    var max = min = arr[0];   // 假设第1个元素为最大值和最小值
+    for (var i = 1; i < arr.length; i++) {
+      if (arr[i] > max) {     // 若当前元素比最大值大，设置最大值为当前元素
+        max = arr[i];
+      }
+      if (arr[i] < min) {     // 若当前元素比最小值小，设置最小值为当前元素
+        min = arr[i];
+      }
+    }
+    console.log(`班级中最高分为${max}`);
+    console.log(`班级中最低分为${min}`);
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 创建一个空对象
+    var obj = {};
+    // 创建一个学生对象
+    var student = {
+      name: '小智',						            // name属性
+      sex: '男',							            // sex属性  
+      age: '20',						              // age属性
+      sayHello: function() {			        // sayHello()方法
+        console.log('Hello');
+      } 
+    };
+
+    // 第1种方式：使用“.”访问对象的成员
+    console.log(student.name);				    // 访问对象的属性，输出结果为：小智
+    student.sayHello();						        // 调用对象的方法，输出结果为：Hello
+    // 第2种方式：使用“[]”访问对象的成员
+    console.log(student['sex']);			    // 访问对象的属性，输出结果为：男
+    student['sayHello']();					      // 调用对象的方法，输出结果为：Hello
+    
+    var student02 = {
+      'name-sex': '小强-男',
+    };
+    console.log(student02['name-sex']);	  // 输出结果为：小强-男	
+
+    var obj = {};					                // 创建一个空对象
+    obj.name = '小娜';				            // 为对象添加name属性（使用“.”语法）
+    obj['sex'] = '女';				            // 为对象添加sex属性（使用“[]”语法）
+    obj.sayHello = function() {		        // 为对象添加sayHello()方法（使用“.”语法）
+      console.log('Hello');
+    };
+    obj['dance'] = function() {		      // 为对象添加dance()方法（使用“[]”语法）
+      console.log('小娜在跳民族舞');
+    };
+    console.log(obj.name);			        // 访问name属性，输出结果为：小娜
+    console.log(obj.sex);			          // 访问sex属性，输出结果为：女
+    obj.sayHello();					            // 调用对象的方法，输出结果为：Hello
+    obj.dance();					              // 调用对象的方法，输出结果为：小娜在跳民族舞
+    
+    // 访问对象中不存在的成员
+    var obj = {};
+    console.log(obj.name);			       // 输出结果为：undefined
+  </script>
+</body>
+</html>

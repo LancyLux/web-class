@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var name = '小明';
+    function method(a, b) {
+      console.log(this.name + a + b);
+    }
+    // 使用apply()方法更改this指向
+    method.apply({ name: '小智'}, ['1', '8']);
+    // 使用call()方法更改this指向
+    method.call({ name: '小智'}, '1', '8');
+    // 使用bind()方法更改this指向
+    var test = method.bind({ name: '小智'}, '1', '8');
+    method('1', '8');
+    test();
+  </script>   
+</body>
+</html>

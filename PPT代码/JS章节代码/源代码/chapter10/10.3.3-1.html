@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="jquery-3.6.4.min.js"></script>
+</head>
+<body>
+  <div>通过事件方法实现事件触发</div>
+  <script>
+    // 事件注册
+    $('div').click(function () {
+      alert('Hello');
+    });
+    // 事件触发
+    $('div').click();
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 父类
+    class Father {
+      constructor(a, b) {
+        this.a = a;
+        this.b = b;
+      }
+      sum() {
+        console.log(this.a + this.b);
+      }
+    }
+    // 子类
+    class Son extends Father {
+      constructor(a, b) {
+        super(a, b);                    // 调用父类的构造方法
+        this.a++;
+        this.b++;
+      }
+      subtract() {
+        console.log(this.a - this.b);
+      }
+    }
+    var son = new Son(5, 4);            
+    son.sum();      // 输出结果为：11
+    son.subtract(); // 输出结果为：1
+  </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var username = '小智';
+    var sex = '男';
+    // 使用加号“+”运算符实现字符串拼接
+    var str = username + '：' + sex;
+    console.log(str);							        // 输出结果为“小智：男”
+
+    var username = '小智';
+    var sex = '男';
+    // 使用模板字符串实现字符串拼接		
+    console.log(`${username}：${sex}`);		// 输出结果为“小智：男”
+
+    // 隐式转换
+    // 通过隐式转换将数据转换为数字型数据
+    console.log('13' - 0);          		// 输出结果为：13
+    console.log('13' * 1);          		// 输出结果为：13
+    console.log('13' / 1);          		// 输出结果为：13
+    // 通过隐式转换将数据转换为字符串型数据
+    console.log(13 + '');           		// 输出结果为：13
+    console.log(true + '');         		// 输出结果为：true
+    console.log(null + '');         		// 输出结果为：null
+    console.log(undefined + '');    		// 输出结果为：undefined
+  </script>
+</body>
+</html>

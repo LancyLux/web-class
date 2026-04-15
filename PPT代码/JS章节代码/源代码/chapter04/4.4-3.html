@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function fn01() {
+        var num = 0;
+        function fn02() {
+          ++num;
+          console.log(`第${num}次被调用`);
+        }
+        return fn02;
+      }
+      var fn = fn01();
+      fn();
+      fn();
+      fn();
+    </script>  
+  </body>
+</html>

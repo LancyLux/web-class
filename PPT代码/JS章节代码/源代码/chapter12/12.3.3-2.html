@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var reg = /\^/g;
+    var reg1 = /\?/g;
+    var reg2 = new RegExp('\\.', 'g');
+    console.log('^a1b2'.match(reg));  // 输出结果为：['^']
+    console.log('a1?b2'.match(reg1)); // 输出结果为：['?']
+    console.log('a1.b2'.match(reg2)); // 输出结果为：['.']
+  </script>
+</body>
+</html>

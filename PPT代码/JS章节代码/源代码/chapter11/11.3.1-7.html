@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 混入继承
+    var o1 = {};
+    var o2 = {
+      sayHello: function () {
+        console.log('Hello');
+      }
+    };
+    o1.sayHello = o2.sayHello;
+    o1.sayHello();
+  </script>    
+</body>
+</html>

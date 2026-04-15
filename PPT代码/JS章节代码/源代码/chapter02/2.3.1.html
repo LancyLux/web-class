@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var a = 2, b = 2, c = 3, d = 3;
+    // 自增
+    console.log(++a);						            // 输出结果为：3
+    console.log(a);							            // 输出结果为：3
+    console.log(b++);						            // 输出结果为：2
+    console.log(b);							            // 输出结果为：3
+    // 自减
+    console.log(--c);						            // 输出结果为：2
+    console.log(c);							            // 输出结果为：2
+    console.log(d--);						            // 输出结果为：3
+    console.log(d);							            // 输出结果为：2
+
+    // 表达式
+    var num = 3 + 3;			                  // 将表达式"3 + 3"的值"6"赋值给变量num
+    num = 7;					                      // 将表达式"7"的值赋值给变量num
+    var age = 23 + num;			                // 将表达式"23 + num"的值"30"赋值给变量age
+    age = num = 35;				                  // 将表达式"num = 35"的值"35"赋值给变量age
+    console.log(age);			                  // 将表达式age的值作为参数传给console.log()
+    alert(prompt('a'));			                // 将表达式prompt('a')的值作为参数传给alert()
+    alert(parseInt(prompt('num')) + 1);	    // 由简单的表达式组合成的复杂表达式
+  </script>
+</body>
+</html>

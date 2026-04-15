@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var timestamp1 = +new Date();
+      for (var i = 1, str = ''; i <= 60000; i++) {
+        str += i;
+      }
+      var timestamp2 = +new Date();
+      console.log(`代码运行时间为：${(timestamp2 - timestamp1)}毫秒`);
+    </script>
+  </body>
+</html>

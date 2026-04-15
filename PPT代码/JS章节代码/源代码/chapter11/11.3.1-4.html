@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 使用原型对象实现继承
+    function Student(name) {
+      this.name = name;
+    }
+    Student.prototype.sayHello = function () {
+      console.log('您好，我叫' + this.name);
+    }
+    var student1 = new Student('小明');
+    var student2 = new Student('小智');
+    student1.sayHello();  // 输出结果：您好，我叫小明
+    student2.sayHello();  // 输出结果：您好，我叫小智
+  </script>
+</body>
+</html>

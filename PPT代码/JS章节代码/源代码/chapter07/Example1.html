@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="message.css">
+</head>
+<body>
+  <div>
+    <h1>留言板</h1>
+    <ul></ul>
+    <textarea placeholder="请编辑您的留言"></textarea>
+    <button class="sub">发布</button>
+  </div>
+  <script>
+    // 获取元素
+    var btn = document.querySelector('.sub');
+    var text = document.querySelector('textarea');
+    var ul = document.querySelector('ul');
+    // 注册事件
+    btn.onclick = function () {
+      if (text.value == '') {
+        alert('您没有输入内容');
+        return false;
+      } else {
+        // 创建li元素节点
+        var li = document.createElement('li'); 
+        li.innerHTML = text.value;
+        // 删除留言功能
+        var button = document.createElement('button');
+        button.className = 'remove';
+        button.innerHTML = '删除';
+        button.onclick = function () {
+          ul.removeChild(this.parentNode);
+        };
+        li.appendChild(button);
+        // 在ul元素中添加节点
+        ul.insertBefore(li, ul.children[0]);
+         // 将文本域中的内容清空
+         text.value = '';
+      }
+    };
+  </script>
+</body>
+</html>

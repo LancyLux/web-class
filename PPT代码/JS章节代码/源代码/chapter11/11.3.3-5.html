@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>   
+    // function Student() { }
+    // console.log(Student.prototype.__proto__);
+    // console.log(Student.prototype.__proto__.constructor);
+
+    function Student() { }
+    console.log(Student.prototype.__proto__ === Object.prototype);
+    var object = new Object();
+    console.log(object.__proto__ === Object.prototype);
+
+    console.log(Object.prototype.__proto__);		
+  </script>      
+</body>
+</html>

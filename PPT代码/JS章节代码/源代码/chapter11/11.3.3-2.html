@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Student() { }
+    var student = new Student();
+    // 通过原型对象的constructor属性访问构造函数 
+    console.log(Student.prototype.constructor); // 输出结果：Student() { }
+    // 通过实例对象的constructor属性访问构造函数
+    console.log(student.constructor);           // 输出结果：Student() { }
+  </script>
+</body>
+</html>

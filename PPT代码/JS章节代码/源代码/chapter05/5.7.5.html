@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var str = 'HelloWorld';
+      str.concat('!');	                  // 在字符串末尾拼接字符
+      str.slice(1, 6);                    // 截取从索引1开始到索引6的内容
+      str.substring(7);                   // 截取从索引7开始到最后的内容
+      str.substring(6, 8);                // 截取从索引6开始到索引8的内容
+      str.substr(3);		                  // 截取从索引3开始到字符串结尾的内容
+      str.substring(5, 7);                // 截取从索引5开始到索引7的内容
+      str.toLowerCase();	                // 将字符串转换为小写
+      str.toUpperCase();	                // 将字符串转换为大写
+      str.split('l');		                  // 使用'l'分割字符串
+      str.split('l', 3);	                // 限制最多分割3份
+      str.replace('World', '!');          // 替换字符串
+    </script>
+  </body>
+</html>

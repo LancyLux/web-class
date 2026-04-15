@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var str = new String('Monday');       // 创建字符串对象
+    console.log(str);                     // 输出结果为：String {'Monday'}
+
+    // 创建字符串对象
+    var str01 = new String('Tuesday');
+    // 访问字符串对象的length属性
+    console.log(str01.length);             // 输出结果为：7
+    // 使用typeof运算符检测字符串对象的数据类型
+    console.log(typeof str01);             // 输出结果为：object
+
+    // 定义保存了字符串数据的变量
+    var str02 = 'Tuesday';
+    // 访问变量str02的length属性
+    console.log(str02.length);             // 输出结果为：7
+    // 使用typeof运算符检测变量str02的数据类型
+    console.log(typeof (str02));           // 输出结果为：string
+  </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="t">test</div>
+    <script>
+      var obj = document.getElementById('t');
+      // 定义事件处理函数
+      function test() {
+        console.log('test');
+      }
+      // obj.onclick=function(){}
+      obj.addEventListener('click', test); // 事件监听
+      obj.removeEventListener('click', test); // 事件移除
+
+      // 在早期的IE浏览器中进行事件的监听和移除
+      // obj.attachEvent('onclick', test);		    // 事件监听
+      // obj.detachEvent('onclick', test); 		    // 事件移除
+    </script>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Student() {
+      this.age = 20;
+    }
+    Student.prototype.age = 21;
+    var student = new Student(); 
+    console.log(student.age);       // 输出结果为：20
+    delete student.age;
+    console.log(student.age);       // 输出结果为：21
+    delete Student.prototype.age;
+    console.log(student.age);       // 输出结果为：undefined
+  </script>
+</body>
+</html>

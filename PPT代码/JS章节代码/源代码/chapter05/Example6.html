@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var str = 'shopping';
+      var num = {};                     
+      for (var i = 0; i < str.length; i++) {
+        var chars = str.charAt(i);     
+        if (num[chars]) {               
+          num[chars]++;
+        } else {
+          num[chars] = 1;
+        }
+      }
+      console.log(num);         
+      var max = 0;                       
+      var ch = '';                       
+      for (var k in num) {
+        if (num[k] > max) {
+          max = num[k];
+          ch = k;
+        }
+      }
+      console.log(`出现最多的字符是${ch} ` + `，共出现了${max}次`);
+    </script>
+  </body>
+</html>

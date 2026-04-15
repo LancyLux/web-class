@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    console.log(this);      // this指向全局对象window
+    function fn() {
+      console.log(this);
+    }
+    fn();
+
+    var user = {
+      sayHi: function () {
+        console.log(this);
+      }
+    };
+    user.sayHi();           // sayHi()方法中的this指向user对象
+
+    function Fun() {
+      console.log(this);
+    }
+    var fun = new Fun();    // Fun()中的this指向新创建的实例fun
+  </script>
+</body>
+</html>

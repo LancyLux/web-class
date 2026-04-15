@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div id="parent">
+    <div id="child">单击</div>
+  </div>
+  <script>
+    var parent = document.querySelector('#parent');
+    var child = document.querySelector('#child');
+    parent.onclick = function () {
+      console.log('parent');
+    };
+    child.onclick = function (e) {
+      if (window.event) {
+        window.event.cancelBubble = true;  // 早期版本的IE浏览器
+      } else {
+        e.stopPropagation();               // 新版浏览器
+      }
+      console.log('child');                // 输出结果为：child
+    };
+  </script>
+</body>
+</html>

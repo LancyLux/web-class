@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var reg = /a.min/;
+    console.log('1admin2admin'.match(reg));   // 输出结果为：['admin', index: 1, input: '1admin2admin', groups: undefined]
+    console.log('address'.match(reg));        // 输出结果为：null
+  </script>
+</body>
+</html>

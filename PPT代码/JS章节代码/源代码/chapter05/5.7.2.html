@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var str = 'HelloWorld';	
+    str.indexOf('l');	                // 获取 "l" 在字符串中首次出现的位置，返回结果为：2 
+    str.lastIndexOf('l');	            // 获取 "l" 在字符串中最后出现的位置，返回结果为：8
+
+    var str = 'Hello World, Hello JavaScript';
+    var index = str.indexOf('o');
+    var num = 0;
+    while (index != -1) {
+      console.log(index);                
+      index = str.indexOf('o', index + 1);
+      num++;
+    }
+    console.log(`o出现的次数是：${num}`);  
+  </script>
+</body>
+</html>

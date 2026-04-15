@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  var arr01 = new Array();
+  var arr02 = new Array(2);
+  var arr03 = new Array('土豆', '黄瓜', '玉米');
+  var arr04 = new Array(13, '苹果', true, null, undefined);
+  var arr05 = new Array(11, new Array(22, 33), 44);
+  console.log(arr01);                      // 输出结果为：[]
+  console.log(arr02);                      // 输出结果为：(2) [empty × 2]
+  console.log(arr03);                      // 输出结果为：(3) ['土豆', '黄瓜', '玉米']
+  console.log(arr04);                      // 输出结果为：(5) [13, '苹果', true, null, undefined]
+  console.log(arr05);                      // 输出结果为：(3) [11, Array(2), 44]
+
+  // 多学一招
+  
+  var arr = [];
+  var obj = {};
+  // 第1种方式
+  console.log(arr instanceof Array);        // 输出结果：true
+  console.log(obj instanceof Array);        // 输出结果：false
+  // 第2种方式
+  console.log(Array.isArray(arr));          // 输出结果：true
+  console.log(Array.isArray(obj));          // 输出结果：false
+  </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var arr = [
+      [4, 7, 3],
+      [6, 3, 1],
+      [2, 5, 9],
+      [8, 1, 5]
+    ];
+    var res = [];
+    for (var i = 0; i < arr[0].length; ++i) {   // i表示arr数组的纵向元素索引
+      res[i] = [];
+      for (var j = 0; j < arr.length; ++j) {    // j表示arr数组的横向元素索引
+        res[i][j] = arr[j][i];                  // 为二维数组赋值
+      }
+    }
+    console.log(arr);
+    console.log(res);
+  </script>
+</body>
+</html>

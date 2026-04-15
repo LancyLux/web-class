@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <a href="test.html">单击</a>
+  <script>
+    var a = document.querySelector('a');
+    a.onclick = function (e) {
+      if (window.event) {
+        window.event.returnValue = false; // 早期版本的IE浏览器
+      } else {
+        e.preventDefault();               // 新版浏览器
+      }
+    };
+  </script>
+</body>
+</html>

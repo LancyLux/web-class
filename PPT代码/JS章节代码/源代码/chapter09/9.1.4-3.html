@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="jquery-3.6.4.min.js"></script>
+</head>
+<body>
+  <div>Hello jQuery</div>
+  <script>
+    // 将jQuery对象转换为DOM对象
+    var div1 = $('div')[0];					  // 第1种实现方式
+    var div2 = $('div').get(0);				// 第2种实现方式
+
+    // 将DOM对象转换为jQuery对象
+    // 获取DOM对象
+    var div = document.getElementByTagName('div')[0];
+    // 将DOM对象转换成jQuery对象
+    div = $(div);
+  </script>
+</body>
+</html>

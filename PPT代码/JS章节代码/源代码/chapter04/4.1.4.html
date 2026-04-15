@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function getResult() {
+        return 123456;
+      }
+      // 通过变量接收返回值
+      var result = getResult();
+      console.log(result);        // 输出结果为：123456
+      // 直接将函数的返回值输出
+      console.log(getResult());   // 输出结果为：123456
+
+      function getResult() {
+      }
+      // 直接将函数的返回值输出
+      console.log(getResult());   // 输出结果为：undefined
+    </script>
+  </body>
+</html>

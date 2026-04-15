@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="jquery-3.6.4.min.js"></script>
+</head>
+<body>
+  <script>
+    var targetObj = {
+      id: 0,
+      msg: { sex: '男' }
+    };
+    var obj = {
+      id: 1,
+      name: '小智',
+      msg: { age: 20 }
+    };
+    $.extend(targetObj, obj);	      
+    console.log(targetObj);  	      // 输出结果为：{id: 1, msg: {…}, name: '小智'}
+    targetObj.msg.age = 22;	
+    console.log(obj.msg.age);	      // 输出结果为：22
+  </script>
+</body>
+</html>

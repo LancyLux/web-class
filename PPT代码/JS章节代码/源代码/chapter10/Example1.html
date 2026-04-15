@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-size: 12px;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      .wrapper {
+        width: 250px;
+        height: 248px;
+        margin: 100px auto 0;
+        border: 1px solid black;
+        border-right: 0;
+        overflow: hidden;
+      }
+
+      #left,
+      #content {
+        float: left;
+      }
+
+      #left li {
+        background: url(images/lili.jpg) repeat-x;
+      }
+
+      #left li a {
+        display: block;
+        width: 48px;
+        height: 27px;
+        border-bottom: 1px solid black;
+        line-height: 27px;
+        text-align: center;
+        color: black;
+      }
+
+      #left li a:hover {
+        background-image: url(images/abg01.gif);
+      }
+
+      #content {
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+      }
+    </style>
+    <script src="jquery-3.6.4.min.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <ul id="left">
+        <li><a href="#">深海大虾</a></li>
+        <li><a href="#">鲜嫩鱼片</a></li>
+        <li><a href="#">美味包子</a></li>
+        <li><a href="#">酸菜鱼片</a></li>
+        <li><a href="#">风味鱼串</a></li>
+        <li><a href="#">手工水饺</a></li>
+        <li><a href="#">鲜香鲍鱼</a></li>
+        <li><a href="#">秘制点心</a></li>
+        <li><a href="#">柚子茶</a></li>
+      </ul>
+      <div id="content">
+        <div>
+          <a href="#">
+            <img src="images/深海大虾.png" width="200" height="250" /></a>
+        </div>
+        <div>
+          <a href="#">
+            <img src="images/鲜嫩鱼片.png" width="200" height="250" /></a>
+        </div>
+        <div>
+          <a href="#">
+            <img src="images/美味包子.png" width="200" height="250" /></a>
+        </div>
+        <div>
+          <a href="#">
+            <img src="images/酸菜鱼片.png" width="200" height="250" /></a>
+        </div>
+        <div>
+          <a href="#">
+            <img src="images/风味鱼串.png" width="200" height="250" /></a>
+        </div>
+        <div>
+          <a href="#">
+            <img src="images/手工水饺.png" width="200" height="250" /></a>
+        </div>
+        <div>
+          <a href="#">
+            <img src="images/鲜香鲍鱼.png" width="200" height="250" /></a>
+        </div>
+        <div>
+          <a href="#">
+            <img src="images/秘制点心.png" width="200" height="250" /></a>
+        </div>
+        <div>
+          <a href="#">
+            <img src="images/柚子茶.png" width="200" height="250" /></a>
+        </div>
+      </div>
+    </div>
+    <script>
+      // 鼠标指针经过左侧的li
+        $('#left li').mouseover(function () {
+        var index = $(this).index();	// 获取当前li的索引
+        console.log(index);
+        // 在右侧显示相应索引的图片
+        $('#content div').eq(index).show();
+        // 将其他图片隐藏
+        $('#content div').eq(index).siblings().hide();
+      });
+    </script>
+  </body>
+</html>

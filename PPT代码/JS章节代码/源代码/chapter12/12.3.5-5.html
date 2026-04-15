@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var reg1 = /Countr(?=y)/g; 
+    var reg2 = /Countr(?!y)/g; 
+    var reg3 = /(?<=A)dmin/g; 
+    var reg4 = /(?<!A)dmin/g;             // 后行否定断言
+    console.log('Country'.match(reg1));   // 输出结果为：['Countr']
+    console.log('Country'.match(reg2));   // 输出结果为：null
+    console.log('Admin'.match(reg3));     // 输出结果为：['dmin']
+    console.log('Bdmin'.match(reg4));     // 输出结果为：['dmin']
+  </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="jquery-3.6.4.min.js"></script>
+  <style>
+    div {
+      width: 50px;
+      height: 50px;
+      border: 1px solid black;
+      position: absolute;
+      left: 20px;
+      top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div></div>
+  <script>
+    // 获取元素的尺寸
+    console.log($('div').width());
+    console.log($('div').height());
+    console.log($('div').outerWidth());
+    // 设置元素的尺寸
+    $('div').width(100);
+    $('div').height(100);
+  </script>
+</body>
+</html>

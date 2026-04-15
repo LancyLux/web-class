@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <button id="btn1">后退</button>
+  <button id="btn2">前进</button>
+  <script>
+    var btn1 = document.getElementById('btn1');
+    var btn2 = document.getElementById('btn2');
+    btn1.onclick = function () {
+      history.back();						// 控制浏览器后退一页
+    };
+    btn2.onclick = function () {
+      history.forward();				// 控制浏览器前进一页
+    };
+  </script>
+</body>
+</html>

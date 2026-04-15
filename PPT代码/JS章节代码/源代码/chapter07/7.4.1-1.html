@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .bg { background-color: gainsboro; }
+    table { border-collapse: collapse; }
+    td { padding: 4px; }
+  </style>
+</head>
+<body>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>编号</th>
+        <th>书名</th>
+        <th>作者</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>01</td>
+        <td>《西游记》</td>
+        <td>吴承恩</td>
+      </tr>
+      <tr>
+        <td>02</td>
+        <td>《水浒传》</td>
+        <td>施耐庵</td>
+      </tr>
+      <tr>
+        <td>03</td>
+        <td>《红楼梦》</td>
+        <td>曹雪芹</td>
+      </tr>
+      <tr>
+        <td>04</td>
+        <td>《三国演义》</td>
+        <td>罗贯中</td>
+      </tr>
+    </tbody>
+  </table>
+  <script>
+    var trs = document.querySelectorAll('tr');
+    for (var i = 0; i < trs.length; i++) {
+      trs[i].onmouseover = function () {
+        this.className = 'bg'
+      };
+      trs[i].onmouseout = function () {
+        this.className = '';
+      };
+    }
+  </script>
+</body>
+</html>

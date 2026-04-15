@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+    var n = 1, m = 5;
+
+    // 生成大于或等于m且小于n的随机数
+    console.log(Math.random() * (n - m) + m);
+    // 生成大于或等于m且小于或等于n的随机整数
+    console.log(Math.floor(Math.random() * (n - m + 1) + m));
+    // 生成大于或等于0且小于或等于n的随机整数
+    console.log(Math.floor(Math.random() * (n + 1)));
+    // 生成大于或等于1且小于或等于n的随机整数
+    console.log(Math.floor(Math.random() * n + 1));
+
+    function getRandom(min, max) {
+      return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+    console.log(getRandom(1, 5));     
+
+    var arr = ['老虎', '狮子', '熊猫', '袋鼠', '斑马', '大象'];
+    // 调用前面定义的getRandom()函数获取随机数
+    console.log(arr[getRandom(0, arr.length - 1)]);
+    </script>
+  </body>
+</html>

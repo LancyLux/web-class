@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <p>账号：<input type="text"></p>
+  <p>密码：<input type="text"></p>
+  <script>
+    var inputs = document.getElementsByTagName('input');
+    for (var i = 0; i < inputs.length; ++i) {
+      inputs[i].onkeydown = next;
+    }
+    function next(e) {
+      if (e.keyCode === 13) {
+        for (var i = 0; i < inputs.length; ++i) {
+          if (inputs[i] === this) {
+            var index = i + 1 >= inputs.length ? 0 : i + 1;
+            break;
+          }
+        }
+        if (inputs[index].type === 'text') {
+          inputs[index].focus(); 
+        }
+      }
+    }
+  </script>
+</body>
+</html>

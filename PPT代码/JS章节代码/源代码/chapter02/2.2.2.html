@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    console.log(parseInt('100.56'));		  // 输出结果为：100
+    console.log(parseInt('20', 8));				// 输出结果为：16
+
+    console.log(parseFloat('100.56'));		// 输出结果为：100.56
+    console.log(parseFloat('314e-2'));		// 输出结果为：3.14	
+
+    console.log(Number('100.56'));			  // 输出结果为：100.56
+    console.log(Number('100.abc'));			  // 输出结果为：NaN	
+
+    console.log(isNaN(3)); 						    // 输出结果为：false
+    console.log(isNaN('abc'));					  // 输出结果为：true
+  </script>
+</body>
+</html>

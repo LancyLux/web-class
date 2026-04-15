@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div getTime="20" data-index="3" data-list-name="小智"></div>
+  <script>
+    var div = document.querySelector('div');
+    // 通过第1种方式获取
+    console.log(div.dataset.index);                   // 输出结果为：3
+    console.log(div.dataset['index']);                // 输出结果为：3
+    console.log(div.dataset.listName);                // 输出结果为：小智
+    console.log(div.dataset['listName']);             // 输出结果为：小智
+    // 通过第2种方式获取
+    console.log(div.getAttribute('data-index'));      // 输出结果为：3
+    console.log(div.getAttribute('data-list-name'));  // 输出结果为：小智
+  </script>
+</body>
+<html>

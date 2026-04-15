@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="jquery-3.6.4.min.js"></script>
+</head>
+<body>
+  <script>
+    // 遍历数组
+    var arr = ['小明', '小智', '小强'];
+    $.each(arr, function(index, element) {
+      console.log(index);       // 输出数组中每个元素的索引
+      console.log(element);     // 输出数组中每个元素的值
+    });
+    // 遍历对象
+    var obj = {name: '小明', age: 20};
+    $.each(obj, function(index, element) {
+      console.log(index);       // 输出对象中成员的名称
+      console.log(element);     // 输出对象中成员的值
+    })
+  </script>
+</body>
+</html>

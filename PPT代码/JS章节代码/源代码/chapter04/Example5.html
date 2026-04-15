@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function reverse(arr) {
+        var newArr = [];
+        for (var i = arr.length - 1; i >= 0; i--) {
+          newArr[newArr.length] = arr[i];
+        }
+        return newArr;
+      }
+      var arr1 = reverse(['星期五', '星期四', '星期三', '星期二', '星期一']);
+      console.log(arr1);
+    </script>
+  </body>
+</html>

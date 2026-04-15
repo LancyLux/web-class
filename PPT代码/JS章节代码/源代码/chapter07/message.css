@@ -1,0 +1,62 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 10px;
+}
+
+div {
+  border: 3px solid seagreen;
+  width: 700px;
+}
+
+h1 {
+  text-align: center;
+  color: yellowgreen;
+}
+
+ul {
+  margin-top: 50px;
+  width: 500px;
+  height: 200px;
+  border: seagreen 3px dashed;
+  margin: 30px auto;
+  list-style: none;
+}
+
+li {
+  width: 400px;
+  padding: 5px;
+  background-color: #eee;
+  font-size: 14px;
+  margin: 15px auto;
+}
+
+li a {
+  float: right;
+}
+
+textarea {
+  width: 400px;
+  height: 50px;
+  border: 3px solid seagreen;
+  outline: none;
+  resize: none;
+  display: block;
+  margin: 20px auto 5px;
+}
+
+.sub {
+  display: block;
+  background-color: seagreen;
+  color: seashell;
+  width: 200px;
+  height: 30px;
+  margin: 10px auto;
+}
+
+.remove {
+  float: right;
+}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 父类
+    class Father {
+      constructor() { }
+      money() {
+        console.log('10万');      // 输出结果为：10万
+      }
+    } 
+   // 子类
+    class Son extends Father { }
+    var son1 = new Son();
+    son1.money();
+  </script>
+</body>
+</html>

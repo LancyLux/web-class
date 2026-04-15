@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="jquery-3.6.4.min.js"></script>
+</head>
+<body>
+  <div id="first">
+    <p>标题一：实事求是</p>
+  </div>
+  <div id="second">
+    <p>标题二：与时俱进</p>
+  </div>
+  <div id="third">
+    <p>标题三：求真务实</p>
+  </div>
+  <script>
+    // 元素替换操作
+    $('#first').replaceWith('<b>标题一：实事求是</b>');
+    // 元素删除操作
+    $('#second').empty();
+    $('#third').remove();
+  </script>
+</body>
+</html>

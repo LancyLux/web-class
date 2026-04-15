@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 使用Object.create()实现继承
+    var obj = {
+      sayHello: function () {
+        console.log('使用Object.create()实现继承');
+      }
+    };
+    var newObj = Object.create(obj);
+    newObj.sayHello();
+  </script>    
+</body>
+</html>

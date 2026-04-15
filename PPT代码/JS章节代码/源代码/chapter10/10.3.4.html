@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="jquery-3.6.4.min.js"></script>
+</head>
+<body>
+  <div id="father">
+    <p>第1个p标签</p>
+    <p>第2个p标签</p>
+  </div>
+  <script>
+    $('#father').on('click', 'p', function () {
+      $(this).css('background-color', 'grey');
+    });
+    // 动态创建p标签
+    $('#father').append('<p>新添加的第3个p标签</p>');
+  </script>
+</body>
+</html>

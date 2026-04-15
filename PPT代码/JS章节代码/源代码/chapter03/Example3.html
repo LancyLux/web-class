@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var arr = [98, 7, 65, 54, 12, 6];           // 待排序数组
+    console.log(`待排序数组${arr}`);
+    // 按照从小到大的顺序排序
+    for (var i = 1; i < arr.length; i++) {     // 遍历无序数组索引
+      // 遍历有序数组，将无序数组中的元素插入有序数组中
+      for (var j = i; j > 0; j--) {
+        if (arr[j - 1] > arr[j]) {
+          var temp = arr[j - 1];
+          arr[j - 1] = arr[j];
+          arr[j] = temp;
+        }
+      }
+    }
+    console.log(`排序后数组${arr}`);
+  </script>
+</body>
+</html>

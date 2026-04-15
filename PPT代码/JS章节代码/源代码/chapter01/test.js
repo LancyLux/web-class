@@ -1,0 +1,1 @@
+alert('通过外部式引入JavaScript代码');

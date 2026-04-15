@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 传入普通函数的方式
+    setTimeout(fn, 2000);
+    function fn() {
+      alert('争分夺秒');
+    }
+
+    // 传入匿名函数的方式
+    setTimeout(function () {
+      alert('争分夺秒');
+    }, 2000);
+
+    // 传入字符串代码的方式
+    setTimeout('alert("争分夺秒");', 2000);
+     
+    // 设置定时器时保存定时器ID
+    var timer = setTimeout(function () {
+      alert('争分夺秒');
+    }, 2000);
+    // 清除定时器时传入需要清除的定时器ID
+    clearTimeout(timer);
+  </script>
+</body>
+</html>

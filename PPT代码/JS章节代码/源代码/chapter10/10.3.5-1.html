@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="jquery-3.6.4.min.js"></script>
+</head>
+<body>
+  <div>宝剑锋从磨砺出，梅花香自苦寒来。</div>
+  <script>
+	  // 事件注册
+    $('div').on({
+      mouseover: function () {
+        console.log('鼠标指针移入事件');
+      },
+      mouseout: function () {
+        console.log('鼠标指针移出事件');
+      }
+    })
+    // 事件解除
+    $('div').off('mouseout');
+  </script>
+</body>
+</html>

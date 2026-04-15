@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul>
+      <li>家居</li>
+      <li>美妆</li>
+      <li>食品</li>
+    </ul>
+    <script>
+      // 根据标签名获取元素
+      var list = document.getElementsByTagName('li');
+      console.log(list);
+
+      console.log(Array.isArray(list)); // 输出结果为：false
+    </script>
+  </body>
+</html>

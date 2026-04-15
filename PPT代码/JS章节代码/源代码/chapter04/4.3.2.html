@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var num = 13;
+      function fn01() {         // 定义第1个函数fn01()
+        var num = 26;
+        function fn02() {       // 定义第2个函数fn02()
+          function fn03() {     // 定义第3个函数fn03()
+            console.log(num);
+          }
+          fn03();
+        }
+        fn02();
+      }
+      fn01();
+    </script>
+  </body>
+</html>

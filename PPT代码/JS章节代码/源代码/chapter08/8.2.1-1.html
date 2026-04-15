@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 定义在全局作用域中的变量是window对象的属性
+    var num = 10;
+    console.log(window.num);      // 输出结果为：10
+    // 定义在全局作用域中的函数是window对象的方法
+    function fn() {
+      return 11;
+    }
+    console.log(window.fn());     // 输出结果为：11
+  </script>
+</body>
+</html>

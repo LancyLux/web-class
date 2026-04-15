@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var arr = ['莫等闲', '白了少年头', '空悲切'];
+      // 使用join()方法
+      console.log(arr.join());	  	            // 输出结果为：莫等闲,白了少年头,空悲切
+      console.log(arr.join(''));		            // 输出结果为：莫等闲白了少年头空悲切
+      console.log(arr.join('-'));		            // 输出结果为：莫等闲-白了少年头-空悲切
+      // 使用toString()方法
+      console.log(arr.toString());	            // 输出结果为：莫等闲,白了少年头,空悲切
+
+      // 多学一招
+      
+      // 使用fill()方法填充数组元素
+      console.log([0, 1, 2].fill(4));           // 输出结果为：(3) [4, 4, 4]
+      console.log([0, 1, 2].fill(4, 1));        // 输出结果为：(3) [0, 4, 4]
+      console.log([0, 1, 2].fill(4, 1, 2));     // 输出结果为：(3) [0, 4, 2]
+      // 使用slice()方法截取数组元素
+      console.log([0, 1, 2].slice());           // 输出结果为：(3) [0, 1, 2]
+      console.log([0, 1, 2].slice(1));          // 输出结果为：(2) [1, 2]
+      console.log([0, 1, 2].slice(1, 2));       // 输出结果为：[1]
+      // 使用concat()方法将元素添加到数组中并连接两个数组
+      console.log([0, 1, 2].concat(3));         // 输出结果为：(4) [0, 1, 2, 3]
+      console.log([0, 1, 2].concat([3, 4]));    // 输出结果为：(5) [0, 1, 2, 3, 4]
+    </script>
+  </body>
+</html>

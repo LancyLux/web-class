@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function getMax(num01, num02) {
+        if (typeof num01 != 'number' || typeof num02 != 'number') {
+          return NaN;
+        }
+        return num01 > num02 ? num01 : num02;
+      }
+      console.log(getMax(7, 'a'));
+    </script>
+  </body>
+</html>

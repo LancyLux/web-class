@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="jquery-3.6.4.min.js"></script>
+</head>
+<body>
+  <ul>
+    <li>第1个li元素，索引为0</li>
+    <li>第2个li元素，索引为1</li>
+    <li>第3个li元素，索引为2</li>
+  </ul>
+  <script>
+    $('ul li:first').css('color', 'red');
+    $('ul li:eq(2)').css('color', 'blue');
+  </script>
+</body>
+</html>

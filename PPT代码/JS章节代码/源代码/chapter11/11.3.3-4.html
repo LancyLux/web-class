@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>   
+    function Student() { }
+    Student.prototype = {
+        constructor: Student,
+        class: '101班'
+    };
+    var student = new Student();
+    console.log(student.constructor === Student); // 输出结果：true
+    console.log(student.constructor);             // 输出结果：ƒ Student() { }
+  </script>      
+</body>
+</html>
