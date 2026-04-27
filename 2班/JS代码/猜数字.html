@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  var num = prompt('请输入一个1-10之间的数字');
+  var randomNum = Math.floor(Math.random() * 10 + 1);
+  if (num == randomNum) {
+    alert('恭喜你猜对了');
+  } else if (num < randomNum) {
+    alert('你猜的数字小了');
+  } else {
+    alert('你猜的数字大了');
+  }
+</script>
