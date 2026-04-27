@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  // var定义的变量可以在任何地方访问，作用域为全局作用域
+  var price = 0;
+  let numer = 0;
+  // const定义的变量是常量，后续不能重新赋值
+  const total = 0;
+  // let定义的变量只作用于块级作用域 {}
+  for (let i = 0; i <= 100; i++) {
+    console.log(i);
+  }
+  var vegetable = prompt('请输入蔬菜名称');
+  if (vegetable == '芹菜') {
+    alert('芹菜的价格为：10元/斤');
+  } else if (vegetable == '土豆') {
+    alert('土豆的价格为：15元/斤');
+  } else if (vegetable == '茄子') {
+    alert('茄子的价格为：20元/斤');
+  } else {
+    alert('您输入的蔬菜名称有误');
+  }
+</script>
