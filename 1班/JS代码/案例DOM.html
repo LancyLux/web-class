@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="box">我是div元素的原始内容</div>
+    <button>点击按钮修改div内容</button>
+  </body>
+</html>
+<script>
+  // 1.获取元素
+  var box = document.getElementsByClassName('box')[0];
+  var button = document.getElementsByTagName('button')[0];
+  // 2.点击按钮修改文本内容
+  button.addEventListener('click', function () {
+    // box.innerText = '<strong>我是div元素的新新内容</strong>';
+    box.innerHTML = '<strong>我是div元素的新新内容</strong>';
+  });
+</script>

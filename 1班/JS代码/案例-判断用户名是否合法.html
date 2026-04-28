@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  var username = prompt('判断用户名是否合法，要求3-6位，不能包含admin：');
+  if (username.length < 3 || username.length > 6) {
+    alert('您输入的用户名不合法！');
+  } else if (username.indexOf('admin') != -1) {
+    alert('您输入的用户名包含敏感词！');
+  } else {
+    alert('注册成功！');
+  }
+</script>

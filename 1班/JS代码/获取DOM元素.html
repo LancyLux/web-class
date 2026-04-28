@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul>
+      <li id="menu">111</li>
+      <li>222</li>
+      <li>333</li>
+      <li class="girl">小红</li>
+      <li class="girl">小花</li>
+      <li class="boy">小明</li>
+      <li class="boy">小王</li>
+    </ul>
+  </body>
+</html>
+<script>
+  var girlStudent = document.getElementsByClassName('girl');
+  var boyStudent = document.getElementsByClassName('boy');
+
+  var liBox = document.getElementById('menu');
+  console.log(liBox);
+  // 即使页面中只有一个li元素，getElementsByTagName()方法返回的结果仍然是一个集合
+  var lis = document.getElementsByTagName('li');
+  console.log(lis);
+</script>
