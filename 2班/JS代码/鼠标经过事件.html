@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>代码</th>
+          <th>名称</th>
+          <th>最新公布净值</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>003526</td>
+          <td>农银金穗3个月定期开放债券</td>
+          <td>1.075</td>
+        </tr>
+        <tr>
+          <td>003526</td>
+          <td>农银金穗3个月定期开放债券</td>
+          <td>1.079</td>
+        </tr>
+        <tr>
+          <td>003526</td>
+          <td>农银金穗3个月定期开放债券</td>
+          <td>1.074</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
+<style>
+  .pink {
+    background-color: pink;
+  }
+</style>
+<script>
+  var tbody_tr = document.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+  for (let i = 0; i < tbody_tr.length; i++) {
+    tbody_tr[i].addEventListener('mouseover', function () {
+      tbody_tr[i].classList.add('pink');
+    });
+
+    tbody_tr[i].addEventListener('mouseout', function () {
+      tbody_tr[i].classList.remove('pink');
+    });
+  }
+</script>
