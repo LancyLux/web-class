@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="box">
+      <label>
+        <input type="password" />
+      </label>
+      <img class="image" src="../../PPT代码/images/close.png" alt="" />
+    </div>
+  </body>
+</html>
+<style>
+  .image {
+    position: relative;
+    left: -39px;
+    top: 9px;
+    width: 30px;
+    height: 30px;
+  }
+</style>
+<script>
+  // 1.获取元素
+  var img = document.getElementsByClassName('image')[0];
+  var input = document.getElementsByTagName('input')[0];
+
+  // 2.添加点击事件，点击图片时，密码显示隐藏
+  img.addEventListener('click', function () {
+    if (input.type == 'password') {
+      input.type = 'text';
+      img.src = '../../PPT代码/images/open.png';
+    } else {
+      input.type = 'password';
+      img.src = '../../PPT代码/images/close.png';
+    }
+  });
+</script>
