@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="box">文字</div>
+    <button>点击按钮变色</button>
+  </body>
+</html>
+<style>
+  .box {
+    width: 100px;
+    height: 100px;
+    border: 2px solid red;
+    font-size: 20px;
+  }
+  .active {
+    color: red;
+    background-color: pink;
+  }
+</style>
+<script>
+  // 1.获取元素
+  var box = document.getElementsByClassName('box')[0];
+  var btn = document.getElementsByTagName('button')[0];
+  // 2.添加点击事件，点击按钮时，文字变成红色，盒子变成粉色
+  btn.addEventListener('click', function () {
+    box.classList.add('active');
+  });
+</script>
