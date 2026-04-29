@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  var username = prompt('请输入3-6位的用户名,不能包含admin特殊词');
+  if (username.length < 3 || username.length > 6) {
+    alert('用户名长度必须在3-6位之间');
+  } else if (username.indexOf('admin') != -1) {
+    alert('用户名不能包含admin特殊词');
+  } else {
+    alert('用户名校验通过');
+  }
+</script>
