@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p class="txt">这是原始文本</p>
+    <button>点击修改内容</button>
+  </body>
+</html>
+<script>
+  // 1.获取元素
+  var txt = document.getElementsByClassName('txt')[0];
+  var btn = document.getElementsByTagName('button')[0];
+
+  btn.addEventListener('click', function () {
+    // txt.innerText = '<strong>这是新文本</strong>';
+    txt.innerHTML = '<strong>这是新文本</strong>';
+  });
+</script>

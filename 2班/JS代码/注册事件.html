@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button>点击注册</button>
+  </body>
+</html>
+<script>
+  // 1.获取元素
+  var btn = document.getElementsByTagName('button')[0];
+
+  // 2.绑定点击事件
+  btn.onclick = function () {
+    alert('注册成功');
+  };
+  btn.addEventListener('click', function () {
+    alert('注册成功');
+  });
+</script>
