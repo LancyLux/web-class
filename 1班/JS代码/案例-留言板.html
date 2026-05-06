@@ -14,6 +14,36 @@
     </div>
   </body>
 </html>
+<script>
+  // 获取元素
+  var liuyan = document.getElementsByClassName('liuyan')[0];
+  var inputLiuyan = document.getElementsByTagName('textarea')[0];
+  var btn = document.getElementsByClassName('btn')[0];
+  // 给按钮添加点击事件
+  btn.addEventListener('click', function () {
+    if (inputLiuyan.value == '') {
+      alert('您没有输入内容');
+      return false;
+    } else {
+      // 创建li元素节点
+      var li = document.createElement('li');
+      li.innerHTML = inputLiuyan.value;
+      // 增加删除留言按钮
+      var deleteBtn = document.createElement('button');
+      deleteBtn.innerHTML = '删除';
+      deleteBtn.addEventListener('click', function () {
+        // this.parentNode.remove();
+        liuyan.removeChild(this.parentNode);
+      });
+      li.appendChild(deleteBtn);
+
+      // 将新创建的留言li添加到最前面
+      liuyan.insertBefore(li, liuyan.children[0]);
+      // 将文本域中的内容清空
+      inputLiuyan.value = '';
+    }
+  });
+</script>
 <style>
   .box {
     width: 500px;
@@ -30,6 +60,7 @@
     min-height: 200px;
     border: 2px dotted green;
     margin: 0 auto;
+    padding: 10px;
   }
   textarea {
     display: block;
@@ -42,5 +73,18 @@
     margin: 0 auto;
     width: 300px;
     background-color: rgb(121, 230, 121);
+  }
+  li {
+    /* 作为删除按钮的定位基准 */
+    position: relative;
+    list-style: none;
+    background-color: #ccc;
+    margin-bottom: 10px;
+  }
+  li button {
+    /* float: right; */
+    /* 绝对定位 */
+    position: absolute;
+    right: 0;
   }
 </style>
