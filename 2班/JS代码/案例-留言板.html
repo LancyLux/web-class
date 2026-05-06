@@ -19,6 +19,22 @@
   var ul = document.getElementsByName('liuyan')[0];
   var inputText = document.getElementsByTagName('textarea')[0];
   var btn = document.getElementsByClassName('sub')[0];
+  // 点击发布按钮
+  btn.addEventListener('click', function () {
+    if (inputText.value == '') {
+      alert('您没有输入内容');
+      return false;
+    } else {
+      // 创建li元素节点
+      var li = document.createElement('li');
+      li.innerHTML = inputText.value;
+      // 删除留言按钮
+      var delBtn = document.createElement('button');
+      delBtn.innerHTML = '删除';
+
+      li.appendChild(delBtn);
+    }
+  });
 </script>
 <style>
   .box {
