@@ -31,11 +31,15 @@
       // 删除留言按钮
       var delBtn = document.createElement('button');
       delBtn.innerHTML = '删除';
-
+      delBtn.addEventListener('click', function () {
+        ul.removeChild(this.parentNode);
+      });
       li.appendChild(delBtn);
 
       // 在ul元素中添加节点
       ul.insertBefore(li, ul.children[0]);
+      // 将文本域中的内容清空
+      inputText.value = '';
     }
   });
 </script>
@@ -55,6 +59,7 @@
     min-height: 200px;
     margin: 20px auto;
     border: 2px dotted green;
+    padding: 10px;
   }
   textarea {
     display: block;
@@ -68,5 +73,13 @@
     margin: 0 auto;
     background-color: rgb(184, 237, 184);
     margin-top: 20px;
+  }
+  ul li {
+    list-style: none;
+    background-color: #ccc;
+    margin-bottom: 10px;
+  }
+  ul li button {
+    float: right;
   }
 </style>
