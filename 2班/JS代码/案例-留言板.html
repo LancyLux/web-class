@@ -16,7 +16,7 @@
 </html>
 <script>
   // 获取元素
-  var ul = document.getElementsByName('liuyan')[0];
+  var ul = document.getElementsByClassName('liuyan')[0];
   var inputText = document.getElementsByTagName('textarea')[0];
   var btn = document.getElementsByClassName('sub')[0];
   // 点击发布按钮
@@ -33,6 +33,9 @@
       delBtn.innerHTML = '删除';
 
       li.appendChild(delBtn);
+
+      // 在ul元素中添加节点
+      ul.insertBefore(li, ul.children[0]);
     }
   });
 </script>
